@@ -14,7 +14,7 @@ export function ScrollReveal({
   children, 
   className, 
   delay = 0,
-  threshold = 0.1 
+  threshold = 0.05 
 }: ScrollRevealProps) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -24,13 +24,11 @@ export function ScrollReveal({
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Opcional: parar de observar após ficar visível
-          // observer.unobserve(entry.target);
         }
       },
       {
         threshold: threshold,
-        rootMargin: "0px 0px -50px 0px" // Dispara um pouco antes de entrar totalmente
+        rootMargin: "0px 0px -80px 0px"
       }
     );
 
@@ -50,13 +48,15 @@ export function ScrollReveal({
     <div
       ref={ref}
       className={cn(
-        "transition-all duration-[700ms] ease-out",
+        "transition-all",
         isVisible 
           ? "opacity-100 blur-0 translate-y-0" 
-          : "opacity-0 blur-[8px] translate-y-6",
+          : "opacity-0 blur-[4px] translate-y-4",
         className
       )}
       style={{ 
+        transitionDuration: "1200ms",
+        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
         transitionDelay: `${delay}ms`,
         willChange: "transform, opacity, filter"
       }}
