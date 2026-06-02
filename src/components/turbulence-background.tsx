@@ -14,7 +14,7 @@ export function TurbulenceBackground() {
     function resize() {
       if (canvas) {
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight * 1.4; // Aumentado para suportar o parallax de 140%
+        canvas.height = window.innerHeight * 1.4; // Suporta o parallax de 140%
       }
     }
     
@@ -47,11 +47,7 @@ export function TurbulenceBackground() {
     // Algoritmo de colorização seletiva (Preto, Branco e Azul 22, 87, 130)
     function getColor(n: number) {
       const t = (n + 1) / 2;
-      
-      // Base P&B (Cinza escuro para brilhos sutis)
       const grayScale = Math.pow(t, 4) * 35; 
-      
-      // Destaque Azul (22, 87, 130) - Aparece apenas nos pontos de maior densidade
       const accentStrength = Math.pow(t, 14); 
       
       const r = Math.round(grayScale + accentStrength * 22);
@@ -78,7 +74,8 @@ export function TurbulenceBackground() {
       const move = scrollPercent * 40;
       
       if (canvas) {
-        canvas.style.transform = `translateY(${move}%)`;
+        // Direção invertida: movendo para cima (-) conforme o scroll
+        canvas.style.transform = `translateY(-${move}%)`;
       }
     };
 
@@ -103,7 +100,6 @@ export function TurbulenceBackground() {
         for (let px = 0; px < bW; px++) {
           const nx = (px / bW) * 4.2;
           
-          // Domain Warping para fluidez extrema
           const qx = noise(nx, ny, time * 0.2);
           const qy = noise(nx + 1.2, ny + 1.2, time * 0.2);
           
@@ -130,7 +126,6 @@ export function TurbulenceBackground() {
         ctx.imageSmoothingEnabled = true;
         ctx.drawImage(offCanvas, 0, 0, W, H);
 
-        // Aplicação do grão para textura analógica
         ctx.globalAlpha = 0.05;
         ctx.globalCompositeOperation = 'screen';
         const gW = grainCanvas.width;
@@ -164,6 +159,7 @@ export function TurbulenceBackground() {
       style={{ 
         opacity: 0,
         animation: 'fadeInBg 1.5s ease-out forwards',
+        pointerEvents: 'none'
       }}
     />
   );
