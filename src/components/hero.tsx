@@ -42,14 +42,19 @@ export function Hero() {
           Transformando minhas ideias malucas em maluquices visuais. 
         </p>
 
-        <div 
-          className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-up-blur"
-          style={{ animationDelay: '0.45s' }}
-        >
-          <a href="#portfolio" className="liquid-button bg-white/[0.08] text-[10px] uppercase tracking-[0.3em] py-5 px-14 inline-block">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+          <a 
+            href="#portfolio" 
+            className="liquid-button bg-white/[0.08] text-[10px] uppercase tracking-[0.3em] py-5 px-14 inline-block animate-fade-up-blur"
+            style={{ animationDelay: '0.45s' }}
+          >
             Ver Portfólio
           </a>
-          <a href="#contact" className="text-[10px] uppercase tracking-[0.3em] font-bold text-foreground/40 hover:text-foreground transition-all">
+          <a 
+            href="#contact" 
+            className="text-[10px] uppercase tracking-[0.3em] font-bold text-foreground/40 hover:text-foreground transition-all animate-fade-up-blur"
+            style={{ animationDelay: '0.45s' }}
+          >
             Fale Comigo
           </a>
         </div>
