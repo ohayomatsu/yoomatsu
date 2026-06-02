@@ -29,7 +29,7 @@ export function Clients() {
   const marqueeItems = [...CLIENTS, ...CLIENTS, ...CLIENTS];
 
   return (
-    <section className="py-24 overflow-hidden bg-background">
+    <section className="py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
         <h2 className="text-3xl md:text-4xl font-headline font-bold tracking-tight text-foreground/80">
           Quem confia no meu trabalho
