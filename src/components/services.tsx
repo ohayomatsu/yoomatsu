@@ -77,9 +77,12 @@ export function Services() {
                 ))}
               </ul>
 
-              <button className="liquid-button w-full text-xs font-bold uppercase tracking-widest bg-white/5">
+              <a 
+                href="#contact" 
+                className="liquid-button w-full text-xs font-bold uppercase tracking-widest bg-white/5 text-center flex items-center justify-center"
+              >
                 Saiba Mais
-              </button>
+              </a>
             </div>
           ))}
         </div>
