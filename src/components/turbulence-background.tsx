@@ -14,20 +14,29 @@ export function TurbulenceBackground() {
     function resize() {
       if (canvas) {
         canvas.width = window.innerWidth;
-        // Definimos a altura do canvas como 150% da viewport para o efeito parallax
-        canvas.height = window.innerHeight * 1.5;
+        // Definimos a altura do canvas como 100% da viewport para evitar estiramento
+        canvas.height = window.innerHeight;
       }
     }
     
     resize();
     window.addEventListener('resize', resize);
 
-    // Efeito Parallax
+    // Efeito Parallax com limitador de Footer
     const handleScroll = () => {
       if (canvas) {
         const scrollY = window.scrollY;
-        // Aplicamos o transform baseado no scroll para o efeito de profundidade
-        canvas.style.transform = `translateY(${scrollY * 0.4}px)`;
+        const footer = document.querySelector('footer');
+        const bodyHeight = document.documentElement.scrollHeight;
+        const windowHeight = window.innerHeight;
+        const footerHeight = footer ? footer.offsetHeight : 0;
+        
+        // Cálculo do scroll máximo permitido para que o parallax pare antes do footer
+        const maxScroll = bodyHeight - windowHeight - footerHeight;
+        const limited = Math.min(scrollY, maxScroll);
+        
+        // Aplicamos o transform baseado no scroll limitado para profundidade
+        canvas.style.transform = `translateY(${limited * 0.4}px)`;
       }
     };
 
@@ -57,7 +66,7 @@ export function TurbulenceBackground() {
     function getColor(n: number) {
       const t = (n + 1) / 2;
       const grayScale = Math.pow(t, 4) * 20;
-      const accentStrength = Math.pow(t, 8); // Mais acentuado para ser apenas detalhe
+      const accentStrength = Math.pow(t, 12); 
       
       const r = Math.round(grayScale + accentStrength * 22);
       const g = Math.round(grayScale + accentStrength * 87);
@@ -66,7 +75,7 @@ export function TurbulenceBackground() {
       return [r, g, b];
     }
 
-    const SCALE = 10; // Aumentado para performance em monitores High-Hz
+    const SCALE = 12; 
     let time = 0;
     let animationFrameId: number;
 
@@ -88,7 +97,6 @@ export function TurbulenceBackground() {
         for (let px = 0; px < bW; px++) {
           const nx = (px / bW) * 3.8;
           
-          // Domain Warping para fluidez máxima
           const qx = noise(nx, ny, time * 0.3);
           const qy = noise(nx + 1.5, ny + 1.5, time * 0.3);
           
@@ -150,7 +158,6 @@ export function TurbulenceBackground() {
         zIndex: -1,
         opacity: 0,
         animation: 'fadeInBg 1.5s ease-out forwards',
-        transform: 'translateZ(0)',
         willChange: 'transform'
       }}
     />
