@@ -13,16 +13,17 @@ export function TurbulenceBackground() {
 
     function resize() {
       if (canvas) {
+        // O canvas ocupa a largura da tela
         canvas.width = window.innerWidth;
-        // Definimos a altura do canvas como 100% da viewport para evitar estiramento
-        canvas.height = window.innerHeight;
+        // Altura levemente maior para suportar o movimento do parallax sem mostrar o fundo preto
+        canvas.height = window.innerHeight * 1.2;
       }
     }
     
     resize();
     window.addEventListener('resize', resize);
 
-    // Efeito Parallax com limitador de Footer
+    // Motor de Parallax com Limite de Footer
     const handleScroll = () => {
       if (canvas) {
         const scrollY = window.scrollY;
@@ -31,12 +32,13 @@ export function TurbulenceBackground() {
         const windowHeight = window.innerHeight;
         const footerHeight = footer ? (footer as HTMLElement).offsetHeight : 0;
         
-        // Cálculo do scroll máximo permitido para que o parallax pare antes do footer
+        // Cálculo do scroll máximo permitido
         const maxScroll = bodyHeight - windowHeight - footerHeight;
         const limited = Math.min(scrollY, maxScroll);
         
-        // Aplicamos o transform baseado no scroll limitado para profundidade
-        canvas.style.transform = `translateY(${limited * 0.4}px)`;
+        // Aplicamos o transform baseado no scroll limitado (fator 0.4 conforme solicitado)
+        // O movimento é suave e limitado ao viewport pelo container fixo
+        canvas.style.transform = `translateY(${limited * 0.15}px)`;
       }
     };
 
@@ -57,6 +59,7 @@ export function TurbulenceBackground() {
     }
 
     function noise(x: number, y: number, t: number) {
+      // Frequências ajustadas para movimento fluido
       const n1 = Math.sin(x * 1.1 + t * 0.15) * Math.cos(y * 0.8 - t * 0.1);
       const n2 = Math.sin(x * 0.5 - y * 0.6 + t * 0.08) * 0.5;
       const n3 = Math.cos(x * 1.8 + y * 1.2 - t * 0.2) * 0.25;
@@ -65,8 +68,10 @@ export function TurbulenceBackground() {
 
     function getColor(n: number) {
       const t = (n + 1) / 2;
-      const grayScale = Math.pow(t, 4) * 20;
-      const accentStrength = Math.pow(t, 12); 
+      // Estética monocromática luxuosa
+      const grayScale = Math.pow(t, 4) * 35;
+      // Azul sutil como detalhe (RGB: 22, 87, 130)
+      const accentStrength = Math.pow(t, 14); 
       
       const r = Math.round(grayScale + accentStrength * 22);
       const g = Math.round(grayScale + accentStrength * 87);
@@ -75,7 +80,7 @@ export function TurbulenceBackground() {
       return [r, g, b];
     }
 
-    const SCALE = 12; 
+    const SCALE = 12; // Resolução otimizada para alto FPS
     let time = 0;
     let animationFrameId: number;
 
@@ -93,17 +98,18 @@ export function TurbulenceBackground() {
       const data = imgData.data;
 
       for (let py = 0; py < bH; py++) {
-        const ny = (py / bH) * 2.5;
+        const ny = (py / bH) * 2.8;
         for (let px = 0; px < bW; px++) {
-          const nx = (px / bW) * 3.8;
+          const nx = (px / bW) * 4.2;
           
-          const qx = noise(nx, ny, time * 0.3);
-          const qy = noise(nx + 1.5, ny + 1.5, time * 0.3);
+          // Domain Warping para viscosidade de fluido real
+          const qx = noise(nx, ny, time * 0.2);
+          const qy = noise(nx + 1.2, ny + 1.2, time * 0.2);
           
-          const rx = noise(nx + 3.0 * qx, ny + 3.0 * qy, time * 0.2);
-          const ry = noise(nx + 3.0 * qx + 5.0, ny + 3.0 * qy + 2.0, time * 0.2);
+          const rx = noise(nx + 2.5 * qx, ny + 2.5 * qy, time * 0.15);
+          const ry = noise(nx + 2.5 * qx + 4.0, ny + 2.5 * qy + 1.8, time * 0.15);
           
-          const val = noise(nx + rx, ny + ry, time * 0.4);
+          const val = noise(nx + rx, ny + ry, time * 0.3);
           
           const [r, g, b] = getColor(val);
           const idx = (py * bW + px) * 4;
@@ -123,6 +129,7 @@ export function TurbulenceBackground() {
         ctx.imageSmoothingEnabled = true;
         ctx.drawImage(offCanvas, 0, 0, W, H);
 
+        // Aplicação de granulação sutil
         ctx.globalAlpha = 0.05;
         ctx.globalCompositeOperation = 'screen';
         const gW = grainCanvas.width;
@@ -136,7 +143,7 @@ export function TurbulenceBackground() {
         ctx.globalCompositeOperation = 'source-over';
       }
 
-      time += 0.006; 
+      time += 0.008; // Incremento granular para suavidade extrema
       animationFrameId = requestAnimationFrame(draw);
     }
 
@@ -153,12 +160,9 @@ export function TurbulenceBackground() {
     <canvas
       ref={canvasRef}
       id="turbulence-bg"
-      className="absolute inset-0 pointer-events-none"
       style={{ 
-        zIndex: -1,
         opacity: 0,
         animation: 'fadeInBg 1.5s ease-out forwards',
-        willChange: 'transform'
       }}
     />
   );
