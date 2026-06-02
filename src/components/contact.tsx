@@ -5,11 +5,11 @@ import { Twitter, Mail } from "lucide-react";
 
 export function Contact() {
   return (
-    <section id="contact" className="py-32 px-6 max-w-5xl mx-auto">
+    <section id="contact" className="py-32 px-6 max-w-[500px] mx-auto">
       {/* Substituído liquid-card por liquid-glass direto para remover o efeito de hover do background */}
-      <div className="liquid-glass rounded-[2rem] p-16 md:p-24 space-y-16 flex flex-col items-center text-center">
+      <div className="liquid-glass rounded-[2rem] py-8 px-12 space-y-12 flex flex-col items-center text-center">
         <div className="space-y-6">
-          <h2 className="text-5xl md:text-7xl font-headline font-bold tracking-tight glow-text leading-none">
+          <h2 className="text-4xl md:text-5xl font-headline font-bold tracking-tight glow-text leading-tight">
             Ficou interessado? <br /> só chamar.
           </h2>
         </div>
