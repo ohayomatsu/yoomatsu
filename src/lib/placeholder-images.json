@@ -47,6 +47,66 @@
       "description": "Portrait of Matsu",
       "imageUrl": "https://picsum.photos/seed/matsu-profile/400/400",
       "imageHint": "man portrait"
+    },
+    {
+      "id": "client-1",
+      "description": "Client Avatar 1",
+      "imageUrl": "https://picsum.photos/seed/c1/200/200",
+      "imageHint": "person face"
+    },
+    {
+      "id": "client-2",
+      "description": "Client Avatar 2",
+      "imageUrl": "https://picsum.photos/seed/c2/200/200",
+      "imageHint": "person face"
+    },
+    {
+      "id": "client-3",
+      "description": "Client Avatar 3",
+      "imageUrl": "https://picsum.photos/seed/c3/200/200",
+      "imageHint": "person face"
+    },
+    {
+      "id": "client-4",
+      "description": "Client Avatar 4",
+      "imageUrl": "https://picsum.photos/seed/c4/200/200",
+      "imageHint": "person face"
+    },
+    {
+      "id": "client-5",
+      "description": "Client Avatar 5",
+      "imageUrl": "https://picsum.photos/seed/c5/200/200",
+      "imageHint": "person face"
+    },
+    {
+      "id": "client-6",
+      "description": "Client Avatar 6",
+      "imageUrl": "https://picsum.photos/seed/c6/200/200",
+      "imageHint": "person face"
+    },
+    {
+      "id": "client-7",
+      "description": "Client Avatar 7",
+      "imageUrl": "https://picsum.photos/seed/c7/200/200",
+      "imageHint": "person face"
+    },
+    {
+      "id": "client-8",
+      "description": "Client Avatar 8",
+      "imageUrl": "https://picsum.photos/seed/c8/200/200",
+      "imageHint": "person face"
+    },
+    {
+      "id": "client-9",
+      "description": "Client Avatar 9",
+      "imageUrl": "https://picsum.photos/seed/c9/200/200",
+      "imageHint": "person face"
+    },
+    {
+      "id": "client-10",
+      "description": "Client Avatar 10",
+      "imageUrl": "https://picsum.photos/seed/c10/200/200",
+      "imageHint": "person face"
     }
   ]
 }

@@ -1,7 +1,9 @@
+
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { Portfolio } from "@/components/portfolio";
 import { Services } from "@/components/services";
+import { Clients } from "@/components/clients";
 import { About } from "@/components/about";
 import { Contact } from "@/components/contact";
 import { Toaster } from "@/components/ui/toaster";
@@ -14,6 +16,8 @@ export default function Home() {
       <Hero />
       
       <Portfolio />
+
+      <Clients />
       
       <Services />
       
