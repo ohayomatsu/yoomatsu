@@ -129,7 +129,7 @@ export function TurbulenceBackground() {
         ctx.globalCompositeOperation = 'source-over';
       }
 
-      time += 0.018;
+      time += 0.036; // Velocidade dobrada (de 0.018 para 0.036)
       animationFrameId = requestAnimationFrame(draw);
     }
 

@@ -23,7 +23,7 @@ export function About() {
 
         <div className="space-y-6 flex-1 text-center md:text-left">
           <div className="space-y-2">
-            <h2 className="text-[2.2rem] font-headline font-bold tracking-tight">OHAYO!</h2>
+            <h2 className="text-[2.2rem] font-headline font-bold tracking-tight">MATSU!</h2>
             <p className="text-[1.1rem] text-foreground/80 font-light leading-relaxed">
               Criador de conteúdo e Editor de vídeo.
             </p>
