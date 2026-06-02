@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Twitter, Mail } from "lucide-react";
@@ -22,7 +21,7 @@ export function Contact() {
             <Twitter size={16} className="text-foreground/60 group-hover:text-foreground transition-colors" />
           </a>
           <a 
-            href="mailto:contato@matsu.com" 
+            href="mailto:contato.ohayomatsu@gmail.com" 
             className="w-8 h-8 rounded-full liquid-glass flex items-center justify-center transition-all duration-500 hover:border-white/50 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] hover:scale-110 group"
             aria-label="Email"
           >
