@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -66,7 +65,7 @@ export function Portfolio() {
       <div className="w-full flex flex-col items-center justify-center space-y-12">
         {/* Container de Filtros Centralizado */}
         <div className="flex justify-center w-full">
-          <div className="filter-toggle flex items-center justify-center relative">
+          <div className="filter-toggle relative">
             {/* O indicador só renderiza se tiver largura para evitar o artefato vertical órfão */}
             {indicatorStyle.width > 0 && (
               <div 
