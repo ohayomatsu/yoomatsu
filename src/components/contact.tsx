@@ -16,14 +16,14 @@ export function Contact() {
         <div className="flex items-center justify-center gap-10">
           <a 
             href="#" 
-            className="w-[60px] h-[60px] rounded-full liquid-glass flex items-center justify-center transition-all duration-500 hover:border-teal-400/50 hover:shadow-[0_0_25px_rgba(45,212,191,0.3)] hover:scale-110 group"
+            className="w-[60px] h-[60px] rounded-full liquid-glass flex items-center justify-center transition-all duration-500 hover:border-white/50 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] hover:scale-110 group"
             aria-label="Twitter"
           >
             <Twitter size={24} className="text-foreground/60 group-hover:text-foreground transition-colors" />
           </a>
           <a 
             href="#" 
-            className="w-[60px] h-[60px] rounded-full liquid-glass flex items-center justify-center transition-all duration-500 hover:border-teal-400/50 hover:shadow-[0_0_25px_rgba(45,212,191,0.3)] hover:scale-110 group"
+            className="w-[60px] h-[60px] rounded-full liquid-glass flex items-center justify-center transition-all duration-500 hover:border-white/50 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] hover:scale-110 group"
             aria-label="Email"
           >
             <Mail size={24} className="text-foreground/60 group-hover:text-foreground transition-colors" />
