@@ -8,7 +8,7 @@ export function TurbulenceBackground() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     function resize() {
@@ -20,6 +20,21 @@ export function TurbulenceBackground() {
     
     resize();
     window.addEventListener('resize', resize);
+
+    // Grain pré-gerado uma única vez — não recalcula a cada frame
+    const grainCanvas = document.createElement('canvas');
+    const grainCtx = grainCanvas.getContext('2d');
+    if (grainCtx) {
+      grainCanvas.width = 512;
+      grainCanvas.height = 512;
+      const grainData = grainCtx.createImageData(512, 512);
+      for (let i = 0; i < grainData.data.length; i += 4) {
+        const v = Math.round((Math.random() - 0.5) * 30 + 128);
+        grainData.data[i] = grainData.data[i+1] = grainData.data[i+2] = v;
+        grainData.data[i+3] = 18;
+      }
+      grainCtx.putImageData(grainData, 0, 0);
+    }
 
     function noise(x: number, y: number, t: number) {
       return (
@@ -58,7 +73,7 @@ export function TurbulenceBackground() {
       return [Math.min(255, r), Math.min(255, g), Math.min(255, b)];
     }
 
-    const SCALE = 3;
+    const SCALE = 4;
     let time = 0;
     let animationFrameId: number;
 
@@ -102,15 +117,15 @@ export function TurbulenceBackground() {
         ctx.drawImage(offCanvas, 0, 0, W, H);
         ctx.filter = 'none';
 
-        const finalData = ctx.getImageData(0, 0, W, H);
-        const fd = finalData.data;
-        for (let i = 0; i < fd.length; i += 4) {
-          const grain = (Math.random() - 0.5) * 22;
-          fd[i] = Math.min(255, Math.max(0, fd[i] + grain));
-          fd[i + 1] = Math.min(255, Math.max(0, fd[i + 1] + grain));
-          fd[i + 2] = Math.min(255, Math.max(0, fd[i + 2] + grain));
-        }
-        ctx.putImageData(finalData, 0, 0);
+        // Grain estático aplicado via compositing — zero custo de CPU
+        ctx.globalAlpha = 0.12;
+        ctx.globalCompositeOperation = 'screen';
+        const gW = grainCanvas.width, gH = grainCanvas.height;
+        for (let tx = 0; tx < W; tx += gW)
+          for (let ty = 0; ty < H; ty += gH)
+            ctx.drawImage(grainCanvas, tx, ty);
+        ctx.globalAlpha = 1;
+        ctx.globalCompositeOperation = 'source-over';
       }
 
       time += 0.018;
@@ -129,7 +144,7 @@ export function TurbulenceBackground() {
     <canvas
       ref={canvasRef}
       id="turbulence-bg"
-      className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none"
+      className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"
     />
   );
 }

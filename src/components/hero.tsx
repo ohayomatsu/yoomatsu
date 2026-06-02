@@ -1,24 +1,11 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
-import Image from "next/image";
 
 export function Hero() {
-  const heroImg = PlaceHolderImages.find((img) => img.id === "hero-bg");
-
   return (
-    <section id="hero" className="relative h-screen flex flex-col items-center justify-center overflow-hidden px-6">
+    <section id="hero" className="relative h-screen flex flex-col items-center justify-center overflow-hidden px-6 z-10">
       <div className="absolute inset-0 -z-10 bg-[#030303]">
-        {heroImg && (
-          <Image
-            src={heroImg.imageUrl}
-            alt="Hero Background"
-            fill
-            className="object-cover opacity-20 saturate-0"
-            priority
-          />
-        )}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#030303]/60 to-[#030303]" />
       </div>
 
