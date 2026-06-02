@@ -34,7 +34,7 @@ export function Navbar() {
     const heroTitle = document.getElementById("hero-title");
     if (heroTitle) observer.observe(heroTitle);
 
-    // Custom High-FPS Smooth Scroll
+    // High-Precision Liquid Smooth Scroll
     const handleHashLinks = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a');
@@ -48,11 +48,12 @@ export function Navbar() {
 
         const start = window.scrollY;
         const end = targetElement.getBoundingClientRect().top + window.scrollY - 80;
-        const duration = 800;
+        const duration = 1200; // Aumentado para um deslize mais majestoso
         let startTime: number | null = null;
 
+        // Quintic Easing: Aceleração e desaceleração extremamente suaves
         function ease(t: number) {
-          return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+          return t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2;
         }
 
         function step(timestamp: number) {
