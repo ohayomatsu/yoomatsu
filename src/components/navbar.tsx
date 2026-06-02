@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -53,13 +52,17 @@ export function Navbar() {
         <Link 
           href="#hero" 
           className={cn(
-            "text-xl font-headline font-bold tracking-tighter glow-text transition-all duration-500 ease-in-out absolute left-0 z-10",
+            "transition-all duration-500 ease-in-out absolute left-0 z-10 flex items-center",
             isHeroTitleVisible 
               ? "opacity-0 -translate-x-2 pointer-events-none" 
               : "opacity-100 translate-x-0"
           )}
         >
-          MATSU
+          <img 
+            src="/logo.svg" 
+            alt="MATSU" 
+            style={{ height: '36px', width: 'auto' }} 
+          />
         </Link>
 
         {/* Desktop Menu Wrapper - Gerencia o alinhamento suave */}
