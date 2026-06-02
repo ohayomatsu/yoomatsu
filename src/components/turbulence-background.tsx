@@ -74,7 +74,8 @@ export function TurbulenceBackground() {
       for (let py = 0; py < bH; py++) {
         const ny = (py / bH) * 4.0;
         for (let px = 0; px < bW; px++) {
-          const nx = (px / bW) * 6.0;
+          // Ajustado: nx multiplicado por 12.0 (antes 6.0) para "comprimir" a escala X
+          const nx = (px / bW) * 12.0;
           const warpX = noise(nx + 1.7, ny + 9.2, time);
           const warpY = noise(nx + 8.3, ny + 2.8, time + 1.5);
           const combined = noise(nx + warpX * 1.5, ny + warpY * 1.5, time * 0.8);
@@ -112,7 +113,7 @@ export function TurbulenceBackground() {
         ctx.globalCompositeOperation = 'source-over';
       }
 
-      time += 0.015; // Incremento menor para suavidade em Hz altos
+      time += 0.015; // Incremento para fluidez constante
       animationFrameId = requestAnimationFrame(draw);
     }
 
