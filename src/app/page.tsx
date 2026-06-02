@@ -4,7 +4,6 @@ import { Portfolio } from "@/components/portfolio";
 import { Services } from "@/components/services";
 import { About } from "@/components/about";
 import { Contact } from "@/components/contact";
-import { AIHookGenerator } from "@/components/ai-hook-generator";
 import { Toaster } from "@/components/ui/toaster";
 
 export default function Home() {
@@ -17,8 +16,6 @@ export default function Home() {
       <Portfolio />
       
       <Services />
-
-      <AIHookGenerator />
       
       <About />
       
