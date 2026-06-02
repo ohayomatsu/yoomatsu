@@ -9,12 +9,12 @@ export function About() {
   const profileImg = PlaceHolderImages.find(img => img.id === "about-matsu");
 
   return (
-    <section id="about" className="py-24 px-6 max-w-7xl mx-auto">
-      <div className="flex flex-col md:flex-row items-center gap-16">
+    <section id="about" className="py-24 px-6 max-w-[600px] mx-auto">
+      <div className="flex flex-col md:flex-row items-center gap-10">
         <div className="shrink-0">
-          <div className="relative w-64 h-64 md:w-80 md:h-80">
+          <div className="relative w-[180px] h-[180px]">
             <div className="absolute inset-0 rounded-full border-2 border-white/20 animate-pulse" />
-            <div className="absolute inset-4 rounded-full liquid-glass overflow-hidden">
+            <div className="absolute inset-3 rounded-full liquid-glass overflow-hidden">
               {profileImg && (
                 <Image
                   src={profileImg.imageUrl}
@@ -27,28 +27,28 @@ export function About() {
           </div>
         </div>
 
-        <div className="space-y-8 flex-1 text-center md:text-left">
-          <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-headline font-bold tracking-tight">OHAYO!</h2>
-            <p className="text-xl md:text-2xl text-foreground/80 font-light leading-relaxed">
+        <div className="space-y-6 flex-1 text-center md:text-left">
+          <div className="space-y-2">
+            <h2 className="text-[1.8rem] font-headline font-bold tracking-tight">OHAYO!</h2>
+            <p className="text-[1rem] text-foreground/80 font-light leading-relaxed">
               Criador de conteúdo e Editor de vídeo.
             </p>
           </div>
           
-          <div className="space-y-6 text-lg text-foreground/60 leading-relaxed max-w-2xl">
+          <div className="space-y-4 text-[0.85rem] text-foreground/60 leading-relaxed">
             <p>
               Opa, eu sou o Matsu, trabalho com edição de vídeo e motion design há mais de 5 anos.
             </p>
           </div>
 
-          <div className="flex items-center justify-center md:justify-start gap-6 pt-4">
+          <div className="flex items-center justify-center md:justify-start gap-4 pt-2">
             {[
               { 
-                icon: <Youtube size={24} />, 
+                icon: <Youtube size={16} />, 
                 href: "https://www.youtube.com/@yoomatsu" 
               },
               { 
-                icon: <Twitter size={24} />, 
+                icon: <Twitter size={16} />, 
                 href: "https://x.com/ohayomatsu" 
               }
             ].map((social, idx) => (
@@ -57,7 +57,7 @@ export function About() {
                 href={social.href} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="p-3 rounded-full liquid-glass hover:bg-white/10 transition-all hover:scale-110 inline-block"
+                className="w-8 h-8 rounded-full liquid-glass flex items-center justify-center transition-all hover:bg-white/10 hover:scale-110"
               >
                 {social.icon}
               </a>
