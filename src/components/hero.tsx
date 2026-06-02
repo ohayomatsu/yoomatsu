@@ -12,7 +12,7 @@ export function Hero() {
             EDITOR DE VÍDEO
           </p>
           
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center mt-6">
             <img 
               id="hero-title"
               src="/logo.svg" 
@@ -30,8 +30,6 @@ export function Hero() {
               }} 
             />
           </div>
-          
-          <div style={{ height: '2rem' }} className="mt-6" />
         </div>
 
         <p className="text-lg md:text-xl text-foreground/40 max-w-2xl mx-auto leading-relaxed font-light">
