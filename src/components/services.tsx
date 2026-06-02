@@ -6,7 +6,7 @@ import { Check } from "lucide-react";
 const SERVICES = [
   {
     title: "Edição Básica",
-    description: "Como sempre me diziam, o básico bem feito.",
+    description: "Como sempre me diziam, o famoso básico mas bem feito.",
     features: [
       "Cortes e ritmo dinâmico",
       "Transições limpas",
