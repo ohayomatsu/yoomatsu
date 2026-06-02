@@ -14,7 +14,7 @@ export function TurbulenceBackground() {
     function resize() {
       if (canvas) {
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight * 1.8; // Suporta o parallax de 180%
+        canvas.height = window.innerHeight * 2.2; // Suporta a altura de 220% definida no CSS
       }
     }
     
@@ -70,8 +70,8 @@ export function TurbulenceBackground() {
       // Calcula o percentual de scroll (0 a 1)
       const scrollPercent = scrollY / (docHeight - winHeight || 1);
       
-      // Move no máximo 30% dentro do container (compensando a altura de 180%)
-      const move = scrollPercent * 30;
+      // Move no máximo 20% dentro do container (compensando a altura de 220%)
+      const move = scrollPercent * 20;
       
       if (canvas) {
         // Direção invertida: movendo para cima (-) conforme o scroll
