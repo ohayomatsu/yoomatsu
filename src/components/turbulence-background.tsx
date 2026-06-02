@@ -46,14 +46,17 @@ export function TurbulenceBackground() {
       );
     }
 
-    // Função de cor refinada para elegância
+    // Função de cor refinada para elegância - Foco em P&B com detalhes sutis azuis
     function getColor(n: number) {
       const t = (n + 1) / 2; // Normaliza para 0-1
       
-      // Transição suave de azul profundo para indigo/violeta sutil
-      const r = Math.round(Math.pow(t, 4) * 45); 
-      const g = Math.round(Math.pow(t, 3) * 55); 
-      const b = Math.round(t * 110);
+      // Componente de cinza profundo para manter a base P&B (muito escuro)
+      const grayBase = Math.pow(t, 6) * 20;
+      
+      // O azul agora é apenas um detalhe que "brilha" levemente nas cristas das ondas
+      const r = Math.round(grayBase); 
+      const g = Math.round(grayBase * 1.02); 
+      const b = Math.round(grayBase + Math.pow(t, 4) * 45); 
       
       return [r, g, b];
     }
@@ -78,7 +81,6 @@ export function TurbulenceBackground() {
       for (let py = 0; py < bH; py++) {
         const ny = (py / bH) * 3.5;
         for (let px = 0; px < bW; px++) {
-          // Escala nx restaurada para um valor mais elegante (5.0)
           const nx = (px / bW) * 5.0;
           const warpX = noise(nx + 1.7, ny + 9.2, time);
           const warpY = noise(nx + 8.3, ny + 2.8, time + 1.5);
@@ -116,7 +118,7 @@ export function TurbulenceBackground() {
         ctx.globalCompositeOperation = 'source-over';
       }
 
-      time += 0.012; // Velocidade ajustada para fluidez elegante
+      time += 0.012; 
       animationFrameId = requestAnimationFrame(draw);
     }
 
