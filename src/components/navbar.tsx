@@ -7,9 +7,9 @@ import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
   { name: "Início", href: "#hero" },
+  { name: "Sobre", href: "#about" },
   { name: "Portfólio", href: "#portfolio" },
   { name: "Serviços", href: "#services" },
-  { name: "Sobre", href: "#about" },
 ];
 
 export function Navbar() {
