@@ -67,9 +67,7 @@ export function Portfolio() {
               width: `${pillStyle.width}px`,
               opacity: pillStyle.opacity,
               transition: 'left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease',
-              background: 'rgba(255, 255, 255, 0.15)',
-              backdropFilter: 'blur(12px)',
-              boxShadow: '0 2px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3)',
+              background: 'rgba(255, 255, 255, 0.2)',
               borderRadius: '9999px',
             }}
           />
