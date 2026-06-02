@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useRef } from 'react';
@@ -15,12 +14,24 @@ export function TurbulenceBackground() {
     function resize() {
       if (canvas) {
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // Definimos a altura do canvas como 150% da viewport para o efeito parallax
+        canvas.height = window.innerHeight * 1.5;
       }
     }
     
     resize();
     window.addEventListener('resize', resize);
+
+    // Efeito Parallax
+    const handleScroll = () => {
+      if (canvas) {
+        const scrollY = window.scrollY;
+        // Aplicamos o transform baseado no scroll para o efeito de profundidade
+        canvas.style.transform = `translateY(${scrollY * 0.4}px)`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     const grainCanvas = document.createElement('canvas');
     const grainCtx = grainCanvas.getContext('2d');
@@ -45,8 +56,8 @@ export function TurbulenceBackground() {
 
     function getColor(n: number) {
       const t = (n + 1) / 2;
-      const grayScale = Math.pow(t, 4) * 25;
-      const accentStrength = Math.pow(t, 6);
+      const grayScale = Math.pow(t, 4) * 20;
+      const accentStrength = Math.pow(t, 8); // Mais acentuado para ser apenas detalhe
       
       const r = Math.round(grayScale + accentStrength * 22);
       const g = Math.round(grayScale + accentStrength * 87);
@@ -55,7 +66,7 @@ export function TurbulenceBackground() {
       return [r, g, b];
     }
 
-    const SCALE = 8;
+    const SCALE = 10; // Aumentado para performance em monitores High-Hz
     let time = 0;
     let animationFrameId: number;
 
@@ -73,17 +84,18 @@ export function TurbulenceBackground() {
       const data = imgData.data;
 
       for (let py = 0; py < bH; py++) {
-        const ny = (py / bH) * 2.8;
+        const ny = (py / bH) * 2.5;
         for (let px = 0; px < bW; px++) {
-          const nx = (px / bW) * 4.2;
+          const nx = (px / bW) * 3.8;
           
-          const qx = noise(nx + 0.0, ny + 0.0, time);
-          const qy = noise(nx + 1.2, ny + 1.5, time);
+          // Domain Warping para fluidez máxima
+          const qx = noise(nx, ny, time * 0.3);
+          const qy = noise(nx + 1.5, ny + 1.5, time * 0.3);
           
-          const rx = noise(nx + 4.0 * qx + 1.7, ny + 4.0 * qy + 9.2, time * 0.5);
-          const ry = noise(nx + 4.0 * qx + 8.3, ny + 4.0 * qy + 2.8, time * 0.5);
+          const rx = noise(nx + 3.0 * qx, ny + 3.0 * qy, time * 0.2);
+          const ry = noise(nx + 3.0 * qx + 5.0, ny + 3.0 * qy + 2.0, time * 0.2);
           
-          const val = noise(nx + rx, ny + ry, time * 0.6);
+          const val = noise(nx + rx, ny + ry, time * 0.4);
           
           const [r, g, b] = getColor(val);
           const idx = (py * bW + px) * 4;
@@ -103,7 +115,7 @@ export function TurbulenceBackground() {
         ctx.imageSmoothingEnabled = true;
         ctx.drawImage(offCanvas, 0, 0, W, H);
 
-        ctx.globalAlpha = 0.06;
+        ctx.globalAlpha = 0.05;
         ctx.globalCompositeOperation = 'screen';
         const gW = grainCanvas.width;
         const gH = grainCanvas.height;
@@ -116,7 +128,7 @@ export function TurbulenceBackground() {
         ctx.globalCompositeOperation = 'source-over';
       }
 
-      time += 0.008; 
+      time += 0.006; 
       animationFrameId = requestAnimationFrame(draw);
     }
 
@@ -124,6 +136,7 @@ export function TurbulenceBackground() {
 
     return () => {
       window.removeEventListener('resize', resize);
+      window.removeEventListener('scroll', handleScroll);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -132,13 +145,13 @@ export function TurbulenceBackground() {
     <canvas
       ref={canvasRef}
       id="turbulence-bg"
-      className="fixed inset-0 pointer-events-none"
+      className="absolute inset-0 pointer-events-none"
       style={{ 
         zIndex: -1,
         opacity: 0,
         animation: 'fadeInBg 1.5s ease-out forwards',
         transform: 'translateZ(0)',
-        willChange: 'contents'
+        willChange: 'transform'
       }}
     />
   );

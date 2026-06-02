@@ -1,4 +1,3 @@
-
 import type {Metadata} from 'next';
 import './globals.css';
 import { TurbulenceBackground } from '@/components/turbulence-background';
@@ -21,16 +20,20 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
         <style>{`
           #turbulence-bg { 
-            position: fixed; 
+            position: absolute; 
             top: 0; 
             left: 0; 
             width: 100%; 
-            height: 100%; 
+            height: 150%; 
             z-index: -1;
             pointer-events: none;
+            will-change: transform;
           }
           body { 
             background: transparent !important; 
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
           }
           main {
             position: relative;
