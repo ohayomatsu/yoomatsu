@@ -40,7 +40,7 @@ export function Clients() {
         <div className="flex animate-marquee group-hover:[animation-play-state:paused] space-x-12 px-6">
           {marqueeItems.map((client, idx) => (
             <div key={idx} className="flex flex-col items-center space-y-4 shrink-0">
-              <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full liquid-glass flex items-center justify-center border border-white/10 transition-all duration-500 hover:border-teal-500/50 hover:shadow-[0_0_20px_rgba(20,184,166,0.3)] cursor-default group/item">
+              <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-[20px] flex items-center justify-center transition-all duration-500 hover:border-teal-500/50 hover:shadow-[0_0_20px_rgba(20,184,166,0.3)] cursor-default group/item">
                 <span className="text-xl md:text-2xl font-bold tracking-tighter text-white/40 group-hover/item:text-white group-hover/item:glow-text transition-all duration-500">
                   {getInitials(client.name)}
                 </span>
