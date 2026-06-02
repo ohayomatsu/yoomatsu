@@ -23,7 +23,6 @@ export default function Home() {
 
       <footer className="py-12 border-t border-white/5 text-center text-foreground/30 text-xs">
         <p>© {new Date().getFullYear()} Matsu. Todos os direitos reservados.</p>
-        <p className="mt-2 tracking-widest uppercase">Transforming ideas into images.</p>
       </footer>
 
       <Toaster />
