@@ -2,7 +2,6 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import Image from 'next/image';
 
 export function Hero() {
   return (
@@ -14,14 +13,21 @@ export function Hero() {
           </p>
           
           <div className="flex justify-center items-center">
-            <Image 
+            <img 
               id="hero-title"
               src="/logo.svg" 
               alt="Matsu" 
               width={420} 
-              height={200} 
-              style={{ maxWidth: '75vw', height: 'auto' }} 
-              priority
+              style={{
+                maxWidth: '75vw', 
+                height: 'auto', 
+                display: 'block', 
+                margin: '0 auto'
+              }} 
+              onError={(e: any) => { 
+                e.target.style.display='none'; 
+                console.log('Logo não encontrada'); 
+              }} 
             />
           </div>
           
