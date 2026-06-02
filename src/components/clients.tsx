@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 const CLIENTS = [
   { name: "CAIO ANDRES", imageUrl: "/caioandres.jpeg" },
   { name: "?" },
-  { name: "YOOMATSU", imageUrl: "/eu.png" },
+  { name: "YOOMATSU (EU)", imageUrl: "/eu.png" },
 ];
 
 function getInitials(name: string) {

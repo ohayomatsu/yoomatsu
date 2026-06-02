@@ -3,18 +3,41 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Play } from "lucide-react";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { Play, X } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const PROJECTS = [
-  { id: 1, title: "Modern Brand Identity", category: "Edição Básica", imgId: "portfolio-1" },
-  { id: 2, title: "Dynamic Social Ad", category: "Edição Complexa", imgId: "portfolio-2" },
-  { id: 3, title: "ASMR Audio Mix", category: "Sonorização", imgId: "portfolio-3" },
-  { id: 4, title: "Cinematic Travel Film", category: "Edição Complexa", imgId: "portfolio-4" },
-  { id: 5, title: "Urban Lifestyle Reel", category: "Edição Básica", imgId: "portfolio-5" },
-  { id: 6, title: "Commercial Sound Design", category: "Sonorização", imgId: "portfolio-6" },
+  { 
+    id: 1, 
+    title: "SUPER BATTLE GOLF (YOOMATSU)", 
+    category: "Edição Complexa", 
+    videoId: "YLDHPSmUhVg" 
+  },
+  { 
+    id: 2, 
+    title: "MD10 CS (YOOMATSU)", 
+    category: "Edição Complexa", 
+    videoId: "S5kAg4xBnNo" 
+  },
+  { 
+    id: 3, 
+    title: "15K INTRO (YOOMATSU)", 
+    category: "Edição Complexa", 
+    videoId: "u29iT_vn468" 
+  },
+  { 
+    id: 4, 
+    title: "MINECRAFT SURVIVAL (YOOMATSU)", 
+    category: "Edição Básica", 
+    videoId: "Ctt-e2dugY8" 
+  },
+  { 
+    id: 5, 
+    title: "PEAK (YOOMATSU)", 
+    category: "Edição Básica", 
+    videoId: "bxg4Qrf-UZg" 
+  },
 ];
 
 const CATEGORIES = [
@@ -26,6 +49,7 @@ const CATEGORIES = [
 
 export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<{ [key: string]: HTMLButtonElement | null }>({});
@@ -44,6 +68,18 @@ export function Portfolio() {
       });
     }
   }, [activeCategory]);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedVideoId) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedVideoId]);
 
   return (
     <section id="portfolio" className="py-24 px-6 max-w-7xl mx-auto space-y-16 scroll-mt-20">
@@ -93,18 +129,22 @@ export function Portfolio() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
           {filteredProjects.map((project) => {
-            const image = PlaceHolderImages.find(img => img.id === project.imgId);
+            const thumbnailUrl = `https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg`;
             return (
-              <div key={project.id} className="group relative liquid-card overflow-hidden aspect-video cursor-pointer">
-                {image && (
+              <div 
+                key={project.id} 
+                onClick={() => setSelectedVideoId(project.videoId)}
+                className="group relative liquid-card overflow-hidden aspect-video cursor-pointer"
+              >
+                <div className="relative w-full h-full">
                   <Image
-                    src={image.imageUrl}
+                    src={thumbnailUrl}
                     alt={project.title}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110 saturate-[0.8]"
-                    data-ai-hint="video editing"
+                    unoptimized
                   />
-                )}
+                </div>
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center space-y-4 backdrop-blur-sm">
                   <div className="p-4 rounded-full bg-white/20 border border-white/40 scale-0 group-hover:scale-100 transition-transform duration-500">
                     <Play fill="white" size={32} />
@@ -123,6 +163,40 @@ export function Portfolio() {
           })}
         </div>
       </div>
+
+      {/* Video Modal Player */}
+      {selectedVideoId && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-sm animate-in fade-in duration-300"
+          onClick={() => setSelectedVideoId(null)}
+        >
+          <button 
+            className="absolute top-6 right-6 p-3 text-white/60 hover:text-white transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedVideoId(null);
+            }}
+          >
+            <X size={32} />
+          </button>
+          
+          <div 
+            className="relative w-full max-w-[860px] aspect-video mx-4 animate-in zoom-in-95 duration-300"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <iframe
+              width="100%"
+              height="100%"
+              src={`https://www.youtube.com/embed/${selectedVideoId}?autoplay=1`}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="rounded-2xl shadow-2xl"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
