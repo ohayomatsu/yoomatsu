@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -21,15 +22,15 @@ export function About() {
           </div>
         </div>
 
-        <div className="space-y-6 flex-1 text-center md:text-left">
-          <div className="space-y-2">
+        <div className="space-y-2 flex-1 text-center md:text-left">
+          <div className="space-y-1">
             <h2 className="text-[2.2rem] font-headline font-bold tracking-tight">MATSU!</h2>
             <p className="text-[1.1rem] text-foreground/80 font-light leading-relaxed">
               Criador de conteúdo e Editor de vídeo.
             </p>
           </div>
           
-          <div className="space-y-4 text-[0.95rem] text-foreground/60 leading-relaxed">
+          <div className="text-[0.95rem] text-foreground/60 leading-relaxed">
             <p>
               Opa, eu sou o Matsu, trabalho com edição de vídeo e motion design há mais de 5 anos.
             </p>
