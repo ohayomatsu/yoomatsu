@@ -29,7 +29,7 @@ export function Hero() {
           <p className="text-[10px] uppercase tracking-[0.6em] text-foreground/40 font-bold">
             Visual Storytelling
           </p>
-          <h1 className="text-8xl md:text-[14rem] font-headline font-bold tracking-tighter glow-text leading-none m-0 p-0 text-white select-none">
+          <h1 id="hero-title" className="text-8xl md:text-[14rem] font-headline font-bold tracking-tighter glow-text leading-none m-0 p-0 text-white select-none">
             MATSU
           </h1>
           <p className="text-xl md:text-3xl font-light text-foreground/60 tracking-[0.2em] mt-6">

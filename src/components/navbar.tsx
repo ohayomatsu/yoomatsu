@@ -15,6 +15,7 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHeroTitleVisible, setIsHeroTitleVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -22,7 +23,23 @@ export function Navbar() {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeroTitleVisible(entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+
+    const titleElement = document.getElementById("hero-title");
+    if (titleElement) {
+      observer.observe(titleElement);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (titleElement) observer.unobserve(titleElement);
+    };
   }, []);
 
   return (
@@ -33,7 +50,13 @@ export function Navbar() {
       )}
     >
       <div className="flex items-center justify-between">
-        <Link href="#hero" className="text-xl font-headline font-bold tracking-tighter glow-text">
+        <Link 
+          href="#hero" 
+          className={cn(
+            "text-xl font-headline font-bold tracking-tighter glow-text transition-opacity duration-400 ease-in-out",
+            isHeroTitleVisible ? "opacity-0 pointer-events-none" : "opacity-100"
+          )}
+        >
           MATSU
         </Link>
 
