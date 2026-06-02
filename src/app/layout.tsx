@@ -1,3 +1,4 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { TurbulenceBackground } from '@/components/turbulence-background';
@@ -13,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="dark">
+    <html lang="pt-BR" className="dark" style={{ background: '#000' }}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -25,22 +26,22 @@ export default function RootLayout({
             left: 0; 
             width: 100%; 
             height: 100%; 
-            z-index: 0;
+            z-index: -1;
+            pointer-events: none;
           }
           body { 
-            background: #000; 
+            background: transparent !important; 
           }
           main {
             position: relative;
             z-index: 1;
           }
-          /* Remove fundos padrão para garantir que o canvas apareça sem forçar !important em tudo */
           section {
             background: transparent;
           }
         `}</style>
       </head>
-      <body className="font-body antialiased bg-black text-[#F0F0F0] noise-bg">
+      <body className="font-body antialiased text-[#F0F0F0] noise-bg">
         <TurbulenceBackground />
         {children}
       </body>

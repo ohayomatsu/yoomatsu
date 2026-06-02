@@ -22,7 +22,6 @@ export function TurbulenceBackground() {
     resize();
     window.addEventListener('resize', resize);
 
-    // Grain pré-gerado para textura
     const grainCanvas = document.createElement('canvas');
     const grainCtx = grainCanvas.getContext('2d');
     if (grainCtx) {
@@ -37,7 +36,6 @@ export function TurbulenceBackground() {
       grainCtx.putImageData(grainData, 0, 0);
     }
 
-    // Função de ruído orgânico mais complexa para fluidez
     function noise(x: number, y: number, t: number) {
       const n1 = Math.sin(x * 1.1 + t * 0.15) * Math.cos(y * 0.8 - t * 0.1);
       const n2 = Math.sin(x * 0.5 - y * 0.6 + t * 0.08) * 0.5;
@@ -45,16 +43,9 @@ export function TurbulenceBackground() {
       return (n1 + n2 + n3) / 1.75;
     }
 
-    // Função de cor refinada - Azul (22, 87, 130) como detalhe sutil
     function getColor(n: number) {
-      // t normalizado com curva de suavização (easing)
       const t = (n + 1) / 2;
-      
-      // Base preta e cinza profundo
       const grayScale = Math.pow(t, 4) * 25;
-      
-      // Azul específico como detalhe apenas em áreas de alta turbulência
-      // Usamos uma curva de potência maior para que o azul seja apenas um "brilho"
       const accentStrength = Math.pow(t, 6);
       
       const r = Math.round(grayScale + accentStrength * 22);
@@ -64,7 +55,7 @@ export function TurbulenceBackground() {
       return [r, g, b];
     }
 
-    const SCALE = 8; // Mantido para alta performance
+    const SCALE = 8;
     let time = 0;
     let animationFrameId: number;
 
@@ -81,21 +72,17 @@ export function TurbulenceBackground() {
       const imgData = ctx.createImageData(bW, bH);
       const data = imgData.data;
 
-      // Domain Warping: Técnica avançada para movimento fluido
       for (let py = 0; py < bH; py++) {
-        const ny = (py / bH) * 2.8; // Escala vertical
+        const ny = (py / bH) * 2.8;
         for (let px = 0; px < bW; px++) {
-          const nx = (px / bW) * 4.2; // Escala horizontal
+          const nx = (px / bW) * 4.2;
           
-          // Camada de deformação 1 (Warp)
           const qx = noise(nx + 0.0, ny + 0.0, time);
           const qy = noise(nx + 1.2, ny + 1.5, time);
           
-          // Camada de deformação 2 (Warp secundário)
           const rx = noise(nx + 4.0 * qx + 1.7, ny + 4.0 * qy + 9.2, time * 0.5);
           const ry = noise(nx + 4.0 * qx + 8.3, ny + 4.0 * qy + 2.8, time * 0.5);
           
-          // Resultado final combinado para máxima fluidez
           const val = noise(nx + rx, ny + ry, time * 0.6);
           
           const [r, g, b] = getColor(val);
@@ -116,7 +103,6 @@ export function TurbulenceBackground() {
         ctx.imageSmoothingEnabled = true;
         ctx.drawImage(offCanvas, 0, 0, W, H);
 
-        // Textura de grão sutil para profundidade
         ctx.globalAlpha = 0.06;
         ctx.globalCompositeOperation = 'screen';
         const gW = grainCanvas.width;
@@ -130,7 +116,6 @@ export function TurbulenceBackground() {
         ctx.globalCompositeOperation = 'source-over';
       }
 
-      // Incremento de tempo menor para movimento mais lento e majestoso
       time += 0.008; 
       animationFrameId = requestAnimationFrame(draw);
     }
@@ -149,7 +134,7 @@ export function TurbulenceBackground() {
       id="turbulence-bg"
       className="fixed inset-0 pointer-events-none"
       style={{ 
-        zIndex: 0,
+        zIndex: -1,
         opacity: 0,
         animation: 'fadeInBg 1.5s ease-out forwards',
         transform: 'translateZ(0)',
