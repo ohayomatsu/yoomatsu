@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Mail } from "lucide-react";
@@ -16,7 +15,7 @@ export function Contact() {
             href="https://x.com/ohayomatsu" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="liquid-glass w-[42px] h-[42px] rounded-full flex items-center justify-center transition-all hover:bg-white/10 active:scale-95"
+            className="liquid-glass w-[42px] h-[42px] rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/10 hover:scale-[1.04] active:scale-95"
             aria-label="X (Twitter)"
           >
             <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
@@ -28,7 +27,7 @@ export function Contact() {
             href="mailto:contato.ohayomatsu@gmail.com" 
             target="_blank"
             rel="noopener noreferrer"
-            className="liquid-glass w-[42px] h-[42px] rounded-full flex items-center justify-center transition-all hover:bg-white/10 active:scale-95"
+            className="liquid-glass w-[42px] h-[42px] rounded-full flex items-center justify-center transition-all duration-200 hover:bg-white/10 hover:scale-[1.04] active:scale-95"
             aria-label="E-mail"
           >
             <Mail size={13} />

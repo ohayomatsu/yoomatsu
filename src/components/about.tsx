@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -52,7 +51,7 @@ export function About() {
                 href={social.href} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-8 h-8 rounded-full liquid-glass flex items-center justify-center transition-all hover:bg-white/10 hover:scale-110"
+                className="w-8 h-8 rounded-full liquid-glass flex items-center justify-center transition-all duration-200 hover:bg-white/10 hover:scale-[1.04]"
               >
                 {social.icon}
               </a>

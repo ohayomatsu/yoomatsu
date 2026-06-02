@@ -54,7 +54,7 @@
   }
 
   .liquid-button {
-    @apply liquid-glass rounded-full px-8 py-3 font-semibold transition-all duration-300 hover:bg-white/[0.12];
+    @apply liquid-glass rounded-full px-8 py-3 font-semibold transition-all duration-200 hover:bg-white/[0.12] hover:scale-[1.04] active:scale-95;
   }
 
   .glow-text {

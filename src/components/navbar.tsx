@@ -81,7 +81,7 @@ export function Navbar() {
             ))}
             <Link
               href="#contact"
-              className="px-6 py-2 liquid-glass rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all active:scale-95 whitespace-nowrap"
+              className="px-6 py-2 liquid-glass rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all duration-200 hover:scale-[1.04] active:scale-95 whitespace-nowrap"
             >
               Fale Comigo
             </Link>
@@ -120,7 +120,7 @@ export function Navbar() {
           <Link
             href="#contact"
             onClick={() => setMobileMenuOpen(false)}
-            className="px-6 py-4 liquid-glass rounded-full text-sm font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all text-center"
+            className="px-6 py-4 liquid-glass rounded-full text-sm font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all duration-200 hover:scale-[1.04] text-center"
           >
             Fale Comigo
           </Link>
