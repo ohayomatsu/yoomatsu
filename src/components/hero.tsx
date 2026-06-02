@@ -12,13 +12,15 @@ export function Hero() {
     <section id="hero" className="relative h-screen flex flex-col items-center justify-center overflow-hidden px-6">
       <div className="absolute inset-0 -z-10 bg-[#030303]">
         {heroImg && (
-          <Image
-            src={heroImg.imageUrl}
-            alt="Hero Background"
-            fill
-            className="object-cover opacity-20 saturate-0"
-            priority
-          />
+          <ScrollReveal threshold={0} className="h-full w-full">
+            <Image
+              src={heroImg.imageUrl}
+              alt="Hero Background"
+              fill
+              className="object-cover opacity-20 saturate-0"
+              priority
+            />
+          </ScrollReveal>
         )}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#030303]/60 to-[#030303]" />
       </div>
@@ -50,19 +52,25 @@ export function Hero() {
           </p>
         </ScrollReveal>
 
-        <ScrollReveal delay={800} className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
-          <a href="#portfolio" className="liquid-button bg-white/[0.08] text-[10px] uppercase tracking-[0.3em] py-5 px-14">
-            Ver Portfólio
-          </a>
-          <a href="#contact" className="text-[10px] uppercase tracking-[0.3em] font-bold text-foreground/40 hover:text-foreground transition-all">
-            Fale Comigo
-          </a>
-        </ScrollReveal>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
+          <ScrollReveal delay={800}>
+            <a href="#portfolio" className="liquid-button bg-white/[0.08] text-[10px] uppercase tracking-[0.3em] py-5 px-14 inline-block">
+              Ver Portfólio
+            </a>
+          </ScrollReveal>
+          <ScrollReveal delay={900}>
+            <a href="#contact" className="text-[10px] uppercase tracking-[0.3em] font-bold text-foreground/40 hover:text-foreground transition-all">
+              Fale Comigo
+            </a>
+          </ScrollReveal>
+        </div>
       </div>
 
-      <a href="#portfolio" className="absolute bottom-12 animate-bounce text-foreground/20 hover:text-foreground transition-colors">
-        <ChevronDown size={32} />
-      </a>
+      <ScrollReveal delay={1200} className="absolute bottom-12">
+        <a href="#portfolio" className="animate-bounce text-foreground/20 hover:text-foreground transition-colors block">
+          <ChevronDown size={32} />
+        </a>
+      </ScrollReveal>
     </section>
   );
 }

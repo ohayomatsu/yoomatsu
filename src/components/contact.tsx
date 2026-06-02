@@ -78,11 +78,17 @@ export function Contact() {
             </ScrollReveal>
           </form>
 
-          <ScrollReveal delay={700} className="flex flex-col md:flex-row items-center justify-between gap-10 text-foreground/30 text-[10px] uppercase tracking-widest border-t border-white/5 pt-12">
-            <p className="hover:text-foreground/60 transition-colors cursor-pointer">whatsapp: +55 11 99999-9999</p>
-            <p className="hover:text-foreground/60 transition-colors cursor-pointer">email: contato@matsu.pro</p>
-            <p>São Paulo, Brasil</p>
-          </ScrollReveal>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-10 text-foreground/30 text-[10px] uppercase tracking-widest border-t border-white/5 pt-12">
+            <ScrollReveal delay={700}>
+              <p className="hover:text-foreground/60 transition-colors cursor-pointer">whatsapp: +55 11 99999-9999</p>
+            </ScrollReveal>
+            <ScrollReveal delay={800}>
+              <p className="hover:text-foreground/60 transition-colors cursor-pointer">email: contato@matsu.pro</p>
+            </ScrollReveal>
+            <ScrollReveal delay={900}>
+              <p>São Paulo, Brasil</p>
+            </ScrollReveal>
+          </div>
         </div>
       </ScrollReveal>
     </section>

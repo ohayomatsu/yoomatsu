@@ -52,20 +52,20 @@ export function About() {
             </ScrollReveal>
           </div>
 
-          <ScrollReveal delay={600} className="flex items-center justify-center md:justify-start gap-6 pt-4">
-            <a href="#" className="p-3 rounded-full liquid-glass hover:bg-white/10 transition-all hover:scale-110">
-              <Instagram size={24} />
-            </a>
-            <a href="#" className="p-3 rounded-full liquid-glass hover:bg-white/10 transition-all hover:scale-110">
-              <Youtube size={24} />
-            </a>
-            <a href="#" className="p-3 rounded-full liquid-glass hover:bg-white/10 transition-all hover:scale-110">
-              <Twitter size={24} />
-            </a>
-            <a href="#" className="p-3 rounded-full liquid-glass hover:bg-white/10 transition-all hover:scale-110">
-              <MessageCircle size={24} />
-            </a>
-          </ScrollReveal>
+          <div className="flex items-center justify-center md:justify-start gap-6 pt-4">
+            {[
+              { icon: <Instagram size={24} />, delay: 600 },
+              { icon: <Youtube size={24} />, delay: 700 },
+              { icon: <Twitter size={24} />, delay: 800 },
+              { icon: <MessageCircle size={24} />, delay: 900 }
+            ].map((social, idx) => (
+              <ScrollReveal key={idx} delay={social.delay}>
+                <a href="#" className="p-3 rounded-full liquid-glass hover:bg-white/10 transition-all hover:scale-110 inline-block">
+                  {social.icon}
+                </a>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -61,7 +61,7 @@ export function Services() {
             <ScrollReveal key={i} delay={i * 200}>
               <div
                 className={`liquid-card p-10 flex flex-col space-y-8 h-full ${
-                  service.highlight ? "border-white/40 bg-white/[0.08] scale-105" : ""
+                  service.highlight ? "border-white/40 bg-white/[0.08] md:scale-105" : ""
                 }`}
               >
                 <div className="space-y-3">

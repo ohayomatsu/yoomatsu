@@ -28,7 +28,7 @@ export function ScrollReveal({
       },
       {
         threshold: threshold,
-        rootMargin: "0px 0px -80px 0px"
+        rootMargin: "0px 0px -40px 0px"
       }
     );
 
@@ -48,14 +48,13 @@ export function ScrollReveal({
     <div
       ref={ref}
       className={cn(
-        "transition-all",
+        "transition-all duration-[1200ms]",
         isVisible 
           ? "opacity-100 blur-0 translate-y-0" 
           : "opacity-0 blur-[4px] translate-y-4",
         className
       )}
       style={{ 
-        transitionDuration: "1200ms",
         transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
         transitionDelay: `${delay}ms`,
         willChange: "transform, opacity, filter"
