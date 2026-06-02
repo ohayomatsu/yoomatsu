@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect, useRef } from 'react';
@@ -21,7 +22,7 @@ export function TurbulenceBackground() {
     resize();
     window.addEventListener('resize', resize);
 
-    // Grain pré-gerado uma única vez — não recalcula a cada frame
+    // Grain pré-gerado uma única vez — zero custo de CPU no loop
     const grainCanvas = document.createElement('canvas');
     const grainCtx = grainCanvas.getContext('2d');
     if (grainCtx) {
@@ -117,7 +118,7 @@ export function TurbulenceBackground() {
         ctx.drawImage(offCanvas, 0, 0, W, H);
         ctx.filter = 'none';
 
-        // Grain estático aplicado via compositing — zero custo de CPU
+        // Grain estático aplicado via compositing
         ctx.globalAlpha = 0.12;
         ctx.globalCompositeOperation = 'screen';
         const gW = grainCanvas.width, gH = grainCanvas.height;
@@ -144,7 +145,7 @@ export function TurbulenceBackground() {
     <canvas
       ref={canvasRef}
       id="turbulence-bg"
-      className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"
+      style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}
     />
   );
 }

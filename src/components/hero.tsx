@@ -1,3 +1,4 @@
+
 "use client";
 
 import { ChevronDown } from "lucide-react";
@@ -5,10 +6,6 @@ import { ChevronDown } from "lucide-react";
 export function Hero() {
   return (
     <section id="hero" className="relative h-screen flex flex-col items-center justify-center overflow-hidden px-6 z-10">
-      <div className="absolute inset-0 -z-10 bg-[#030303]">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#030303]/60 to-[#030303]" />
-      </div>
-
       <div className="text-center max-w-4xl space-y-12 relative z-10">
         <div className="space-y-4">
           <p className="text-[10px] uppercase tracking-[0.6em] text-foreground/40 font-bold">

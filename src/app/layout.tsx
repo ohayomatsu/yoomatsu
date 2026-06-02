@@ -1,3 +1,4 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { TurbulenceBackground } from '@/components/turbulence-background';
@@ -30,9 +31,16 @@ export default function RootLayout({
           body { 
             background: #000; 
           }
-          main, section, nav, footer { 
-            position: relative; 
-            z-index: 10; 
+          section, div, header, main, nav, footer { 
+            background: transparent !important; 
+            background-image: none !important;
+            position: relative;
+            z-index: 1;
+          }
+          /* Exceções necessárias para componentes que precisam de fundo (cards, overlays) */
+          .liquid-glass, .liquid-card, .liquid-button, [role="tabpanel"], [role="tablist"] {
+            background: rgba(255, 255, 255, 0.04) !important;
+            backdrop-filter: blur(20px) !important;
           }
         `}</style>
       </head>
