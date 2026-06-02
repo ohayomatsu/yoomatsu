@@ -16,7 +16,6 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isHeroTitleVisible, setIsHeroTitleVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -24,23 +23,7 @@ export function Navbar() {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsHeroTitleVisible(entry.isIntersecting);
-      },
-      { threshold: 0 }
-    );
-
-    const titleElement = document.getElementById("hero-title");
-    if (titleElement) {
-      observer.observe(titleElement);
-    }
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (titleElement) observer.unobserve(titleElement);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -50,51 +33,32 @@ export function Navbar() {
         isScrolled ? "liquid-glass py-2 px-6" : "bg-transparent py-4 px-6"
       )}
     >
-      <div className="flex items-center relative min-h-[40px]">
-        {/* Logo - Animates opacity and horizontal slide */}
+      <div className="flex items-center justify-between relative min-h-[40px]">
+        {/* Logo */}
         <Link 
           href="#hero" 
-          className={cn(
-            "text-xl font-headline font-bold tracking-tighter glow-text transition-all duration-500 ease-in-out absolute left-0 z-10",
-            isHeroTitleVisible 
-              ? "opacity-0 pointer-events-none -translate-x-2" 
-              : "opacity-100 translate-x-0"
-          )}
+          className="text-xl font-headline font-bold tracking-tighter glow-text transition-all duration-500 ease-in-out z-10 opacity-100"
         >
           MATSU
         </Link>
 
-        {/* Desktop Menu - Animated centering logic using spacers */}
-        <div className="hidden md:flex items-center w-full transition-all duration-500 ease-in-out">
-          {/* Left Spacer - Always expanding to push links from the left */}
-          <div className="flex-1 transition-all duration-500" />
-          
-          {/* Links Container */}
-          <div className="flex items-center space-x-8 shrink-0">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-xs font-semibold uppercase tracking-widest text-foreground/60 hover:text-foreground transition-colors"
-              >
-                {link.name}
-              </Link>
-            ))}
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center space-x-8">
+          {NAV_LINKS.map((link) => (
             <Link
-              href="#contact"
-              className="px-6 py-2 liquid-glass rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all active:scale-95"
+              key={link.name}
+              href={link.href}
+              className="text-xs font-semibold uppercase tracking-widest text-foreground/60 hover:text-foreground transition-colors"
             >
-              Fale Comigo
+              {link.name}
             </Link>
-          </div>
-
-          {/* Right Spacer - Toggles flex-grow to center or right-align links */}
-          <div 
-            className={cn(
-              "transition-all duration-500 ease-in-out",
-              isHeroTitleVisible ? "flex-1" : "flex-[0]"
-            )} 
-          />
+          ))}
+          <Link
+            href="#contact"
+            className="px-6 py-2 liquid-glass rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all active:scale-95"
+          >
+            Fale Comigo
+          </Link>
         </div>
 
         {/* Mobile Menu Trigger */}

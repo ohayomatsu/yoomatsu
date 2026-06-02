@@ -1,9 +1,9 @@
+
 "use client";
 
 import { ChevronDown } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import Image from "next/image";
-import { ScrollReveal } from "./scroll-reveal";
 
 export function Hero() {
   const heroImg = PlaceHolderImages.find((img) => img.id === "hero-bg");
@@ -12,65 +12,51 @@ export function Hero() {
     <section id="hero" className="relative h-screen flex flex-col items-center justify-center overflow-hidden px-6">
       <div className="absolute inset-0 -z-10 bg-[#030303]">
         {heroImg && (
-          <ScrollReveal threshold={0} className="h-full w-full">
-            <Image
-              src={heroImg.imageUrl}
-              alt="Hero Background"
-              fill
-              className="object-cover opacity-20 saturate-0"
-              priority
-            />
-          </ScrollReveal>
+          <Image
+            src={heroImg.imageUrl}
+            alt="Hero Background"
+            fill
+            className="object-cover opacity-20 saturate-0"
+            priority
+          />
         )}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#030303]/60 to-[#030303]" />
       </div>
 
       <div className="text-center max-w-4xl space-y-12 relative z-10">
         <div className="space-y-4">
-          <ScrollReveal delay={0}>
-            <p className="text-[10px] uppercase tracking-[0.6em] text-foreground/40 font-bold">
-              Visual Storytelling
-            </p>
-          </ScrollReveal>
+          <p className="text-[10px] uppercase tracking-[0.6em] text-foreground/40 font-bold">
+            Visual Storytelling
+          </p>
           
-          <ScrollReveal delay={200}>
-            <h1 id="hero-title" className="text-8xl md:text-[14rem] font-headline font-bold tracking-tighter glow-text leading-none m-0 p-0 text-white select-none">
-              MATSU
-            </h1>
-          </ScrollReveal>
+          <h1 className="text-8xl md:text-[14rem] font-headline font-bold tracking-tighter glow-text leading-none m-0 p-0 text-white select-none">
+            MATSU
+          </h1>
           
-          <ScrollReveal delay={400}>
-            <p className="text-xl md:text-3xl font-light text-foreground/60 tracking-[0.2em] mt-6">
-              EDITOR DE VÍDEO
-            </p>
-          </ScrollReveal>
+          <p className="text-xl md:text-3xl font-light text-foreground/60 tracking-[0.2em] mt-6">
+            EDITOR DE VÍDEO
+          </p>
         </div>
 
-        <ScrollReveal delay={600}>
-          <p className="text-lg md:text-xl text-foreground/40 max-w-2xl mx-auto leading-relaxed font-light">
-            Transformo ideias em imagens de alto impacto. Conteúdo especializado para quem busca transcendência visual.
-          </p>
-        </ScrollReveal>
+        <p className="text-lg md:text-xl text-foreground/40 max-w-2xl mx-auto leading-relaxed font-light">
+          Transformo ideias em imagens de alto impacto. Conteúdo especializado para quem busca transcendência visual.
+        </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
-          <ScrollReveal delay={800}>
-            <a href="#portfolio" className="liquid-button bg-white/[0.08] text-[10px] uppercase tracking-[0.3em] py-5 px-14 inline-block">
-              Ver Portfólio
-            </a>
-          </ScrollReveal>
-          <ScrollReveal delay={900}>
-            <a href="#contact" className="text-[10px] uppercase tracking-[0.3em] font-bold text-foreground/40 hover:text-foreground transition-all">
-              Fale Comigo
-            </a>
-          </ScrollReveal>
+          <a href="#portfolio" className="liquid-button bg-white/[0.08] text-[10px] uppercase tracking-[0.3em] py-5 px-14 inline-block">
+            Ver Portfólio
+          </a>
+          <a href="#contact" className="text-[10px] uppercase tracking-[0.3em] font-bold text-foreground/40 hover:text-foreground transition-all">
+            Fale Comigo
+          </a>
         </div>
       </div>
 
-      <ScrollReveal delay={1200} className="absolute bottom-12">
+      <div className="absolute bottom-12">
         <a href="#portfolio" className="animate-bounce text-foreground/20 hover:text-foreground transition-colors block">
           <ChevronDown size={32} />
         </a>
-      </ScrollReveal>
+      </div>
     </section>
   );
 }
