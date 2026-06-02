@@ -1,3 +1,52 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-bg",
+      "description": "Abstract liquid glass background",
+      "imageUrl": "https://picsum.photos/seed/matsu-1/1920/1080",
+      "imageHint": "abstract glass"
+    },
+    {
+      "id": "portfolio-1",
+      "description": "Dynamic edit showcase",
+      "imageUrl": "https://picsum.photos/seed/matsu-2/800/600",
+      "imageHint": "video editing"
+    },
+    {
+      "id": "portfolio-2",
+      "description": "Motion graphics project",
+      "imageUrl": "https://picsum.photos/seed/matsu-3/800/600",
+      "imageHint": "motion design"
+    },
+    {
+      "id": "portfolio-3",
+      "description": "Sound design visualization",
+      "imageUrl": "https://picsum.photos/seed/matsu-4/800/600",
+      "imageHint": "sound wave"
+    },
+    {
+      "id": "portfolio-4",
+      "description": "VFX composition",
+      "imageUrl": "https://picsum.photos/seed/matsu-5/800/600",
+      "imageHint": "vfx cinema"
+    },
+    {
+      "id": "portfolio-5",
+      "description": "Fast paced social edit",
+      "imageUrl": "https://picsum.photos/seed/matsu-6/800/600",
+      "imageHint": "tiktok reels"
+    },
+    {
+      "id": "portfolio-6",
+      "description": "Color grading showcase",
+      "imageUrl": "https://picsum.photos/seed/matsu-7/800/600",
+      "imageHint": "color grade"
+    },
+    {
+      "id": "about-matsu",
+      "description": "Portrait of Matsu",
+      "imageUrl": "https://picsum.photos/seed/matsu-profile/400/400",
+      "imageHint": "man portrait"
+    }
+  ]
 }
