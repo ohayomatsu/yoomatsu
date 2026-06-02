@@ -3,7 +3,7 @@
 
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import Image from "next/image";
-import { Youtube, Instagram, Twitter, MessageCircle } from "lucide-react";
+import { Youtube, Twitter } from "lucide-react";
 
 export function About() {
   const profileImg = PlaceHolderImages.find(img => img.id === "about-matsu");
@@ -46,12 +46,22 @@ export function About() {
 
           <div className="flex items-center justify-center md:justify-start gap-6 pt-4">
             {[
-              { icon: <Instagram size={24} /> },
-              { icon: <Youtube size={24} /> },
-              { icon: <Twitter size={24} /> },
-              { icon: <MessageCircle size={24} /> }
+              { 
+                icon: <Youtube size={24} />, 
+                href: "https://www.youtube.com/@yoomatsu" 
+              },
+              { 
+                icon: <Twitter size={24} />, 
+                href: "https://x.com/ohayomatsu" 
+              }
             ].map((social, idx) => (
-              <a key={idx} href="#" className="p-3 rounded-full liquid-glass hover:bg-white/10 transition-all hover:scale-110 inline-block">
+              <a 
+                key={idx} 
+                href={social.href} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="p-3 rounded-full liquid-glass hover:bg-white/10 transition-all hover:scale-110 inline-block"
+              >
                 {social.icon}
               </a>
             ))}
