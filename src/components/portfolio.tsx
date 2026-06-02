@@ -42,10 +42,8 @@ export function Portfolio() {
       }
     };
 
-    // Update position immediately
     updateIndicator();
 
-    // Re-check after a small delay to handle layout shifts/fonts
     const timer = setTimeout(updateIndicator, 100);
     
     window.addEventListener('resize', updateIndicator);
@@ -64,14 +62,15 @@ export function Portfolio() {
         </p>
       </div>
 
-      <div className="w-full flex flex-col items-center space-y-12">
+      <div className="w-full flex flex-col items-center justify-center space-y-12">
         {/* Liquid Glass Slider */}
-        <div className="filter-toggle">
+        <div className="filter-toggle mx-auto flex items-center justify-center relative">
           <div 
             className="indicator__liquid" 
             style={{ 
               left: `${indicatorStyle.left}px`, 
-              width: `${indicatorStyle.width}px` 
+              width: `${indicatorStyle.width}px`,
+              opacity: indicatorStyle.width > 0 ? 1 : 0
             }} 
           />
           {CATEGORIES.map((cat) => (
