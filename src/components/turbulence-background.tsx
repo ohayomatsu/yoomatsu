@@ -44,15 +44,17 @@ export function TurbulenceBackground() {
       return (n1 + n2 + n3) / 1.75;
     }
 
-    // Algoritmo de colorização seletiva (Preto, Branco e Azul 22, 87, 130)
+    // Algoritmo de colorização intensificado (Azul vibrante e cinzas mais claros)
     function getColor(n: number) {
       const t = (n + 1) / 2;
-      const grayScale = Math.pow(t, 4) * 35; 
-      const accentStrength = Math.pow(t, 14); 
+      // Curva mais suave para o brilho base (grayScale) e cor (accentStrength)
+      // Isso torna os "blobs" maiores e mais presentes
+      const grayScale = Math.pow(t, 2.5) * 60; 
+      const accentStrength = Math.pow(t, 6); 
       
-      const r = Math.round(grayScale + accentStrength * 22);
-      const g = Math.round(grayScale + accentStrength * 87);
-      const b = Math.round(grayScale + accentStrength * 130);
+      const r = Math.round(grayScale + accentStrength * 40);
+      const g = Math.round(grayScale + accentStrength * 120);
+      const b = Math.round(grayScale + accentStrength * 200);
       
       return [r, g, b];
     }
