@@ -61,7 +61,7 @@ export function Navbar() {
           <img 
             src="/logo.svg" 
             alt="MATSU" 
-            style={{ height: '28px', width: 'auto' }} 
+            style={{ height: '22px', width: 'auto' }} 
           />
         </Link>
 
