@@ -6,10 +6,11 @@ import { Twitter, Mail } from "lucide-react";
 export function Contact() {
   return (
     <section id="contact" className="py-32 px-6 max-w-5xl mx-auto">
-      <div className="liquid-card p-16 md:p-24 space-y-16 flex flex-col items-center text-center">
+      {/* Substituído liquid-card por liquid-glass direto para remover o efeito de hover do background */}
+      <div className="liquid-glass rounded-[2rem] p-16 md:p-24 space-y-16 flex flex-col items-center text-center">
         <div className="space-y-6">
           <h2 className="text-5xl md:text-7xl font-headline font-bold tracking-tight glow-text leading-none">
-            Vamos criar <br /> algo novo?
+            Ficou interessado? <br /> só chamar.
           </h2>
         </div>
 
