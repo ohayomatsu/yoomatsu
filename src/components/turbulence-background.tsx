@@ -29,7 +29,7 @@ export function TurbulenceBackground() {
         const footer = document.querySelector('footer');
         const bodyHeight = document.documentElement.scrollHeight;
         const windowHeight = window.innerHeight;
-        const footerHeight = footer ? footer.offsetHeight : 0;
+        const footerHeight = footer ? (footer as HTMLElement).offsetHeight : 0;
         
         // Cálculo do scroll máximo permitido para que o parallax pare antes do footer
         const maxScroll = bodyHeight - windowHeight - footerHeight;
