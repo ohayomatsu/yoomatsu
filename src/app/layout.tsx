@@ -30,14 +30,15 @@ export default function RootLayout({
             pointer-events: none;
             background: #000;
           }
-          #turbulence-bg { 
+          .bg-gradient { 
             position: absolute; 
-            top: 0;
+            top: -20%;
             left: 0; 
             width: 100%; 
-            height: 100%;
+            height: 140%;
             z-index: -1;
             pointer-events: none;
+            will-change: transform;
           }
           body { 
             background: transparent !important; 
