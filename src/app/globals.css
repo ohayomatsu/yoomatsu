@@ -44,7 +44,7 @@
 @layer components {
   .noise-bg {
     position: relative;
-    transform: translateZ(0);
+    /* Removido transform: translateZ(0) para não quebrar position: fixed da navbar */
   }
   
   .liquid-glass {
