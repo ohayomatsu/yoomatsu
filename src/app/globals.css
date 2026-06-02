@@ -67,8 +67,10 @@
     --control: hsl(300, 100%, 100%);
     position: relative;
     display: flex;
+    align-items: center;
     border-radius: 100px;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 4px;
     container-type: inline-size;
   }
@@ -79,12 +81,13 @@
     background: transparent;
     border: none;
     border-radius: 100px;
-    padding: 8px 20px;
+    padding: 6px 20px;
     color: rgba(255,255,255,0.5);
     cursor: pointer;
     transition: color 0.2s ease-out;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
+    white-space: nowrap;
   }
 
   .filter-toggle button[aria-pressed="true"] {
