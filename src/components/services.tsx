@@ -9,10 +9,9 @@ const SERVICES = [
     description: "Ideal para reels, shorts e stories que precisam de agilidade.",
     features: [
       "Cortes e ritmo dinâmico",
-      "Legendas automáticas",
       "Transições limpas",
       "Ajustes básicos de cor",
-      "Exportação em 4K"
+      "Efeitos dinâmicos"
     ],
   },
   {
