@@ -8,7 +8,7 @@ export function TurbulenceBackground() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
     if (!ctx) return;
 
     function resize() {
@@ -29,11 +29,6 @@ export function TurbulenceBackground() {
         Math.sin((x + y) * 0.8 + t * 0.14) * Math.cos(x * 0.5 - t * 0.07) * 0.15 +
         Math.cos(x * 0.3 + y * 2.0 + t * 0.11) * 0.10
       );
-    }
-
-    function staticNoise(x: number, y: number) {
-      const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
-      return (s - Math.floor(s)) * 2 - 1;
     }
 
     function getColor(n: number) {
@@ -63,26 +58,21 @@ export function TurbulenceBackground() {
       return [Math.min(255, r), Math.min(255, g), Math.min(255, b)];
     }
 
-    const SCALE = 4;
-    const NOISE_INTENSITY = 18;
+    const SCALE = 3;
     let time = 0;
     let animationFrameId: number;
 
-    const offCanvas = document.createElement('canvas');
-    const offCtx = offCanvas.getContext('2d');
-
     function draw() {
-      if (!canvas || !ctx || !offCtx) return;
+      if (!canvas || !ctx) return;
 
       const W = canvas.width;
       const H = canvas.height;
+      if (W === 0 || H === 0) return;
+
       const bW = Math.ceil(W / SCALE);
       const bH = Math.ceil(H / SCALE);
 
-      offCanvas.width = bW;
-      offCanvas.height = bH;
-
-      const imgData = offCtx.createImageData(bW, bH);
+      const imgData = ctx.createImageData(bW, bH);
       const data = imgData.data;
 
       for (let py = 0; py < bH; py++) {
@@ -95,22 +85,33 @@ export function TurbulenceBackground() {
           const wx2 = noise(nx * 1.3 + warpX, ny * 1.3 + warpY + 5.1, time * 1.1);
           const n2 = noise(nx + wx2 * 0.8, ny + wx2 * 0.5, time * 0.6 + 2.3);
           const combined = n * 0.65 + n2 * 0.35;
-          let [r, g, b] = getColor(combined);
-          const grain = staticNoise(px, py) * NOISE_INTENSITY;
-          r = Math.min(255, Math.max(0, r + grain));
-          g = Math.min(255, Math.max(0, g + grain));
-          b = Math.min(255, Math.max(0, b + grain));
+          const [r, g, b] = getColor(combined);
           const idx = (py * bW + px) * 4;
           data[idx] = r; data[idx + 1] = g; data[idx + 2] = b; data[idx + 3] = 255;
         }
       }
 
-      offCtx.putImageData(imgData, 0, 0);
-      ctx.clearRect(0, 0, W, H);
-      ctx.imageSmoothingEnabled = true;
-      ctx.filter = 'blur(2px)';
-      ctx.drawImage(offCanvas, 0, 0, W, H);
-      ctx.filter = 'none';
+      const offCanvas = document.createElement('canvas');
+      offCanvas.width = bW;
+      offCanvas.height = bH;
+      const offCtx = offCanvas.getContext('2d');
+      if (offCtx) {
+        offCtx.putImageData(imgData, 0, 0);
+        ctx.clearRect(0, 0, W, H);
+        ctx.filter = 'blur(2px)';
+        ctx.drawImage(offCanvas, 0, 0, W, H);
+        ctx.filter = 'none';
+
+        const finalData = ctx.getImageData(0, 0, W, H);
+        const fd = finalData.data;
+        for (let i = 0; i < fd.length; i += 4) {
+          const grain = (Math.random() - 0.5) * 22;
+          fd[i] = Math.min(255, Math.max(0, fd[i] + grain));
+          fd[i + 1] = Math.min(255, Math.max(0, fd[i + 1] + grain));
+          fd[i + 2] = Math.min(255, Math.max(0, fd[i + 2] + grain));
+        }
+        ctx.putImageData(finalData, 0, 0);
+      }
 
       time += 0.018;
       animationFrameId = requestAnimationFrame(draw);
