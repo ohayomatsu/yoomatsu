@@ -45,7 +45,7 @@ export function Hero() {
       </div>
 
       <div className="absolute bottom-12">
-        <a href="#portfolio" className="animate-bounce text-foreground/20 hover:text-foreground transition-colors block">
+        <a href="#about" className="animate-bounce text-foreground/20 hover:text-foreground transition-colors block">
           <ChevronDown size={32} />
         </a>
       </div>
