@@ -30,7 +30,7 @@ export function Hero() {
           />
         </div>
 
-        <p className="text-[0.95rem] text-foreground/40 max-w-2xl mx-auto leading-relaxed font-light mb-7">
+        <p className="text-[0.95rem] text-foreground/40 max-w-2xl mx-auto leading-relaxed font-light mb-5">
           Transformando minhas ideias malucas em maluquices visuais. 
         </p>
 
