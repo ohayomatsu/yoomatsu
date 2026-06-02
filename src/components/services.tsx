@@ -6,7 +6,7 @@ import { Check } from "lucide-react";
 const SERVICES = [
   {
     title: "Edição Básica",
-    description: "Ideal para reels, shorts e stories que precisam de agilidade.",
+    description: "Como sempre me diziam, o básico bem feito.",
     features: [
       "Cortes e ritmo dinâmico",
       "Transições limpas",
@@ -16,7 +16,7 @@ const SERVICES = [
   },
   {
     title: "Edição Complexa",
-    description: "Para conteúdos que precisam se destacar e contar uma história.",
+    description: "Dê um tchan a mais na edição do seu vídeo com o Motion Graphics.",
     features: [
       "Tudo do plano básico",
       "Motion Graphics avançado",
@@ -29,7 +29,7 @@ const SERVICES = [
   },
   {
     title: "Sonorização",
-    description: "O áudio é 50% do seu vídeo. Dê vida às suas imagens.",
+    description: "O áudio é 50% do seu vídeo. Dê vida aos seus vídeos vazios.",
     features: [
       "Curadoria de trilha sonora",
       "Sound Design (Foley e FX)",

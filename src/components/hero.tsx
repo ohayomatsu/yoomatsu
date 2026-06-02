@@ -30,8 +30,8 @@ export function Hero() {
           />
         </div>
 
-        <p className="text-lg md:text-xl text-foreground/40 max-w-2xl mx-auto leading-relaxed font-light">
-          Transformo ideias em imagens de alto impacto. Conteúdo especializado para quem busca transcendência visual.
+        <p className="text-[0.95rem] text-foreground/40 max-w-2xl mx-auto leading-relaxed font-light mb-7">
+          Transformando minhas ideias malucas em maluquices visuais. 
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
