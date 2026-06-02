@@ -1,13 +1,10 @@
 
 "use client";
 
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 import Image from "next/image";
 import { Youtube, Twitter } from "lucide-react";
 
 export function About() {
-  const profileImg = PlaceHolderImages.find(img => img.id === "about-matsu");
-
   return (
     <section id="about" className="py-24 px-6 max-w-[680px] mx-auto">
       <div className="flex flex-col md:flex-row items-center gap-10">
@@ -15,14 +12,12 @@ export function About() {
           <div className="relative w-[220px] h-[220px]">
             <div className="absolute inset-0 rounded-full border-2 border-white/20 animate-pulse" />
             <div className="absolute inset-3 rounded-full liquid-glass overflow-hidden">
-              {profileImg && (
-                <Image
-                  src={profileImg.imageUrl}
-                  alt="Matsu Portrait"
-                  fill
-                  className="object-cover saturate-0"
-                />
-              )}
+              <Image
+                src="/norantry.png"
+                alt="Matsu Portrait"
+                fill
+                className="object-cover saturate-0"
+              />
             </div>
           </div>
         </div>
