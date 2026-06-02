@@ -34,7 +34,7 @@ export function Navbar() {
     const heroTitle = document.getElementById("hero-title");
     if (heroTitle) observer.observe(heroTitle);
 
-    // High-Precision Liquid Smooth Scroll
+    // Motor de Scroll de Alta Precisão (Cubic Easing)
     const handleHashLinks = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a');
@@ -47,19 +47,28 @@ export function Navbar() {
         if (!targetElement) return;
 
         const start = window.scrollY;
-        const end = targetElement.getBoundingClientRect().top + window.scrollY - 80;
-        const duration = 1200; // Aumentado para um deslize mais majestoso
+        // Calcula o destino respeitando o limite da página
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const rawEnd = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+        const end = Math.min(rawEnd, maxScroll);
+        
+        const duration = 1000; // Tempo otimizado para não ficar arrastado
         let startTime: number | null = null;
 
-        // Quintic Easing: Aceleração e desaceleração extremamente suaves
-        function ease(t: number) {
-          return t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2;
+        // Cubic Easing: Muito mais natural, evita o "salto" no meio
+        function easeInOutCubic(t: number) {
+          return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
         }
 
         function step(timestamp: number) {
           if (!startTime) startTime = timestamp;
           const progress = Math.min((timestamp - startTime) / duration, 1);
-          window.scrollTo(0, start + (end - start) * ease(progress));
+          
+          window.scrollTo({
+            top: start + (end - start) * easeInOutCubic(progress),
+            behavior: 'auto'
+          });
+
           if (progress < 1) {
             requestAnimationFrame(step);
           }
