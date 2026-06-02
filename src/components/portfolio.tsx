@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -42,9 +43,9 @@ export function Portfolio() {
       }
     };
 
+    // Atualiza imediatamente e com um pequeno delay para garantir que o layout foi renderizado
     updateIndicator();
-
-    const timer = setTimeout(updateIndicator, 100);
+    const timer = setTimeout(updateIndicator, 50);
     
     window.addEventListener('resize', updateIndicator);
     return () => {
@@ -63,26 +64,30 @@ export function Portfolio() {
       </div>
 
       <div className="w-full flex flex-col items-center justify-center space-y-12">
-        {/* Liquid Glass Slider */}
-        <div className="filter-toggle mx-auto flex items-center justify-center relative">
-          <div 
-            className="indicator__liquid" 
-            style={{ 
-              left: `${indicatorStyle.left}px`, 
-              width: `${indicatorStyle.width}px`,
-              opacity: indicatorStyle.width > 0 ? 1 : 0
-            }} 
-          />
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              ref={(el) => { buttonRefs.current[cat.id] = el; }}
-              aria-pressed={activeCategory === cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-            >
-              {cat.label}
-            </button>
-          ))}
+        {/* Container de Filtros Centralizado */}
+        <div className="flex justify-center w-full">
+          <div className="filter-toggle flex items-center justify-center relative">
+            {/* O indicador só renderiza se tiver largura para evitar o artefato vertical órfão */}
+            {indicatorStyle.width > 0 && (
+              <div 
+                className="indicator__liquid" 
+                style={{ 
+                  left: `${indicatorStyle.left}px`, 
+                  width: `${indicatorStyle.width}px`,
+                }} 
+              />
+            )}
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                ref={(el) => { buttonRefs.current[cat.id] = el; }}
+                aria-pressed={activeCategory === cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
@@ -96,6 +101,7 @@ export function Portfolio() {
                     alt={project.title}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110 saturate-[0.8]"
+                    data-ai-hint="video editing"
                   />
                 )}
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center space-y-4 backdrop-blur-sm">
