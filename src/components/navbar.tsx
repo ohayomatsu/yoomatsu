@@ -10,7 +10,6 @@ const NAV_LINKS = [
   { name: "Portfólio", href: "#portfolio" },
   { name: "Serviços", href: "#services" },
   { name: "Sobre", href: "#about" },
-  { name: "Contato", href: "#contact" },
 ];
 
 export function Navbar() {
@@ -65,12 +64,10 @@ export function Navbar() {
           />
         </Link>
 
-        {/* Desktop Menu Wrapper - Gerencia o alinhamento suave */}
+        {/* Desktop Menu Wrapper */}
         <div className="hidden md:flex flex-1 items-center transition-all duration-500 ease-in-out">
-          {/* Espaçador Esquerdo - Sempre flexível */}
           <div className="flex-1 transition-all duration-500" />
           
-          {/* Container de Links */}
           <div className="flex items-center space-x-8 transition-all duration-500">
             {NAV_LINKS.map((link) => (
               <Link
@@ -89,7 +86,6 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Espaçador Direito - Encolhe quando o logo aparece, empurrando os links para a direita */}
           <div 
             className={cn(
               "transition-all duration-500 ease-in-out",
@@ -120,6 +116,13 @@ export function Navbar() {
               {link.name}
             </Link>
           ))}
+          <Link
+            href="#contact"
+            onClick={() => setMobileMenuOpen(false)}
+            className="px-6 py-4 liquid-glass rounded-full text-sm font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all text-center"
+          >
+            Fale Comigo
+          </Link>
         </div>
       )}
     </nav>
