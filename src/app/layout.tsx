@@ -1,5 +1,3 @@
-
-
 import type {Metadata} from 'next';
 import './globals.css';
 import { TurbulenceBackground } from '@/components/turbulence-background';
@@ -27,23 +25,18 @@ export default function RootLayout({
             left: 0; 
             width: 100%; 
             height: 100%; 
-            z-index: 0; 
-            opacity: 0;
-            animation: fadeInBg 1s ease-out forwards;
+            z-index: 0;
           }
           body { 
             background: #000; 
           }
-          section, div, header, main, nav, footer { 
-            background: transparent !important; 
-            background-image: none !important;
+          main {
             position: relative;
             z-index: 1;
           }
-          /* Exceções necessárias para componentes que precisam de fundo (cards, overlays) */
-          .liquid-glass, .liquid-card, .liquid-button, [role="tabpanel"], [role="tablist"] {
-            background: rgba(255, 255, 255, 0.04) !important;
-            backdrop-filter: blur(20px) !important;
+          /* Remove fundos padrão para garantir que o canvas apareça sem forçar !important em tudo */
+          section {
+            background: transparent;
           }
         `}</style>
       </head>
