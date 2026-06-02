@@ -1,4 +1,3 @@
-
 "use client";
 
 import { ChevronDown } from "lucide-react";
@@ -29,7 +28,10 @@ export function Hero() {
             Visual Storytelling
           </p>
           
-          <h1 className="text-8xl md:text-[14rem] font-headline font-bold tracking-tighter glow-text leading-none m-0 p-0 text-white select-none">
+          <h1 
+            id="hero-title"
+            className="text-8xl md:text-[14rem] font-headline font-bold tracking-tighter glow-text leading-none m-0 p-0 text-white select-none"
+          >
             MATSU
           </h1>
           
