@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Play } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
@@ -25,10 +25,24 @@ const CATEGORIES = [
 
 export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [pillStyle, setPillStyle] = useState({ left: 0, width: 0, opacity: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const buttonsRef = useRef<{ [key: string]: HTMLButtonElement | null }>({});
 
   const filteredProjects = activeCategory === "all" 
     ? PROJECTS 
     : PROJECTS.filter(p => p.category === activeCategory);
+
+  useEffect(() => {
+    const activeBtn = buttonsRef.current[activeCategory];
+    if (activeBtn && containerRef.current) {
+      setPillStyle({
+        left: activeBtn.offsetLeft,
+        width: activeBtn.offsetWidth,
+        opacity: 1
+      });
+    }
+  }, [activeCategory]);
 
   return (
     <section id="portfolio" className="py-24 px-6 max-w-7xl mx-auto space-y-16 scroll-mt-20">
@@ -40,16 +54,38 @@ export function Portfolio() {
       </div>
 
       <div className="w-full flex flex-col items-center justify-center space-y-12">
-        <div className="flex flex-wrap justify-center gap-3">
+        <div 
+          ref={containerRef}
+          className="relative flex flex-wrap justify-center p-1 bg-white/[0.04] border border-white/10 rounded-full"
+        >
+          {/* Liquid Slider Pill */}
+          <div 
+            className="absolute top-1 bottom-1 pointer-events-none z-0"
+            style={{
+              left: `${pillStyle.left}px`,
+              width: `${pillStyle.width}px`,
+              opacity: pillStyle.opacity,
+              transition: 'left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease',
+              background: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              boxShadow: '0 2px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3)',
+              borderRadius: '9999px',
+            }}
+          />
+
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
+              ref={(el) => {
+                buttonsRef.current[cat.id] = el;
+              }}
               onClick={() => setActiveCategory(cat.id)}
               className={cn(
-                "px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 border",
+                "relative z-10 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-opacity duration-300",
                 activeCategory === cat.id
-                  ? "bg-white text-black border-white"
-                  : "bg-white/5 text-white/40 border-white/10 hover:bg-white/10 hover:text-white"
+                  ? "text-white opacity-100"
+                  : "text-white/40 opacity-50 hover:opacity-80"
               )}
             >
               {cat.label}
