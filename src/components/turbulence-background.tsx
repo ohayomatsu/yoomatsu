@@ -37,33 +37,34 @@ export function TurbulenceBackground() {
       grainCtx.putImageData(grainData, 0, 0);
     }
 
-    // Função de ruído suave
+    // Função de ruído orgânico mais complexa para fluidez
     function noise(x: number, y: number, t: number) {
-      return (
-        Math.sin(x * 1.2 + t * 0.18) * Math.cos(y * 0.9 - t * 0.12) * 0.35 +
-        Math.sin(x * 0.6 - y * 0.7 + t * 0.09) * 0.25 +
-        Math.cos(x * 2.1 + y * 1.4 - t * 0.22) * 0.15
-      );
+      const n1 = Math.sin(x * 1.1 + t * 0.15) * Math.cos(y * 0.8 - t * 0.1);
+      const n2 = Math.sin(x * 0.5 - y * 0.6 + t * 0.08) * 0.5;
+      const n3 = Math.cos(x * 1.8 + y * 1.2 - t * 0.2) * 0.25;
+      return (n1 + n2 + n3) / 1.75;
     }
 
-    // Função de cor refinada para elegância - Foco em P&B com detalhes sutis no azul específico
+    // Função de cor refinada - Azul (22, 87, 130) como detalhe sutil
     function getColor(n: number) {
-      const t = (n + 1) / 2; // Normaliza para 0-1
+      // t normalizado com curva de suavização (easing)
+      const t = (n + 1) / 2;
       
-      // Componente de cinza profundo para manter a base P&B (muito escuro)
-      const grayBase = Math.pow(t, 6) * 20;
+      // Base preta e cinza profundo
+      const grayScale = Math.pow(t, 4) * 25;
       
-      // O azul agora é um detalhe que utiliza o tom solicitado: 22, 87, 130
-      // Usamos um expoente alto (t^5) para que ele apareça apenas nos picos das ondas
-      const accent = Math.pow(t, 5); 
-      const r = Math.round(grayBase + accent * 22); 
-      const g = Math.round(grayBase + accent * 87); 
-      const b = Math.round(grayBase + accent * 130); 
+      // Azul específico como detalhe apenas em áreas de alta turbulência
+      // Usamos uma curva de potência maior para que o azul seja apenas um "brilho"
+      const accentStrength = Math.pow(t, 6);
+      
+      const r = Math.round(grayScale + accentStrength * 22);
+      const g = Math.round(grayScale + accentStrength * 87);
+      const b = Math.round(grayScale + accentStrength * 130);
       
       return [r, g, b];
     }
 
-    const SCALE = 8;
+    const SCALE = 8; // Mantido para alta performance
     let time = 0;
     let animationFrameId: number;
 
@@ -80,15 +81,24 @@ export function TurbulenceBackground() {
       const imgData = ctx.createImageData(bW, bH);
       const data = imgData.data;
 
+      // Domain Warping: Técnica avançada para movimento fluido
       for (let py = 0; py < bH; py++) {
-        const ny = (py / bH) * 3.5;
+        const ny = (py / bH) * 2.8; // Escala vertical
         for (let px = 0; px < bW; px++) {
-          const nx = (px / bW) * 5.0;
-          const warpX = noise(nx + 1.7, ny + 9.2, time);
-          const warpY = noise(nx + 8.3, ny + 2.8, time + 1.5);
-          const combined = noise(nx + warpX * 1.2, ny + warpY * 1.2, time * 0.7);
+          const nx = (px / bW) * 4.2; // Escala horizontal
           
-          const [r, g, b] = getColor(combined);
+          // Camada de deformação 1 (Warp)
+          const qx = noise(nx + 0.0, ny + 0.0, time);
+          const qy = noise(nx + 1.2, ny + 1.5, time);
+          
+          // Camada de deformação 2 (Warp secundário)
+          const rx = noise(nx + 4.0 * qx + 1.7, ny + 4.0 * qy + 9.2, time * 0.5);
+          const ry = noise(nx + 4.0 * qx + 8.3, ny + 4.0 * qy + 2.8, time * 0.5);
+          
+          // Resultado final combinado para máxima fluidez
+          const val = noise(nx + rx, ny + ry, time * 0.6);
+          
+          const [r, g, b] = getColor(val);
           const idx = (py * bW + px) * 4;
           data[idx] = r; 
           data[idx + 1] = g; 
@@ -106,8 +116,8 @@ export function TurbulenceBackground() {
         ctx.imageSmoothingEnabled = true;
         ctx.drawImage(offCanvas, 0, 0, W, H);
 
-        // Textura de grão sutil
-        ctx.globalAlpha = 0.08;
+        // Textura de grão sutil para profundidade
+        ctx.globalAlpha = 0.06;
         ctx.globalCompositeOperation = 'screen';
         const gW = grainCanvas.width;
         const gH = grainCanvas.height;
@@ -120,7 +130,8 @@ export function TurbulenceBackground() {
         ctx.globalCompositeOperation = 'source-over';
       }
 
-      time += 0.012; 
+      // Incremento de tempo menor para movimento mais lento e majestoso
+      time += 0.008; 
       animationFrameId = requestAnimationFrame(draw);
     }
 
