@@ -38,6 +38,12 @@ const PROJECTS = [
     category: "Edição Básica", 
     videoId: "bxg4Qrf-UZg" 
   },
+  { 
+    id: 6, 
+    title: "MINECRAFT TERROR (YOOMATSU)", 
+    category: "Edição Básica", 
+    videoId: "jVsj5zg67Pc" 
+  },
 ];
 
 const CATEGORIES = [
