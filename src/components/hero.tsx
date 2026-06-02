@@ -2,6 +2,7 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
+import Image from 'next/image';
 
 export function Hero() {
   return (
@@ -12,12 +13,17 @@ export function Hero() {
             Visual Storytelling
           </p>
           
-          <h1 
-            id="hero-title"
-            className="text-8xl md:text-[14rem] font-headline font-bold tracking-tighter glow-text leading-none m-0 p-0 text-white select-none"
-          >
-            MATSU
-          </h1>
+          <div className="flex justify-center items-center">
+            <Image 
+              id="hero-title"
+              src="/logo.svg" 
+              alt="Matsu" 
+              width={420} 
+              height={200} 
+              style={{ maxWidth: '75vw', height: 'auto' }} 
+              priority
+            />
+          </div>
           
           <p className="text-xl md:text-3xl font-light text-foreground/60 tracking-[0.2em] mt-6">
             EDITOR DE VÍDEO
