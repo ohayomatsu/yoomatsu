@@ -6,6 +6,7 @@ import { Clients } from "@/components/clients";
 import { About } from "@/components/about";
 import { Contact } from "@/components/contact";
 import { Toaster } from "@/components/ui/toaster";
+import { ScrollReveal } from "@/components/scroll-reveal";
 
 export default function Home() {
   return (
@@ -14,15 +15,25 @@ export default function Home() {
       
       <Hero />
       
-      <About />
+      <ScrollReveal>
+        <About />
+      </ScrollReveal>
       
-      <Portfolio />
+      <ScrollReveal>
+        <Portfolio />
+      </ScrollReveal>
 
-      <Clients />
+      <ScrollReveal>
+        <Clients />
+      </ScrollReveal>
       
-      <Services />
+      <ScrollReveal>
+        <Services />
+      </ScrollReveal>
       
-      <Contact />
+      <ScrollReveal>
+        <Contact />
+      </ScrollReveal>
 
       <footer className="py-12 border-t border-white/5 text-center text-foreground/30 text-xs">
         <p>© {new Date().getFullYear()} Matsu. Todos os direitos reservados.</p>

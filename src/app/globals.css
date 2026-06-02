@@ -51,10 +51,12 @@
   
   .liquid-card {
     @apply liquid-glass rounded-[2rem] transition-all duration-500 hover:bg-white/[0.08] hover:border-white/40;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .liquid-button {
-    @apply liquid-glass rounded-full px-8 py-3 font-semibold transition-all duration-200 hover:bg-white/[0.12] hover:scale-[1.04] active:scale-95;
+    @apply liquid-glass rounded-full px-8 py-3 font-semibold transition-all duration-500 hover:bg-white/[0.12] hover:scale-[1.04] active:scale-95;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .glow-text {
@@ -82,7 +84,7 @@
 
 .animate-fade-up-blur {
   opacity: 0;
-  animation: fadeUpBlur 0.8s ease-out forwards;
+  animation: fadeUpBlur 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 #turbulence-bg {
