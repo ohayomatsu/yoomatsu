@@ -32,13 +32,12 @@ export default function RootLayout({
           }
           #turbulence-bg { 
             position: absolute; 
-            top: -10%; /* Compensação para o parallax não mostrar bordas */
+            top: 0;
             left: 0; 
             width: 100%; 
-            height: 120%; /* Um pouco maior para permitir o movimento sem gaps */
+            height: 100%;
             z-index: -1;
             pointer-events: none;
-            will-change: transform;
           }
           body { 
             background: transparent !important; 
