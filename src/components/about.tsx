@@ -9,10 +9,10 @@ export function About() {
   const profileImg = PlaceHolderImages.find(img => img.id === "about-matsu");
 
   return (
-    <section id="about" className="py-24 px-6 max-w-[600px] mx-auto">
+    <section id="about" className="py-24 px-6 max-w-[680px] mx-auto">
       <div className="flex flex-col md:flex-row items-center gap-10">
         <div className="shrink-0">
-          <div className="relative w-[180px] h-[180px]">
+          <div className="relative w-[220px] h-[220px]">
             <div className="absolute inset-0 rounded-full border-2 border-white/20 animate-pulse" />
             <div className="absolute inset-3 rounded-full liquid-glass overflow-hidden">
               {profileImg && (
@@ -29,13 +29,13 @@ export function About() {
 
         <div className="space-y-6 flex-1 text-center md:text-left">
           <div className="space-y-2">
-            <h2 className="text-[1.8rem] font-headline font-bold tracking-tight">OHAYO!</h2>
-            <p className="text-[1rem] text-foreground/80 font-light leading-relaxed">
+            <h2 className="text-[2.2rem] font-headline font-bold tracking-tight">OHAYO!</h2>
+            <p className="text-[1.1rem] text-foreground/80 font-light leading-relaxed">
               Criador de conteúdo e Editor de vídeo.
             </p>
           </div>
           
-          <div className="space-y-4 text-[0.85rem] text-foreground/60 leading-relaxed">
+          <div className="space-y-4 text-[0.95rem] text-foreground/60 leading-relaxed">
             <p>
               Opa, eu sou o Matsu, trabalho com edição de vídeo e motion design há mais de 5 anos.
             </p>
