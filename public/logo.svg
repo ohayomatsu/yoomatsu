@@ -1,31 +1,7 @@
-<svg width="420" height="120" viewBox="0 0 420 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="shimmerAnim" x1="0%" y1="0%" x2="100%" y2="0%" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#333" />
-      <stop offset="50%" stop-color="#fff" />
-      <stop offset="100%" stop-color="#333" />
-      <animateTransform 
-        attributeName="gradientTransform" 
-        type="translate" 
-        from="-420" 
-        to="840" 
-        dur="2.2s" 
-        repeatCount="indefinite" 
-      />
-    </linearGradient>
-  </defs>
-  <g fill="url(#shimmerAnim)">
-    <text 
-      x="50%" 
-      y="60" 
-      dominant-baseline="middle" 
-      text-anchor="middle" 
-      font-family="DM Sans, sans-serif" 
-      font-weight="900" 
-      font-size="72" 
-      letter-spacing="0.25em"
-    >
-      MATSU
-    </text>
-  </g>
+<svg width="420" height="100" viewBox="0 0 420 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M45 20L65 80H55L40 35L25 80H15L35 20H45Z" fill="white"/>
+  <path d="M90 20L115 80H105L85 30L65 80H55L80 20H90Z" fill="white"/>
+  <path d="M120 20H170V30H150V80H140V30H120V20Z" fill="white"/>
+  <path d="M215 35C215 25 205 20 190 20C175 20 165 25 165 35V40H175V35C175 30 182 28 190 28C198 28 205 30 205 35C205 40 195 42 185 45C175 48 165 52 165 65C165 75 175 82 190 82C205 82 215 75 215 65V60H205V65C205 70 198 74 190 74C182 74 175 70 175 65C175 60 185 58 195 55C205 52 215 48 215 35Z" fill="white"/>
+  <path d="M225 20V60C225 72 235 82 250 82C265 82 275 72 275 60V20H265V60C265 68 258 74 250 74C242 74 235 68 235 60V20H225Z" fill="white"/>
 </svg>
