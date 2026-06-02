@@ -11,7 +11,8 @@ export function About() {
         <div className="shrink-0">
           <div className="relative w-[220px] h-[220px]">
             <div className="absolute inset-0 rounded-full border-2 border-white/20 animate-pulse" />
-            <div className="absolute inset-3 rounded-full liquid-glass overflow-hidden">
+            {/* Removido 'liquid-glass' para evitar o saturate-[200%] e aplicado os estilos manualmente sem saturação */}
+            <div className="absolute inset-3 rounded-full backdrop-blur-[20px] bg-white/[0.04] border border-white/30 overflow-hidden">
               <Image
                 src="/norantry.png"
                 alt="Matsu Portrait"
