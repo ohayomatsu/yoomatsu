@@ -1,24 +1,31 @@
-
 "use client";
 
-import Image from "next/image";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { cn } from "@/lib/utils";
 
 const CLIENTS = [
-  { name: "Batatinha", imgId: "client-1" },
-  { name: "Polícia Em Ação", imgId: "client-2" },
-  { name: "Luska Dreus", imgId: "client-3" },
-  { name: "Opaulomathias", imgId: "client-4" },
-  { name: "Liny Henricky", imgId: "client-5" },
-  { name: "Lukskk", imgId: "client-6" },
-  { name: "Luksss", imgId: "client-7" },
-  { name: "Upbuxx", imgId: "client-8" },
-  { name: "Lukszin", imgId: "client-9" },
-  { name: "Elly", imgId: "client-10" },
+  { name: "Batatinha" },
+  { name: "Polícia Em Ação" },
+  { name: "Luska Dreus" },
+  { name: "Opaulomathias" },
+  { name: "Liny Henricky" },
+  { name: "Lukskk" },
+  { name: "Luksss" },
+  { name: "Upbuxx" },
+  { name: "Lukszin" },
+  { name: "Elly" },
 ];
 
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 3);
+}
+
 export function Clients() {
-  // Dobramos a lista para garantir o loop infinito suave
+  // Triple the list to ensure smooth infinite loop
   const marqueeItems = [...CLIENTS, ...CLIENTS, ...CLIENTS];
 
   return (
@@ -31,26 +38,18 @@ export function Clients() {
 
       <div className="relative flex group">
         <div className="flex animate-marquee group-hover:[animation-play-state:paused] space-x-12 px-6">
-          {marqueeItems.map((client, idx) => {
-            const image = PlaceHolderImages.find(img => img.id === client.imgId);
-            return (
-              <div key={idx} className="flex flex-col items-center space-y-4 shrink-0">
-                <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full liquid-glass overflow-hidden border border-white/10 transition-all duration-500 hover:border-teal-500/50 hover:shadow-[0_0_20px_rgba(20,184,166,0.3)] cursor-default group/item">
-                  {image && (
-                    <Image
-                      src={image.imageUrl}
-                      alt={client.name}
-                      fill
-                      className="object-cover saturate-0 transition-all duration-500 group-hover/item:saturate-100"
-                    />
-                  )}
-                </div>
-                <span className="text-xs md:text-sm font-medium text-foreground/40 tracking-wider uppercase">
-                  {client.name}
+          {marqueeItems.map((client, idx) => (
+            <div key={idx} className="flex flex-col items-center space-y-4 shrink-0">
+              <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full liquid-glass flex items-center justify-center border border-white/10 transition-all duration-500 hover:border-teal-500/50 hover:shadow-[0_0_20px_rgba(20,184,166,0.3)] cursor-default group/item">
+                <span className="text-xl md:text-2xl font-bold tracking-tighter text-white/40 group-hover/item:text-white group-hover/item:glow-text transition-all duration-500">
+                  {getInitials(client.name)}
                 </span>
               </div>
-            );
-          })}
+              <span className="text-xs md:text-sm font-medium text-foreground/40 tracking-wider uppercase">
+                {client.name}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
