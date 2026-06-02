@@ -9,7 +9,7 @@ export function TurbulenceBackground() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d', { alpha: false }); // Otimização: desativa alpha global
+    const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) return;
 
     function resize() {
@@ -22,7 +22,7 @@ export function TurbulenceBackground() {
     resize();
     window.addEventListener('resize', resize);
 
-    // Grain pré-gerado
+    // Grain pré-gerado para textura
     const grainCanvas = document.createElement('canvas');
     const grainCtx = grainCanvas.getContext('2d');
     if (grainCtx) {
@@ -30,14 +30,14 @@ export function TurbulenceBackground() {
       grainCanvas.height = 256;
       const grainData = grainCtx.createImageData(256, 256);
       for (let i = 0; i < grainData.data.length; i += 4) {
-        const v = Math.round((Math.random() - 0.5) * 30 + 128);
+        const v = Math.round((Math.random() - 0.5) * 20 + 128);
         grainData.data[i] = grainData.data[i+1] = grainData.data[i+2] = v;
-        grainData.data[i+3] = 12;
+        grainData.data[i+3] = 10;
       }
       grainCtx.putImageData(grainData, 0, 0);
     }
 
-    // Noise mais performático
+    // Função de ruído suave
     function noise(x: number, y: number, t: number) {
       return (
         Math.sin(x * 1.2 + t * 0.18) * Math.cos(y * 0.9 - t * 0.12) * 0.35 +
@@ -46,14 +46,18 @@ export function TurbulenceBackground() {
       );
     }
 
+    // Função de cor refinada para elegância
     function getColor(n: number) {
-      const t = (n + 1) / 2;
-      if (t < 0.6) return [Math.round(t * 8), Math.round(t * 12), Math.round(t * 20)];
-      if (t < 0.8) return [Math.round(8 + (t-0.6) * 40), Math.round(12 + (t-0.6) * 60), Math.round(20 + (t-0.6) * 120)];
-      return [30, 45, 90];
+      const t = (n + 1) / 2; // Normaliza para 0-1
+      
+      // Transição suave de azul profundo para indigo/violeta sutil
+      const r = Math.round(Math.pow(t, 4) * 45); 
+      const g = Math.round(Math.pow(t, 3) * 55); 
+      const b = Math.round(t * 110);
+      
+      return [r, g, b];
     }
 
-    // SCALE maior (8) para reduzir iterações e permitir High FPS
     const SCALE = 8;
     let time = 0;
     let animationFrameId: number;
@@ -72,13 +76,13 @@ export function TurbulenceBackground() {
       const data = imgData.data;
 
       for (let py = 0; py < bH; py++) {
-        const ny = (py / bH) * 4.0;
+        const ny = (py / bH) * 3.5;
         for (let px = 0; px < bW; px++) {
-          // Ajustado: nx multiplicado por 12.0 (antes 6.0) para "comprimir" a escala X
-          const nx = (px / bW) * 12.0;
+          // Escala nx restaurada para um valor mais elegante (5.0)
+          const nx = (px / bW) * 5.0;
           const warpX = noise(nx + 1.7, ny + 9.2, time);
           const warpY = noise(nx + 8.3, ny + 2.8, time + 1.5);
-          const combined = noise(nx + warpX * 1.5, ny + warpY * 1.5, time * 0.8);
+          const combined = noise(nx + warpX * 1.2, ny + warpY * 1.2, time * 0.7);
           
           const [r, g, b] = getColor(combined);
           const idx = (py * bW + px) * 4;
@@ -89,7 +93,6 @@ export function TurbulenceBackground() {
         }
       }
 
-      // Renderização ultra rápida
       const offCanvas = document.createElement('canvas');
       offCanvas.width = bW;
       offCanvas.height = bH;
@@ -99,8 +102,8 @@ export function TurbulenceBackground() {
         ctx.imageSmoothingEnabled = true;
         ctx.drawImage(offCanvas, 0, 0, W, H);
 
-        // Grain estático (padrão repetido para performance)
-        ctx.globalAlpha = 0.1;
+        // Textura de grão sutil
+        ctx.globalAlpha = 0.08;
         ctx.globalCompositeOperation = 'screen';
         const gW = grainCanvas.width;
         const gH = grainCanvas.height;
@@ -113,7 +116,7 @@ export function TurbulenceBackground() {
         ctx.globalCompositeOperation = 'source-over';
       }
 
-      time += 0.015; // Incremento para fluidez constante
+      time += 0.012; // Velocidade ajustada para fluidez elegante
       animationFrameId = requestAnimationFrame(draw);
     }
 
@@ -134,7 +137,7 @@ export function TurbulenceBackground() {
         zIndex: 0,
         opacity: 0,
         animation: 'fadeInBg 1.5s ease-out forwards',
-        transform: 'translateZ(0)', // Force GPU
+        transform: 'translateZ(0)',
         willChange: 'contents'
       }}
     />
