@@ -29,18 +29,15 @@ export function About() {
 
         <div className="space-y-8 flex-1 text-center md:text-left">
           <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-headline font-bold tracking-tight">Sou Matsu.</h2>
+            <h2 className="text-4xl md:text-5xl font-headline font-bold tracking-tight">OHAYO!</h2>
             <p className="text-xl md:text-2xl text-foreground/80 font-light leading-relaxed">
-              Editor de vídeo e criador de conteúdo especializado em redes sociais.
+              Criador de conteúdo e Editor de vídeo.
             </p>
           </div>
           
           <div className="space-y-6 text-lg text-foreground/60 leading-relaxed max-w-2xl">
             <p>
-              Com mais de 5 anos de experiência transformando raw footage em narrativas poderosas, trabalho com creators e marcas que buscam transcender o básico. 
-            </p>
-            <p>
-              Minha abordagem foca em retenção, estética moderna e design de som imersivo. Acredito que cada frame é uma oportunidade de conectar.
+              Opa, eu sou o Matsu, trabalho com edição de vídeo e motion design há mais de 5 anos.
             </p>
           </div>
 
