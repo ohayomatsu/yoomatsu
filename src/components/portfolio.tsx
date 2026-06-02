@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Play } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const PROJECTS = [
   { id: 1, title: "Modern Brand Identity", category: "Edição Básica", imgId: "portfolio-1" },
@@ -24,34 +25,10 @@ const CATEGORIES = [
 
 export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 });
-  const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
 
   const filteredProjects = activeCategory === "all" 
     ? PROJECTS 
     : PROJECTS.filter(p => p.category === activeCategory);
-
-  useEffect(() => {
-    const updateIndicator = () => {
-      const activeBtn = buttonRefs.current[activeCategory];
-      if (activeBtn) {
-        setIndicatorStyle({
-          width: activeBtn.offsetWidth,
-          left: activeBtn.offsetLeft,
-        });
-      }
-    };
-
-    // Atualiza imediatamente e com um pequeno delay para garantir que o layout foi renderizado
-    updateIndicator();
-    const timer = setTimeout(updateIndicator, 50);
-    
-    window.addEventListener('resize', updateIndicator);
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', updateIndicator);
-    };
-  }, [activeCategory]);
 
   return (
     <section id="portfolio" className="py-24 px-6 max-w-7xl mx-auto space-y-16 scroll-mt-20">
@@ -63,30 +40,21 @@ export function Portfolio() {
       </div>
 
       <div className="w-full flex flex-col items-center justify-center space-y-12">
-        {/* Container de Filtros Centralizado */}
-        <div className="flex justify-center w-full">
-          <div className="filter-toggle relative">
-            {/* O indicador só renderiza se tiver largura para evitar o artefato vertical órfão */}
-            {indicatorStyle.width > 0 && (
-              <div 
-                className="indicator__liquid" 
-                style={{ 
-                  left: `${indicatorStyle.left}px`, 
-                  width: `${indicatorStyle.width}px`,
-                }} 
-              />
-            )}
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat.id}
-                ref={(el) => { buttonRefs.current[cat.id] = el; }}
-                aria-pressed={activeCategory === cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
+        <div className="flex flex-wrap justify-center gap-3">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={cn(
+                "px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 border",
+                activeCategory === cat.id
+                  ? "bg-white text-black border-white"
+                  : "bg-white/5 text-white/40 border-white/10 hover:bg-white/10 hover:text-white"
+              )}
+            >
+              {cat.label}
+            </button>
+          ))}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
