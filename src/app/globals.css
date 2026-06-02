@@ -66,7 +66,7 @@
   }
 
   .liquid-button {
-    @apply liquid-glass rounded-full px-8 py-3 font-semibold transition-all duration-300 active:scale-95 hover:bg-white/[0.12];
+    @apply liquid-glass rounded-full px-8 py-3 font-semibold transition-all duration-300 hover:bg-white/[0.12];
   }
 
   .glow-text {
@@ -99,6 +99,20 @@ html {
   100% { transform: scale(1, 1); }
 }
 
+@keyframes spring-x {
+  0%   { transform: scaleX(1); }
+  20%  { transform: scaleX(0.6); }
+  50%  { transform: scaleX(1.15); }
+  65%  { transform: scaleX(0.92); }
+  80%  { transform: scaleX(1.06); }
+  90%  { transform: scaleX(0.97); }
+  100% { transform: scaleX(1); }
+}
+
 button:hover, .liquid-button:hover {
   animation: jelly 0.7s ease;
+}
+
+button:active, .liquid-button:active {
+  animation: spring-x 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
