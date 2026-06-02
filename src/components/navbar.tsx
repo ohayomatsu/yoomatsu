@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -49,19 +50,25 @@ export function Navbar() {
         isScrolled ? "liquid-glass py-2 px-6" : "bg-transparent py-4 px-6"
       )}
     >
-      <div className="flex items-center justify-between">
+      <div className="flex items-center relative min-h-[40px]">
+        {/* Logo - Absolute to allow centering of links without layout shift */}
         <Link 
           href="#hero" 
           className={cn(
-            "text-xl font-headline font-bold tracking-tighter glow-text transition-opacity duration-400 ease-in-out",
-            isHeroTitleVisible ? "opacity-0 pointer-events-none" : "opacity-100"
+            "text-xl font-headline font-bold tracking-tighter glow-text transition-all duration-500 ease-in-out absolute left-0",
+            isHeroTitleVisible ? "opacity-0 pointer-events-none -translate-x-4" : "opacity-100 translate-x-0"
           )}
         >
           MATSU
         </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8">
+        {/* Desktop Menu - Flex container that transitions its alignment */}
+        <div 
+          className={cn(
+            "hidden md:flex items-center space-x-8 transition-all duration-500 ease-in-out w-full",
+            isHeroTitleVisible ? "justify-center" : "justify-end"
+          )}
+        >
           {NAV_LINKS.map((link) => (
             <Link
               key={link.name}
@@ -81,7 +88,7 @@ export function Navbar() {
 
         {/* Mobile Menu Trigger */}
         <button
-          className="md:hidden text-foreground"
+          className="md:hidden text-foreground ml-auto"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
