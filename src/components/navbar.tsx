@@ -34,11 +34,49 @@ export function Navbar() {
     const heroTitle = document.getElementById("hero-title");
     if (heroTitle) observer.observe(heroTitle);
 
+    // Custom High-FPS Smooth Scroll
+    const handleHashLinks = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a');
+      if (!anchor) return;
+
+      const href = anchor.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const targetElement = document.querySelector(href);
+        if (!targetElement) return;
+
+        const start = window.scrollY;
+        const end = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+        const duration = 800;
+        let startTime: number | null = null;
+
+        function ease(t: number) {
+          return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        function step(timestamp: number) {
+          if (!startTime) startTime = timestamp;
+          const progress = Math.min((timestamp - startTime) / duration, 1);
+          window.scrollTo(0, start + (end - start) * ease(progress));
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          }
+        }
+
+        requestAnimationFrame(step);
+        if (mobileMenuOpen) setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleHashLinks);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       if (heroTitle) observer.unobserve(heroTitle);
+      document.removeEventListener('click', handleHashLinks);
     };
-  }, []);
+  }, [mobileMenuOpen]);
 
   return (
     <nav
@@ -111,7 +149,6 @@ export function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
               className="text-lg font-medium py-3 border-b border-white/5 text-center"
             >
               {link.name}
@@ -119,7 +156,6 @@ export function Navbar() {
           ))}
           <Link
             href="#contact"
-            onClick={() => setMobileMenuOpen(false)}
             className="px-6 py-4 liquid-glass rounded-full text-sm font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all duration-200 hover:scale-[1.04] text-center"
           >
             Fale Comigo

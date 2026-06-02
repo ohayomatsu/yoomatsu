@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -90,10 +89,6 @@
   image-rendering: pixelated;
   opacity: 0;
   animation: fadeInBg 1s ease-out forwards;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 .no-scrollbar::-webkit-scrollbar {
