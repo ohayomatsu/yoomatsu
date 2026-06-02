@@ -1,4 +1,5 @@
 
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { TurbulenceBackground } from '@/components/turbulence-background';
@@ -27,6 +28,8 @@ export default function RootLayout({
             width: 100%; 
             height: 100%; 
             z-index: 0; 
+            opacity: 0;
+            animation: fadeInBg 1s ease-out forwards;
           }
           body { 
             background: #000; 
