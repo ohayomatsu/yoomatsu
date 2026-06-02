@@ -9,7 +9,7 @@ export function Hero() {
       <div className="text-center max-w-4xl space-y-12 relative z-10">
         <div className="space-y-4">
           <p className="text-[10px] uppercase tracking-[0.6em] text-foreground/40 font-bold">
-            Visual Storytelling
+            EDITOR DE VÍDEO
           </p>
           
           <div className="flex justify-center items-center">
@@ -31,9 +31,7 @@ export function Hero() {
             />
           </div>
           
-          <p className="text-xl md:text-3xl font-light text-foreground/60 tracking-[0.2em] mt-6">
-            EDITOR DE VÍDEO
-          </p>
+          <div style={{ height: '2rem' }} className="mt-6" />
         </div>
 
         <p className="text-lg md:text-xl text-foreground/40 max-w-2xl mx-auto leading-relaxed font-light">
