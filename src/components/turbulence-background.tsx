@@ -46,17 +46,19 @@ export function TurbulenceBackground() {
       );
     }
 
-    // Função de cor refinada para elegância - Foco em P&B com detalhes sutis azuis
+    // Função de cor refinada para elegância - Foco em P&B com detalhes sutis no azul específico
     function getColor(n: number) {
       const t = (n + 1) / 2; // Normaliza para 0-1
       
       // Componente de cinza profundo para manter a base P&B (muito escuro)
       const grayBase = Math.pow(t, 6) * 20;
       
-      // O azul agora é apenas um detalhe que "brilha" levemente nas cristas das ondas
-      const r = Math.round(grayBase); 
-      const g = Math.round(grayBase * 1.02); 
-      const b = Math.round(grayBase + Math.pow(t, 4) * 45); 
+      // O azul agora é um detalhe que utiliza o tom solicitado: 22, 87, 130
+      // Usamos um expoente alto (t^5) para que ele apareça apenas nos picos das ondas
+      const accent = Math.pow(t, 5); 
+      const r = Math.round(grayBase + accent * 22); 
+      const g = Math.round(grayBase + accent * 87); 
+      const b = Math.round(grayBase + accent * 130); 
       
       return [r, g, b];
     }
