@@ -28,12 +28,12 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4",
-        isScrolled ? "glass-nav py-3" : "bg-transparent"
+        "fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[90%] max-w-5xl rounded-full",
+        isScrolled ? "liquid-glass py-2 px-6" : "bg-transparent py-4 px-6"
       )}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link href="#hero" className="text-2xl font-headline font-bold tracking-tighter glow-text">
+      <div className="flex items-center justify-between">
+        <Link href="#hero" className="text-xl font-headline font-bold tracking-tighter glow-text">
           MATSU
         </Link>
 
@@ -43,14 +43,14 @@ export function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
+              className="text-xs font-semibold uppercase tracking-widest text-foreground/60 hover:text-foreground transition-colors"
             >
               {link.name}
             </Link>
           ))}
           <Link
             href="#contact"
-            className="px-5 py-2 glass-effect rounded-full text-xs font-semibold uppercase tracking-widest hover:bg-white/10 transition-all"
+            className="px-6 py-2 liquid-glass rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all active:scale-95"
           >
             Fale Comigo
           </Link>
@@ -67,13 +67,13 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 glass-effect border-t border-white/10 p-6 flex flex-col space-y-4 animate-in fade-in slide-in-from-top-4 duration-300">
+        <div className="md:hidden absolute top-full left-0 right-0 mt-4 liquid-glass rounded-3xl p-8 flex flex-col space-y-4 animate-in fade-in slide-in-from-top-4 duration-500">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.name}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="text-lg font-medium py-2 border-b border-white/5"
+              className="text-lg font-medium py-3 border-b border-white/5 text-center"
             >
               {link.name}
             </Link>

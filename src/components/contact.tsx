@@ -1,9 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 
 export function Contact() {
@@ -13,7 +10,6 @@ export function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate sending
     setTimeout(() => {
       setLoading(false);
       toast({
@@ -25,56 +21,58 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 px-6 max-w-4xl mx-auto">
-      <div className="glass-card p-12 space-y-12 text-center md:text-left">
-        <div className="space-y-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-headline font-bold tracking-tight">Vamos criar algo novo?</h2>
-          <p className="text-foreground/60 max-w-xl mx-auto">
-            Disponível para novos projetos e colaborações criativas. 
+    <section id="contact" className="py-32 px-6 max-w-5xl mx-auto">
+      <div className="liquid-card p-12 md:p-20 space-y-16">
+        <div className="space-y-6 text-center">
+          <h2 className="text-5xl md:text-7xl font-headline font-bold tracking-tight glow-text leading-none">
+            Vamos criar <br /> algo novo?
+          </h2>
+          <p className="text-foreground/40 max-w-xl mx-auto text-lg">
+            Disponível para novos projetos e colaborações criativas que desafiam o comum.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2 text-left">
-              <label className="text-sm font-medium text-foreground/70 ml-1">Nome</label>
-              <Input 
+        <form onSubmit={handleSubmit} className="space-y-8 max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-3">
+              <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-4">Nome</label>
+              <input 
                 required
                 placeholder="Seu nome"
-                className="bg-white/5 border-white/10 h-12 focus:ring-white/20 transition-all"
+                className="w-full bg-white/[0.03] border border-white/10 rounded-2xl h-14 px-6 focus:border-white/30 focus:bg-white/[0.05] transition-all outline-none"
               />
             </div>
-            <div className="space-y-2 text-left">
-              <label className="text-sm font-medium text-foreground/70 ml-1">E-mail</label>
-              <Input 
+            <div className="space-y-3">
+              <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-4">E-mail</label>
+              <input 
                 required
                 type="email"
                 placeholder="seu@email.com"
-                className="bg-white/5 border-white/10 h-12 focus:ring-white/20 transition-all"
+                className="w-full bg-white/[0.03] border border-white/10 rounded-2xl h-14 px-6 focus:border-white/30 focus:bg-white/[0.05] transition-all outline-none"
               />
             </div>
           </div>
-          <div className="space-y-2 text-left">
-            <label className="text-sm font-medium text-foreground/70 ml-1">Sua Mensagem</label>
-            <Textarea 
+          <div className="space-y-3">
+            <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40 ml-4">Sua Mensagem</label>
+            <textarea 
               required
               placeholder="Fale um pouco sobre o seu projeto..."
-              className="bg-white/5 border-white/10 min-h-[160px] focus:ring-white/20 resize-none transition-all"
+              className="w-full bg-white/[0.03] border border-white/10 rounded-3xl min-h-[180px] p-6 focus:border-white/30 focus:bg-white/[0.05] transition-all outline-none resize-none"
             />
           </div>
 
-          <Button 
+          <button 
             type="submit" 
             disabled={loading}
-            className="w-full h-14 text-lg font-bold glass-effect bg-white/10 hover:bg-white/20 text-white transition-all hover:scale-[1.02]"
+            className="liquid-button w-full h-16 text-sm font-bold uppercase tracking-[0.3em] bg-white/[0.05] border-white/40"
           >
             {loading ? "Enviando..." : "Enviar Mensagem"}
-          </Button>
+          </button>
         </form>
 
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-foreground/40 text-sm border-t border-white/5 pt-8">
-          <p>whatsapp: +55 11 99999-9999</p>
-          <p>email: contato@matsu.pro</p>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-10 text-foreground/30 text-[10px] uppercase tracking-widest border-t border-white/5 pt-12">
+          <p className="hover:text-foreground/60 transition-colors cursor-pointer">whatsapp: +55 11 99999-9999</p>
+          <p className="hover:text-foreground/60 transition-colors cursor-pointer">email: contato@matsu.pro</p>
           <p>São Paulo, Brasil</p>
         </div>
       </div>
