@@ -6,12 +6,11 @@ import { Youtube, Twitter } from "lucide-react";
 
 export function About() {
   return (
-    <section id="about" className="py-24 px-6 max-w-[680px] mx-auto">
+    <section id="about" className="py-24 px-6 max-w-[680px] mx-auto scroll-mt-20">
       <div className="flex flex-col md:flex-row items-center gap-10">
         <div className="shrink-0">
           <div className="relative w-[220px] h-[220px]">
             <div className="absolute inset-0 rounded-full border-2 border-white/20 animate-pulse" />
-            {/* Removido 'liquid-glass' para evitar o saturate-[200%] e aplicado os estilos manualmente sem saturação */}
             <div className="absolute inset-3 rounded-full backdrop-blur-[20px] bg-white/[0.04] border border-white/30 overflow-hidden">
               <Image
                 src="/norantry.png"

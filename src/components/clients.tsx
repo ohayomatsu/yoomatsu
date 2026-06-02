@@ -1,3 +1,4 @@
+
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -19,7 +20,7 @@ function getInitials(name: string) {
 
 export function Clients() {
   return (
-    <section id="clients" className="py-24">
+    <section id="clients" className="py-24 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
         <h2 className="text-3xl md:text-4xl font-headline font-bold tracking-tight text-foreground/80">
           CLIENTES

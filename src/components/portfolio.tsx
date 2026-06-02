@@ -25,7 +25,7 @@ export function Portfolio() {
     : PROJECTS.filter(p => p.category === activeCategory);
 
   return (
-    <section id="portfolio" className="py-24 px-6 max-w-7xl mx-auto space-y-16">
+    <section id="portfolio" className="py-24 px-6 max-w-7xl mx-auto space-y-16 scroll-mt-20">
       <div className="space-y-4 text-center">
         <h2 className="text-4xl md:text-5xl font-headline font-bold tracking-tight">Portfólio</h2>
         <p className="text-foreground/60 max-w-2xl mx-auto">
