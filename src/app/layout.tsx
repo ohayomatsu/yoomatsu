@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';
 import './globals.css';
+import { TurbulenceBackground } from '@/components/turbulence-background';
 
 export const metadata: Metadata = {
   title: 'Matsu | Video Editor & Content Creator',
@@ -19,10 +20,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased bg-black text-[#F0F0F0] noise-bg">
-        <div className="liquid-blob-container">
-          <div className="liquid-blob blob-1" />
-          <div className="liquid-blob blob-2" />
-        </div>
+        <TurbulenceBackground />
         {children}
       </body>
     </html>
