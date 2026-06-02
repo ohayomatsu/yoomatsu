@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -47,12 +48,12 @@ export function Navbar() {
         isScrolled ? "liquid-glass py-2 px-6" : "bg-transparent py-4 px-6"
       )}
     >
-      <div className="flex items-center justify-between relative min-h-[40px] w-full">
-        {/* Logo MATSU */}
+      <div className="flex items-center relative min-h-[40px] w-full overflow-hidden md:overflow-visible">
+        {/* Logo MATSU - Animação de Opacidade e Deslizamento */}
         <Link 
           href="#hero" 
           className={cn(
-            "text-xl font-headline font-bold tracking-tighter glow-text transition-all duration-500 ease-in-out absolute left-0",
+            "text-xl font-headline font-bold tracking-tighter glow-text transition-all duration-500 ease-in-out absolute left-0 z-10",
             isHeroTitleVisible 
               ? "opacity-0 -translate-x-2 pointer-events-none" 
               : "opacity-100 translate-x-0"
@@ -61,28 +62,37 @@ export function Navbar() {
           MATSU
         </Link>
 
-        {/* Desktop Menu - Centralizado ou alinhado à direita */}
-        <div 
-          className={cn(
-            "hidden md:flex items-center space-x-8 transition-all duration-500 ease-in-out flex-1",
-            isHeroTitleVisible ? "justify-center" : "justify-end"
-          )}
-        >
-          {NAV_LINKS.map((link) => (
+        {/* Desktop Menu Wrapper - Gerencia o alinhamento suave */}
+        <div className="hidden md:flex flex-1 items-center transition-all duration-500 ease-in-out">
+          {/* Espaçador Esquerdo - Sempre flexível */}
+          <div className="flex-1 transition-all duration-500" />
+          
+          {/* Container de Links */}
+          <div className="flex items-center space-x-8 transition-all duration-500">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-xs font-semibold uppercase tracking-widest text-foreground/60 hover:text-foreground transition-colors whitespace-nowrap"
+              >
+                {link.name}
+              </Link>
+            ))}
             <Link
-              key={link.name}
-              href={link.href}
-              className="text-xs font-semibold uppercase tracking-widest text-foreground/60 hover:text-foreground transition-colors"
+              href="#contact"
+              className="px-6 py-2 liquid-glass rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all active:scale-95 whitespace-nowrap"
             >
-              {link.name}
+              Fale Comigo
             </Link>
-          ))}
-          <Link
-            href="#contact"
-            className="px-6 py-2 liquid-glass rounded-full text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition-all active:scale-95"
-          >
-            Fale Comigo
-          </Link>
+          </div>
+
+          {/* Espaçador Direito - Encolhe quando o logo aparece, empurrando os links para a direita */}
+          <div 
+            className={cn(
+              "transition-all duration-500 ease-in-out",
+              isHeroTitleVisible ? "flex-1" : "flex-[0.0001]"
+            )} 
+          />
         </div>
 
         {/* Mobile Menu Trigger */}
