@@ -32,10 +32,10 @@ export default function RootLayout({
           }
           .bg-gradient { 
             position: absolute; 
-            top: -20%;
+            top: -40%;
             left: 0; 
             width: 100%; 
-            height: 140%;
+            height: 180%;
             z-index: -1;
             pointer-events: none;
             will-change: transform;
