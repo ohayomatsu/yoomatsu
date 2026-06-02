@@ -16,7 +16,7 @@ export function About() {
                 src="/norantry.png"
                 alt="Matsu Portrait"
                 fill
-                className="object-cover saturate-0"
+                className="object-cover"
               />
             </div>
           </div>
