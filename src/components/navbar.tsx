@@ -157,7 +157,14 @@ export function Navbar() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 mt-4 liquid-glass rounded-3xl p-8 flex flex-col space-y-4 animate-in fade-in slide-in-from-top-4 duration-500">
+        <div 
+          className="md:hidden absolute top-full left-0 right-0 mt-4 rounded-3xl p-8 flex flex-col space-y-4 animate-in fade-in slide-in-from-top-4 duration-500 border border-white/20"
+          style={{
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            background: 'rgba(0, 0, 0, 0.4)',
+          }}
+        >
           {NAV_LINKS.map((link) => (
             <Link
               key={link.name}
