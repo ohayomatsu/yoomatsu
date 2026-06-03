@@ -22,7 +22,7 @@ const PROJECTS = [
   },
   { 
     id: 3, 
-    title: "AD HOSTINGER (CAIO ANDRES)", 
+    title: "15K INTRO (YOOMATSU)", 
     category: "Edição Complexa", 
     videoId: "z8Ys15mzk2s" 
   },
@@ -105,14 +105,12 @@ export function Portfolio() {
       </div>
 
       <div className="w-full flex flex-col items-center justify-center space-y-12">
-        {/* Filter Container: 2x2 Grid on Mobile, Pill on Desktop */}
         <div className="w-full max-w-[600px] mx-auto">
           <div 
             ref={containerRef}
-            className="relative bg-white/[0.04] border border-white/10 rounded-[2rem] md:rounded-full w-full md:w-fit mx-auto flex flex-wrap md:flex-nowrap gap-2 p-2 md:py-1 md:px-2"
+            className="relative bg-white/[0.04] border border-white/10 rounded-[2rem] md:rounded-full w-full md:w-fit mx-auto flex flex-wrap md:flex-nowrap gap-2 p-2"
             style={{ isolation: 'isolate' }}
           >
-            {/* Active Indicator (Pill) */}
             <div 
               className="absolute z-0"
               style={{
@@ -192,11 +190,11 @@ export function Portfolio() {
 
       {selectedVideoId && (
         <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-sm animate-in fade-in duration-300"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-sm animate-in fade-in duration-300 p-5"
           onClick={() => setSelectedVideoId(null)}
         >
           <button 
-            className="absolute top-6 right-6 p-3 text-white/60 hover:text-white transition-colors"
+            className="absolute top-6 right-6 p-3 text-white/60 hover:text-white transition-colors z-[110]"
             onClick={(e) => {
               e.stopPropagation();
               setSelectedVideoId(null);
@@ -206,7 +204,7 @@ export function Portfolio() {
           </button>
           
           <div 
-            className="relative w-full max-w-[860px] aspect-video mx-4 animate-in zoom-in-95 duration-300"
+            className="relative overflow-hidden w-[90vw] max-w-[860px] h-[50vw] max-h-[480px] animate-in zoom-in-95 duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             <iframe
@@ -217,7 +215,7 @@ export function Portfolio() {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              className="rounded-2xl shadow-2xl"
+              className="rounded-2xl shadow-2xl w-full h-full"
               loading="lazy"
             />
           </div>
