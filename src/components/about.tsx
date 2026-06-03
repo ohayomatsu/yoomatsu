@@ -8,20 +8,24 @@ export function About() {
     <section id="about" className="py-24 px-6 max-w-[680px] mx-auto scroll-mt-20">
       <div className="flex flex-col md:flex-row items-center gap-10">
         <div className="shrink-0">
-          <div className="relative w-[220px] h-[220px]">
-            {/* Círculo externo pulsante */}
-            <div className="absolute inset-0 rounded-full border-2 border-white/20 animate-pulse" />
+          <div className="relative w-[231px] h-[231px]">
+            {/* Círculo externo pulsante - Escala de 2px para 2.1px */}
+            <div className="absolute inset-0 rounded-full border-[2.1px] border-white/20 animate-pulse" />
             
-            {/* Container do Avatar com efeito Liquid Glass */}
+            {/* Container do Avatar com efeito Liquid Glass - Escala de inset-3 (12px) para 12.6px */}
             <div 
-              className="absolute inset-3 rounded-full overflow-hidden"
+              className="absolute rounded-full overflow-hidden"
               style={{
-                border: '1.5px solid rgba(255, 255, 255, 0.2)',
+                top: '12.6px',
+                right: '12.6px',
+                bottom: '12.6px',
+                left: '12.6px',
+                border: '1.6px solid rgba(255, 255, 255, 0.2)',
                 boxShadow: `
-                  0 0 0 6px rgba(255, 255, 255, 0.04),
-                  0 0 0 7px rgba(255, 255, 255, 0.06),
-                  0 0 30px 8px rgba(100, 180, 255, 0.08),
-                  inset 0 1.5px 0 rgba(255, 255, 255, 0.3)
+                  0 0 0 6.3px rgba(255, 255, 255, 0.04),
+                  0 0 0 7.4px rgba(255, 255, 255, 0.06),
+                  0 0 31.5px 8.4px rgba(100, 180, 255, 0.08),
+                  inset 0 1.6px 0 rgba(255, 255, 255, 0.3)
                 `,
                 backdropFilter: 'blur(2px)',
                 WebkitBackdropFilter: 'blur(2px)',
