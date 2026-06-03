@@ -112,11 +112,3 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
-@media (max-width: 768px) {
-  .navbar-logo {
-    opacity: 0;
-    filter: blur(8px);
-    animation: fadeUpBlur 0.8s ease-out 0.2s forwards;
-  }
-}

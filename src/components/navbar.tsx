@@ -25,6 +25,7 @@ export function Navbar() {
     
     window.addEventListener("scroll", handleScroll, { passive: true });
 
+    // Observer para esconder/mostrar logo da nav baseada na logo do hero
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsHeroTitleVisible(entry.isIntersecting);
@@ -105,11 +106,10 @@ export function Navbar() {
           href="#hero" 
           className={cn(
             "navbar-logo transition-all duration-500 ease-in-out absolute z-10 flex items-center",
-            // Corrigindo posição no mobile para não cortar e alinhando no desktop
             "left-2 md:left-0",
             isHeroTitleVisible 
-              ? "opacity-0 -translate-x-2 pointer-events-none" 
-              : "opacity-100 translate-x-0"
+              ? "opacity-0 -translate-x-2 blur-sm pointer-events-none" 
+              : "opacity-100 translate-x-0 blur-0"
           )}
         >
           <img 
