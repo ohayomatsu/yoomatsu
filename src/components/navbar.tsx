@@ -46,25 +46,20 @@ export function Navbar() {
         if (!targetElement) return;
 
         const start = window.scrollY;
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const rawEnd = targetElement.getBoundingClientRect().top + window.scrollY - 80;
-        const end = Math.min(rawEnd, maxScroll);
-        
-        const duration = 1000;
+        const end = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+        const duration = 600;
         let startTime: number | null = null;
 
-        function easeInOutCubic(t: number) {
-          return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        function ease(t: number) {
+          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
         }
 
         function step(timestamp: number) {
           if (!startTime) startTime = timestamp;
-          const progress = Math.min((timestamp - startTime) / duration, 1);
+          const elapsed = timestamp - startTime;
+          const progress = Math.min(elapsed / duration, 1);
           
-          window.scrollTo({
-            top: start + (end - start) * easeInOutCubic(progress),
-            behavior: 'auto'
-          });
+          window.scrollTo(0, start + (end - start) * ease(progress));
 
           if (progress < 1) {
             requestAnimationFrame(step);
@@ -105,6 +100,7 @@ export function Navbar() {
         style={{ 
           willChange: 'transform, opacity', 
           transform: 'translateX(-50%) translateZ(0)',
+          backfaceVisibility: 'hidden',
           transition: 'background 0.3s ease, border 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease, padding 0.5s ease'
         }}
       >
