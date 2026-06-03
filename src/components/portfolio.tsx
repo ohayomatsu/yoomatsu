@@ -222,7 +222,8 @@ export function Portfolio() {
           </button>
           
           <div 
-            className="relative w-[min(860px,90vw)] aspect-video animate-in zoom-in-95 duration-300 bg-transparent border-none outline-none"
+            className="relative animate-in duration-300 bg-transparent border-none outline-none"
+            style={{ width: 'min(860px, 90vw)', aspectRatio: '16/9' }}
             onClick={(e) => e.stopPropagation()}
           >
             <iframe
@@ -230,7 +231,8 @@ export function Portfolio() {
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              className="w-full h-full border-none block bg-transparent outline-none"
+              style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
+              className="bg-transparent outline-none"
               loading="lazy"
             />
           </div>
