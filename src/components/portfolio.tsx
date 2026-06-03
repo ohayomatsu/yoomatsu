@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -23,7 +24,7 @@ const PROJECTS = [
     id: 3, 
     title: "15K INTRO (YOOMATSU)", 
     category: "Edição Complexa", 
-    videoId: "u29iT_vn468" 
+    videoId: "z8Ys15mzk2s" 
   },
   { 
     id: 4, 
@@ -113,7 +114,7 @@ export function Portfolio() {
           >
             {/* Active Indicator (Pill) */}
             <div 
-              className="absolute pointer-events-none z-0"
+              className="absolute z-0"
               style={{
                 left: `${pillStyle.left}px`,
                 top: `${pillStyle.top}px`,
@@ -124,7 +125,8 @@ export function Portfolio() {
                 background: 'rgba(255, 255, 255, 0.2)',
                 borderRadius: '9999px',
                 willChange: 'left, top, width, opacity',
-                transform: 'translateZ(0)'
+                transform: 'translateZ(0)',
+                pointerEvents: 'none'
               }}
             />
 
