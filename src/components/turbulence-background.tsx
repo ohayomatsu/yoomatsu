@@ -13,17 +13,15 @@ export function TurbulenceBackground() {
 
     function resize() {
       if (canvas) {
-        const isMobile = window.innerWidth <= 768;
         canvas.width = window.innerWidth;
-        // Sincroniza a altura do canvas com o CSS (2.2x no desktop, 2.5x no mobile)
-        canvas.height = window.innerHeight * (isMobile ? 2.5 : 2.2);
+        // Sincroniza a altura do canvas com o CSS (2.2x para preencher o bg-gradient)
+        canvas.height = window.innerHeight * 2.2;
       }
     }
     
     resize();
     window.addEventListener('resize', resize);
 
-    // Função de ruído procedural baseada em fBM (Fractal Brownian Motion)
     function noise(x: number, y: number, t: number) {
       const n1 = Math.sin(x * 1.1 + t * 0.15) * Math.cos(y * 0.8 - t * 0.1);
       const n2 = Math.sin(x * 0.5 - y * 0.6 + t * 0.08) * 0.5;
@@ -31,7 +29,6 @@ export function TurbulenceBackground() {
       return (n1 + n2 + n3) / 1.75;
     }
 
-    // Algoritmo de colorização intensificado (Azul vibrante e cinzas mais claros)
     function getColor(n: number) {
       const t = (n + 1) / 2;
       const grayScale = Math.pow(t, 2.5) * 60; 
@@ -49,7 +46,6 @@ export function TurbulenceBackground() {
     let animationFrameId: number;
 
     const handleScroll = () => {
-      // Cálculo robusto da altura do documento para garantir funcionamento em mobile e desktop
       const docHeight = Math.max(
         document.body.scrollHeight, 
         document.documentElement.scrollHeight,
@@ -62,7 +58,7 @@ export function TurbulenceBackground() {
       const scrollY = window.scrollY || window.pageYOffset;
       
       const scrollPercent = Math.max(0, Math.min(1, scrollY / (docHeight - winHeight || 1)));
-      const move = scrollPercent * 20; // Move até 20% da própria altura para o efeito parallax
+      const move = scrollPercent * 20; 
       
       if (canvas) {
         canvas.style.transform = `translateY(-${move}%) translateZ(0)`;
@@ -70,7 +66,6 @@ export function TurbulenceBackground() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    // Executa uma vez no mount para posicionar corretamente
     handleScroll();
 
     function draw() {
@@ -118,7 +113,7 @@ export function TurbulenceBackground() {
         ctx.drawImage(offCanvas, 0, 0, W, H);
       }
 
-      time += 0.016;
+      time += 0.032; // Velocidade aumentada conforme solicitado anteriormente
       animationFrameId = requestAnimationFrame(draw);
     }
 

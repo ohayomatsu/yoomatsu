@@ -24,7 +24,9 @@ export default function RootLayout({
             top: 0;
             left: 0;
             width: 100%;
+            width: 100dvw;
             height: 100%;
+            height: 100dvh;
             z-index: -1;
             overflow: hidden;
             pointer-events: none;
@@ -36,6 +38,7 @@ export default function RootLayout({
             left: 0; 
             width: 100%; 
             height: 220%;
+            min-width: 100vw;
             z-index: -1;
             pointer-events: none;
           }
@@ -51,13 +54,11 @@ export default function RootLayout({
           }
           @media (max-width: 768px) {
             .bg-container {
-              height: 100vh;
-              min-height: -webkit-fill-available;
+              height: 100dvh;
             }
             .bg-gradient {
-              height: 250%;
+              height: 220%;
               top: -60%;
-              min-height: -webkit-fill-available;
             }
           }
         `}</style>
