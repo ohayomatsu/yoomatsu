@@ -14,7 +14,7 @@ export function ScrollReveal({
   children, 
   className, 
   delay = 0,
-  threshold = 0.05 
+  threshold = 0.1 
 }: ScrollRevealProps) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -28,7 +28,7 @@ export function ScrollReveal({
       },
       {
         threshold: threshold,
-        rootMargin: "0px 0px -40px 0px"
+        rootMargin: "0px 0px -50px 0px"
       }
     );
 
@@ -48,14 +48,11 @@ export function ScrollReveal({
     <div
       ref={ref}
       className={cn(
-        "transition-all duration-[1000ms]",
-        isVisible 
-          ? "opacity-100 blur-0 translate-y-0 scale-100" 
-          : "opacity-0 blur-[8px] translate-y-8 scale-[0.98]",
+        "fade-in-element",
+        isVisible && "visible",
         className
       )}
       style={{ 
-        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
         transitionDelay: `${delay}ms`
       }}
     >
