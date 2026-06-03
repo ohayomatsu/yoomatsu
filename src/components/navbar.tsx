@@ -107,7 +107,7 @@ export function Navbar() {
     <>
       <nav
         className={cn(
-          "fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl rounded-full border transition-all duration-500 ease-in-out",
+          "fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl rounded-full border transition-[background-color,border-color,padding,transform] duration-500 ease-in-out",
           isScrolled 
             ? "bg-white/[0.05] border-white/[0.08] py-2 px-6 shadow-2xl" 
             : "border-transparent bg-transparent py-4 px-6"
@@ -124,7 +124,7 @@ export function Navbar() {
           <Link 
             href="#hero" 
             className={cn(
-              "navbar-logo transition-all duration-500 ease-in-out absolute z-10 flex items-center",
+              "navbar-logo absolute z-10 flex items-center",
               "left-2 md:left-0",
               isHeroTitleVisible 
                 ? "opacity-0 -translate-x-2 blur-sm pointer-events-none" 
@@ -132,6 +132,7 @@ export function Navbar() {
             )}
             style={{ 
               transition: 'opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease',
+              willChange: 'opacity, transform, filter',
               transform: isHeroTitleVisible ? 'translateX(-8px) translateZ(0)' : 'translateX(0) translateZ(0)'
             }}
           >
@@ -185,12 +186,13 @@ export function Navbar() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div 
-          className="md:hidden fixed inset-0 z-[9999] flex flex-col items-center justify-center p-8 space-y-6 animate-in fade-in duration-300"
+          className="md:hidden fixed inset-0 z-[9999] flex flex-col items-center justify-center p-8 space-y-6 animate-in fade-in duration-300 mobile-menu-container"
           style={{
             backdropFilter: 'blur(12px)',
             WebkitBackdropFilter: 'blur(12px)',
             background: 'rgba(0, 0, 0, 0.4)',
             transform: 'translateZ(0)',
+            willChange: 'transform, opacity',
             position: 'fixed',
             top: 0,
             left: 0,

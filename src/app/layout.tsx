@@ -33,6 +33,7 @@ export default function RootLayout({
             pointer-events: none;
             background: #080909;
             transform: translateZ(0);
+            isolation: isolate;
           }
           .bg-gradient { 
             position: absolute; 
@@ -45,6 +46,7 @@ export default function RootLayout({
             pointer-events: none;
             transform: translateZ(0);
             will-change: transform;
+            isolation: isolate;
           }
           body { 
             background: transparent !important; 

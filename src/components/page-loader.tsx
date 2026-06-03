@@ -57,9 +57,11 @@ export function PageLoader() {
         alignItems: 'center',
         justifyContent: 'center',
         transition: 'opacity 0.6s ease, visibility 0.6s ease',
+        willChange: 'opacity, visibility',
         opacity: isVisible ? 1 : 0,
         visibility: isVisible ? 'visible' : 'hidden',
         pointerEvents: isVisible ? 'all' : 'none',
+        transform: 'translateZ(0)'
       }}
     >
       <div style={{
@@ -69,6 +71,7 @@ export function PageLoader() {
         borderTopColor: 'rgba(255,255,255,0.6)',
         borderRadius: '50%',
         animation: 'spin 0.8s linear infinite',
+        willChange: 'transform'
       }} />
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }

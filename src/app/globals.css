@@ -30,6 +30,8 @@
 @layer base {
   * {
     @apply border-border;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   body {
     @apply bg-black text-[#F0F0F0] antialiased selection:bg-white/20;
@@ -55,11 +57,13 @@
   }
   
   .liquid-card {
-    @apply liquid-glass rounded-[2rem] transition-all duration-500 hover:bg-white/[0.08] hover:border-white/30;
+    @apply liquid-glass rounded-[2rem] transition-[background-color,border-color,transform] duration-500 hover:bg-white/[0.08] hover:border-white/30;
+    will-change: transform, opacity;
   }
 
   .liquid-button {
-    @apply liquid-glass rounded-full px-8 py-3 font-semibold transition-all duration-500 hover:bg-white/[0.12] hover:scale-[1.04] active:scale-95;
+    @apply liquid-glass rounded-full px-8 py-3 font-semibold transition-[background-color,transform] duration-500 hover:bg-white/[0.12] hover:scale-[1.04] active:scale-95;
+    will-change: transform, opacity;
   }
 
   .glow-text {
@@ -80,14 +84,15 @@
 
   .bg-gradient, nav, .mobile-menu-container, .navbar {
     transform: translateZ(0);
-    will-change: transform;
+    will-change: transform, opacity;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
   }
 
-  #portfolio, #clients, #services, #contact {
+  #portfolio, #clients, #services, #contact, #about {
     content-visibility: auto;
     contain-intrinsic-size: 1px 1000px;
+    contain: layout style paint;
   }
 }
 
