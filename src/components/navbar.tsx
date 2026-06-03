@@ -22,7 +22,7 @@ export function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -34,7 +34,6 @@ export function Navbar() {
     const heroTitle = document.getElementById("hero-title");
     if (heroTitle) observer.observe(heroTitle);
 
-    // Motor de Scroll de Alta Precisão (Cubic Easing)
     const handleHashLinks = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a');
@@ -47,15 +46,13 @@ export function Navbar() {
         if (!targetElement) return;
 
         const start = window.scrollY;
-        // Calcula o destino respeitando o limite da página
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
         const rawEnd = targetElement.getBoundingClientRect().top + window.scrollY - 80;
         const end = Math.min(rawEnd, maxScroll);
         
-        const duration = 1000; // Tempo otimizado para não ficar arrastado
+        const duration = 1000;
         let startTime: number | null = null;
 
-        // Cubic Easing: Muito mais natural, evita o "salto" no meio
         function easeInOutCubic(t: number) {
           return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
         }
@@ -94,9 +91,12 @@ export function Navbar() {
         "fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[90%] max-w-5xl rounded-full",
         isScrolled ? "liquid-glass py-2 px-6" : "bg-transparent py-4 px-6"
       )}
+      style={{ 
+        willChange: 'transform', 
+        transform: 'translateX(-50%) translateZ(0)' 
+      }}
     >
       <div className="flex items-center relative min-h-[40px] w-full overflow-hidden md:overflow-visible">
-        {/* Logo MATSU - Animação de Opacidade e Deslizamento */}
         <Link 
           href="#hero" 
           className={cn(
@@ -113,7 +113,6 @@ export function Navbar() {
           />
         </Link>
 
-        {/* Desktop Menu Wrapper */}
         <div className="hidden md:flex flex-1 items-center transition-all duration-500 ease-in-out">
           <div className="flex-1 transition-all duration-500" />
           
@@ -143,7 +142,6 @@ export function Navbar() {
           />
         </div>
 
-        {/* Mobile Menu Trigger */}
         <button
           className="md:hidden text-foreground ml-auto z-10"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -152,7 +150,6 @@ export function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 mt-4 liquid-glass rounded-3xl p-8 flex flex-col space-y-4 animate-in fade-in slide-in-from-top-4 duration-500">
           {NAV_LINKS.map((link) => (
