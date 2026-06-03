@@ -22,7 +22,7 @@ const PROJECTS = [
   },
   { 
     id: 3, 
-    title: "15K INTRO (YOOMATSU)", 
+    title: "AD HOSTINGER (CAIO ANDRES)", 
     category: "Edição Complexa", 
     videoId: "z8Ys15mzk2s" 
   },

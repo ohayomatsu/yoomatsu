@@ -35,7 +35,7 @@ export default function Home() {
         <Contact />
       </ScrollReveal>
 
-      <footer className="py-12 border-t border-white/5 text-center text-foreground/30 text-xs">
+      <footer className="py-12 text-center text-foreground/30 text-xs">
         <p>© {new Date().getFullYear()} Matsu. Todos os direitos reservados.</p>
       </footer>
 
