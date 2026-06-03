@@ -28,8 +28,8 @@ export function Contact() {
   }, []);
 
   return (
-    <section id="contact" className="pt-4 pb-32 px-6 max-w-[500px] mx-auto scroll-mt-20">
-      <div className="flex flex-col items-center text-center gap-3">
+    <section id="contact" className="pt-4 pb-32 px-6 max-w-[500px] mx-auto scroll-mt-20 overflow-visible">
+      <div className="flex flex-col items-center text-center gap-3 overflow-visible">
         <h2 
           ref={headingRef}
           className="text-[1.8rem] font-headline font-bold tracking-tight glow-text leading-tight text-white origin-center"

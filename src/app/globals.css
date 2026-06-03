@@ -106,9 +106,14 @@
     -webkit-backface-visibility: hidden;
   }
 
-  #portfolio, #clients, #services, #contact, #about {
+  #portfolio, #clients, #services, #about {
     content-visibility: auto;
     contain: layout style paint;
+  }
+
+  #contact {
+    content-visibility: auto;
+    contain: layout style;
   }
 }
 
