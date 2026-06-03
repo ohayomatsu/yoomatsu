@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -106,9 +105,29 @@ export function Portfolio() {
 
       <div className="w-full flex flex-col items-center justify-center space-y-12">
         <div className="w-full max-w-[600px] mx-auto">
+          {/* Mobile: Grid 2x2 | Desktop: Row with Pill */}
+          <div 
+            className="md:hidden flex flex-wrap gap-2 w-full p-2"
+          >
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={cn(
+                  "flex-[0_0_calc(50%-4px)] py-3 rounded-full text-[0.7rem] font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center",
+                  activeCategory === cat.id
+                    ? "bg-white/20 text-white"
+                    : "bg-white/[0.04] text-white/40"
+                )}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
           <div 
             ref={containerRef}
-            className="relative bg-white/[0.04] border border-white/10 rounded-[2rem] md:rounded-full w-full md:w-fit mx-auto flex flex-wrap md:flex-nowrap gap-2 p-2"
+            className="hidden relative bg-white/[0.04] border border-white/10 rounded-full md:flex gap-2 p-2 mx-auto w-fit"
             style={{ isolation: 'isolate' }}
           >
             <div 
@@ -136,8 +155,7 @@ export function Portfolio() {
                 }}
                 onClick={() => setActiveCategory(cat.id)}
                 className={cn(
-                  "relative z-10 py-3 md:py-2 md:px-6 rounded-full text-[0.7rem] md:text-xs font-bold uppercase tracking-widest transition-opacity duration-300 bg-transparent border-none text-center shrink-0 whitespace-nowrap",
-                  "flex-[0_0_calc(50%-4px)] md:flex-none",
+                  "relative z-10 py-2 px-6 rounded-full text-xs font-bold uppercase tracking-widest transition-opacity duration-300 bg-transparent border-none text-center shrink-0 whitespace-nowrap",
                   activeCategory === cat.id
                     ? "text-white opacity-100"
                     : "text-white/40 opacity-50 hover:opacity-80"
@@ -204,7 +222,7 @@ export function Portfolio() {
           </button>
           
           <div 
-            className="relative overflow-hidden w-[min(860px,90vw)] aspect-video h-auto animate-in zoom-in-95 duration-300 bg-transparent border-none outline-none"
+            className="relative w-[min(860px,90vw)] aspect-video animate-in zoom-in-95 duration-300 bg-transparent border-none outline-none"
             onClick={(e) => e.stopPropagation()}
           >
             <iframe
