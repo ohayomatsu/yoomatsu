@@ -55,7 +55,7 @@ const CATEGORIES = [
 export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
-  const [pillStyle, setPillStyle] = useState({ left: 0, width: 0, height: 0, opacity: 0 });
+  const [pillStyle, setPillStyle] = useState({ left: 0, top: 0, width: 0, height: 0, opacity: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<{ [key: string]: HTMLButtonElement | null }>({});
 
@@ -69,6 +69,7 @@ export function Portfolio() {
       if (activeBtn && containerRef.current) {
         setPillStyle({
           left: activeBtn.offsetLeft,
+          top: activeBtn.offsetTop,
           width: activeBtn.offsetWidth,
           height: activeBtn.offsetHeight,
           opacity: 1
@@ -103,48 +104,27 @@ export function Portfolio() {
       </div>
 
       <div className="w-full flex flex-col items-center justify-center space-y-12">
-        {/* Filter Container with exact structure requested for mobile, while keeping desktop consistent */}
-        <div 
-          className="no-scrollbar md:w-full md:mx-0 md:px-0"
-          style={{
-            marginLeft: '-1rem',
-            marginRight: '-1rem',
-            paddingLeft: '1rem',
-            paddingRight: '1rem',
-            overflowX: 'auto',
-            overflowY: 'visible',
-            WebkitOverflowScrolling: 'touch',
-            scrollbarWidth: 'none',
-          }}
-        >
+        {/* Filter Container: 2x2 Grid on Mobile, Pill on Desktop */}
+        <div className="w-full max-w-[600px] mx-auto">
           <div 
             ref={containerRef}
-            className="relative items-center bg-white/[0.04] border border-white/10 rounded-full w-fit mx-auto"
-            style={{
-              display: 'flex',
-              gap: '8px',
-              flexWrap: 'nowrap',
-              paddingLeft: '0.5rem',
-              paddingRight: '0.5rem',
-              paddingTop: '4px',
-              paddingBottom: '4px',
-              isolation: 'isolate'
-            }}
+            className="relative bg-white/[0.04] border border-white/10 rounded-[2rem] md:rounded-full w-full md:w-fit mx-auto flex flex-wrap md:flex-nowrap gap-2 p-2 md:py-1 md:px-2"
+            style={{ isolation: 'isolate' }}
           >
             {/* Active Indicator (Pill) */}
             <div 
               className="absolute pointer-events-none z-0"
               style={{
                 left: `${pillStyle.left}px`,
-                top: '50%',
+                top: `${pillStyle.top}px`,
                 width: `${pillStyle.width}px`,
                 height: `${pillStyle.height}px`,
                 opacity: pillStyle.opacity,
-                transition: 'left 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                transition: 'left 0.4s cubic-bezier(0.4, 0, 0.2, 1), top 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 background: 'rgba(255, 255, 255, 0.2)',
                 borderRadius: '9999px',
-                willChange: 'left, width, opacity',
-                transform: 'translateY(-50%) translateZ(0)'
+                willChange: 'left, top, width, opacity',
+                transform: 'translateZ(0)'
               }}
             />
 
@@ -156,7 +136,8 @@ export function Portfolio() {
                 }}
                 onClick={() => setActiveCategory(cat.id)}
                 className={cn(
-                  "relative z-10 px-5 md:px-6 py-2 rounded-full text-[0.7rem] md:text-xs font-bold uppercase tracking-widest transition-opacity duration-300 bg-transparent border-none text-center shrink-0 whitespace-nowrap",
+                  "relative z-10 py-3 md:py-2 md:px-6 rounded-full text-[0.7rem] md:text-xs font-bold uppercase tracking-widest transition-opacity duration-300 bg-transparent border-none text-center shrink-0 whitespace-nowrap",
+                  "flex-[0_0_calc(50%-4px)] md:flex-none",
                   activeCategory === cat.id
                     ? "text-white opacity-100"
                     : "text-white/40 opacity-50 hover:opacity-80"
