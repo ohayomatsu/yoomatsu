@@ -16,6 +16,8 @@ export function About() {
                 alt="Matsu Portrait"
                 fill
                 className="object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -80,8 +79,7 @@ export function Portfolio() {
 
     updatePill();
     
-    // Recalcula posição ao redimensionar a janela
-    window.addEventListener('resize', updatePill);
+    window.addEventListener('resize', updatePill, { passive: true });
     return () => window.removeEventListener('resize', updatePill);
   }, [activeCategory]);
 
@@ -110,7 +108,6 @@ export function Portfolio() {
           ref={containerRef}
           className="relative grid grid-cols-2 md:flex items-center justify-center p-2 md:p-1 bg-white/[0.04] border border-white/10 rounded-2xl md:rounded-full w-fit mx-auto gap-1 md:gap-0 overflow-hidden"
         >
-          {/* Liquid Slider Pill */}
           <div 
             className="absolute pointer-events-none z-0"
             style={{
@@ -122,6 +119,7 @@ export function Portfolio() {
               transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
               background: 'rgba(255, 255, 255, 0.2)',
               borderRadius: '9999px',
+              willChange: 'left, top, width, height',
             }}
           />
 
@@ -160,6 +158,8 @@ export function Portfolio() {
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110 saturate-[0.8]"
                     unoptimized
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center space-y-4 backdrop-blur-sm">
@@ -209,6 +209,7 @@ export function Portfolio() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
               className="rounded-2xl shadow-2xl"
+              loading="lazy"
             />
           </div>
         </div>

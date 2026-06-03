@@ -1,4 +1,3 @@
-
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -54,6 +53,8 @@ export function Clients() {
                   src={client.imageUrl} 
                   alt={client.name}
                   className="w-full h-full object-cover rounded-full"
+                  loading="lazy"
+                  decoding="async"
                 />
               ) : (
                 <span className="text-xl md:text-2xl font-bold tracking-tighter text-white/40 group-hover:text-white group-hover:glow-text transition-all duration-500">

@@ -103,7 +103,7 @@ export function Navbar() {
             : "border-transparent bg-transparent py-4 px-6"
         )}
         style={{ 
-          willChange: 'transform, background, border, box-shadow', 
+          willChange: 'transform, opacity', 
           transform: 'translateX(-50%) translateZ(0)',
           transition: 'background 0.3s ease, border 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease, padding 0.5s ease'
         }}
@@ -123,6 +123,7 @@ export function Navbar() {
               src="/logo.svg" 
               alt="MATSU" 
               style={{ height: '22px', width: 'auto' }} 
+              decoding="async"
             />
           </Link>
 
@@ -168,11 +169,12 @@ export function Navbar() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div 
-          className="md:hidden fixed inset-0 z-[9999] flex flex-col items-center justify-center p-8 space-y-6 animate-in fade-in duration-300"
+          className="md:hidden fixed inset-0 z-[9999] flex flex-col items-center justify-center p-8 space-y-6 animate-in fade-in duration-300 mobile-menu-container mobile-menu-blur"
           style={{
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
             background: 'rgba(0, 0, 0, 0.4)',
+            transform: 'translateZ(0)',
           }}
         >
           <button
@@ -187,6 +189,7 @@ export function Navbar() {
             alt="MATSU" 
             className="mb-8"
             style={{ height: '32px', width: 'auto' }} 
+            decoding="async"
           />
 
           {NAV_LINKS.map((link) => (

@@ -14,13 +14,12 @@ export function TurbulenceBackground() {
     function resize() {
       if (canvas) {
         canvas.width = window.innerWidth;
-        // Ajusta a altura interna para suportar a escala do CSS
         canvas.height = window.innerHeight * 3.0;
       }
     }
     
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', resize, { passive: true });
 
     function noise(x: number, y: number, t: number) {
       const n1 = Math.sin(x * 1.1 + t * 0.15) * Math.cos(y * 0.8 - t * 0.1);
@@ -44,33 +43,41 @@ export function TurbulenceBackground() {
     const SCALE = 12;
     let time = 0;
     let animationFrameId: number;
+    let ticking = false;
 
     const handleScroll = () => {
-      const isMobile = window.innerWidth <= 768;
-      
-      if (isMobile) {
-        if (canvas) {
-          canvas.style.transform = 'none';
-        }
-        return;
-      }
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const isMobile = window.innerWidth <= 768;
+          
+          if (isMobile) {
+            if (canvas) {
+              canvas.style.transform = 'none';
+            }
+            ticking = false;
+            return;
+          }
 
-      const docHeight = Math.max(
-        document.body.scrollHeight, 
-        document.documentElement.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.offsetHeight,
-        document.body.clientHeight,
-        document.documentElement.clientHeight
-      );
-      const winHeight = window.innerHeight;
-      const scrollY = window.scrollY || window.pageYOffset;
-      
-      const scrollPercent = Math.max(0, Math.min(1, scrollY / (docHeight - winHeight || 1)));
-      const move = scrollPercent * 20; 
-      
-      if (canvas) {
-        canvas.style.transform = `translateY(-${move}%) translateZ(0)`;
+          const docHeight = Math.max(
+            document.body.scrollHeight, 
+            document.documentElement.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.offsetHeight,
+            document.body.clientHeight,
+            document.documentElement.clientHeight
+          );
+          const winHeight = window.innerHeight;
+          const scrollY = window.scrollY || window.pageYOffset;
+          
+          const scrollPercent = Math.max(0, Math.min(1, scrollY / (docHeight - winHeight || 1)));
+          const move = scrollPercent * 20; 
+          
+          if (canvas) {
+            canvas.style.transform = `translateY(-${move}%) translateZ(0)`;
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 

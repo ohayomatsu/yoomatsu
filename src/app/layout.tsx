@@ -31,6 +31,7 @@ export default function RootLayout({
             overflow: hidden;
             pointer-events: none;
             background: #000;
+            transform: translateZ(0);
           }
           .bg-gradient { 
             position: absolute; 
@@ -41,6 +42,8 @@ export default function RootLayout({
             min-width: 100vw;
             z-index: -1;
             pointer-events: none;
+            transform: translateZ(0);
+            will-change: transform;
           }
           body { 
             background: transparent !important; 
@@ -60,6 +63,10 @@ export default function RootLayout({
               height: 300%;
               top: -100%;
               transform: none !important;
+            }
+            .mobile-menu-blur {
+              backdrop-filter: blur(12px) !important;
+              -webkit-backdrop-filter: blur(12px) !important;
             }
           }
         `}</style>
