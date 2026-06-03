@@ -23,7 +23,6 @@ export function Navbar() {
       setIsScrolled(window.scrollY > 20);
     };
     
-    // Garantindo o uso de passive: true para melhor performance de scroll
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     const observer = new IntersectionObserver(
@@ -90,12 +89,15 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[90%] max-w-5xl rounded-full",
-        isScrolled ? "liquid-glass py-2 px-6" : "bg-transparent py-4 px-6"
+        "fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl rounded-full border",
+        isScrolled 
+          ? "liquid-glass py-2 px-6" 
+          : "border-transparent bg-transparent py-4 px-6"
       )}
       style={{ 
-        willChange: 'transform', 
-        transform: 'translateX(-50%) translateZ(0)' // Forçando aceleração por GPU
+        willChange: 'transform, background, border, box-shadow', 
+        transform: 'translateX(-50%) translateZ(0)',
+        transition: 'background 0.3s ease, border 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease, padding 0.5s ease'
       }}
     >
       <div className="flex items-center relative min-h-[40px] w-full overflow-hidden md:overflow-visible">
