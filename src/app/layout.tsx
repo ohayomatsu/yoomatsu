@@ -55,7 +55,8 @@ export default function RootLayout({
               min-height: -webkit-fill-available;
             }
             .bg-gradient {
-              height: 180%;
+              height: 250%;
+              top: -60%;
               min-height: -webkit-fill-available;
             }
           }
