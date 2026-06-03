@@ -116,7 +116,7 @@ export function Portfolio() {
               width: `${pillStyle.width}px`,
               height: `${pillStyle.height}px`,
               opacity: pillStyle.opacity,
-              transition: 'left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              transition: 'left 0.4s cubic-bezier(0.4, 0, 0.2, 1), top 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1), height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
               background: 'rgba(255, 255, 255, 0.2)',
               borderRadius: '9999px',
               willChange: 'left, top, width, height, opacity',
