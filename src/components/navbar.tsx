@@ -18,17 +18,13 @@ export function Navbar() {
   const [isHeroTitleVisible, setIsHeroTitleVisible] = useState(true);
 
   useEffect(() => {
-    // Função para atualizar o estado da navbar baseado no scroll
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
     
-    // Executa imediatamente para garantir o estado correto no refresh
     handleScroll();
-    
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Observador para a logo do Hero
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsHeroTitleVisible(entry.isIntersecting);
@@ -39,7 +35,6 @@ export function Navbar() {
     const heroTitle = document.getElementById("hero-title");
     if (heroTitle) observer.observe(heroTitle);
 
-    // Smooth scroll otimizado com requestAnimationFrame
     const handleHashLinks = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a');
@@ -100,14 +95,15 @@ export function Navbar() {
         className={cn(
           "fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl rounded-full border transition-all duration-500 ease-in-out",
           isScrolled 
-            ? "backdrop-blur-[20px] bg-black/40 border-white/10 py-2 px-6 shadow-2xl" 
+            ? "bg-white/[0.05] border-white/[0.08] py-2 px-6 shadow-2xl" 
             : "border-transparent bg-transparent py-4 px-6"
         )}
         style={{ 
           willChange: 'transform, opacity', 
           transform: 'translateX(-50%) translateZ(0)',
           backfaceVisibility: 'hidden',
-          WebkitBackdropFilter: isScrolled ? 'blur(20px)' : 'none'
+          WebkitBackdropFilter: isScrolled ? 'blur(16px)' : 'none',
+          backdropFilter: isScrolled ? 'blur(16px)' : 'none'
         }}
       >
         <div className="flex items-center relative min-h-[40px] w-full md:overflow-visible">
