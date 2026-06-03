@@ -1,12 +1,39 @@
 "use client";
 
 import { Mail } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 export function Contact() {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const heading = headingRef.current;
+    if (!heading) return;
+
+    const handleGlow = () => {
+      heading.classList.add("glow-active");
+    };
+
+    const handleAnimationEnd = () => {
+      heading.classList.remove("glow-active");
+    };
+
+    window.addEventListener("trigger-contact-glow", handleGlow);
+    heading.addEventListener("animationend", handleAnimationEnd);
+
+    return () => {
+      window.removeEventListener("trigger-contact-glow", handleGlow);
+      heading.removeEventListener("animationend", handleAnimationEnd);
+    };
+  }, []);
+
   return (
     <section id="contact" className="pt-4 pb-32 px-6 max-w-[500px] mx-auto scroll-mt-20">
       <div className="flex flex-col items-center text-center gap-3">
-        <h2 className="text-[1.8rem] font-headline font-bold tracking-tight glow-text leading-tight text-white">
+        <h2 
+          ref={headingRef}
+          className="text-[1.8rem] font-headline font-bold tracking-tight glow-text leading-tight text-white"
+        >
           Ficou interessado? <br /> só chamar!
         </h2>
         

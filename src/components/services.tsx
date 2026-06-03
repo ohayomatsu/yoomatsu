@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Check } from "lucide-react";
@@ -41,6 +40,10 @@ const SERVICES = [
 ];
 
 export function Services() {
+  const triggerGlow = () => {
+    window.dispatchEvent(new CustomEvent("trigger-contact-glow"));
+  };
+
   return (
     <section id="services" className="py-32 px-6 scroll-mt-20">
       <div className="max-w-7xl mx-auto space-y-20">
@@ -79,6 +82,7 @@ export function Services() {
 
               <a 
                 href="#contact" 
+                onClick={triggerGlow}
                 className="liquid-button w-full text-xs font-bold uppercase tracking-widest bg-white/5 text-center flex items-center justify-center"
               >
                 Saiba Mais
