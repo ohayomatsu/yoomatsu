@@ -20,6 +20,12 @@ export function PageLoader() {
         setIsVisible(false);
         document.body.style.overflow = '';
         
+        // Dispara um evento global para notificar outros componentes (como o Hero)
+        // que o loader terminou de desaparecer (0.6s de transição)
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('page-loader-finished'));
+        }, 600);
+        
         // Remove o componente do DOM completamente após a transição de opacidade (0.6s)
         setTimeout(() => setShouldRender(false), 600);
       }, 300);
