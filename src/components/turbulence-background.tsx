@@ -15,7 +15,7 @@ export function TurbulenceBackground() {
       if (canvas) {
         const isMobile = window.innerWidth <= 768;
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight * (isMobile ? 2.5 : 3.0);
+        canvas.height = window.innerHeight * (isMobile ? 3.0 : 3.0);
       }
     }
     
@@ -31,12 +31,13 @@ export function TurbulenceBackground() {
 
     function getColor(n: number) {
       const t = (n + 1) / 2;
-      // Interpolação entre #0c0d0d (12, 13, 13) e #283d4a (40, 61, 74)
-      const factor = Math.pow(t, 2.5);
+      // Interpolação entre #080909 (8, 9, 9) e #103059 (16, 48, 89)
+      // Usamos um expoente de 3.5 para que a cor escura domine mais a tela
+      const factor = Math.pow(t, 3.5);
       
-      const r = Math.round(12 + factor * 28);
-      const g = Math.round(13 + factor * 48);
-      const b = Math.round(13 + factor * 61);
+      const r = Math.round(8 + factor * 8);
+      const g = Math.round(9 + factor * 39);
+      const b = Math.round(9 + factor * 80);
       
       return [r, g, b];
     }

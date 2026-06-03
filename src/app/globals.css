@@ -4,14 +4,14 @@
 
 @layer base {
   :root {
-    --background: 220 6% 6.7%;
+    --background: 220 6% 3.5%;
     --foreground: 0 0% 98%;
-    --card: 220 6% 8%;
+    --card: 220 6% 5%;
     --card-foreground: 0 0% 98%;
-    --popover: 220 6% 6.7%;
+    --popover: 220 6% 3.5%;
     --popover-foreground: 0 0% 98%;
     --primary: 0 0% 98%;
-    --primary-foreground: 220 6% 6.7%;
+    --primary-foreground: 220 6% 3.5%;
     --secondary: 240 5% 15%;
     --secondary-foreground: 0 0% 98%;
     --muted: 240 5% 15%;
@@ -33,7 +33,7 @@
   }
   body {
     @apply bg-black text-[#F0F0F0] antialiased selection:bg-white/20;
-    background-color: #0c0d0d;
+    background-color: #080909;
     overflow-x: hidden;
   }
 }
@@ -78,7 +78,6 @@
     transform: translateY(0) translateZ(0);
   }
 
-  /* GPU Acceleration para elementos críticos */
   .bg-gradient, nav, .mobile-menu-container, .navbar {
     transform: translateZ(0);
     will-change: transform;
@@ -86,7 +85,6 @@
     -webkit-backface-visibility: hidden;
   }
 
-  /* Content Visibility para seções abaixo do fold */
   #portfolio, #clients, #services, #contact {
     content-visibility: auto;
     contain-intrinsic-size: 1px 1000px;

@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="dark" style={{ background: '#0c0d0d' }}>
+    <html lang="pt-BR" className="dark" style={{ background: '#080909' }}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -30,7 +30,7 @@ export default function RootLayout({
             z-index: -1;
             overflow: hidden;
             pointer-events: none;
-            background: #0c0d0d;
+            background: #080909;
             transform: translateZ(0);
           }
           .bg-gradient { 
