@@ -6,7 +6,6 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { name: "Início", href: "#hero" },
   { name: "Sobre", href: "#about" },
   { name: "Portfólio", href: "#portfolio" },
   { name: "Clientes", href: "#clients" },
@@ -166,7 +165,7 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu - Moved outside of the nav with transform to fix backdrop-filter bug */}
+      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div 
           className="md:hidden fixed inset-0 z-[9999] flex flex-col items-center justify-center p-8 space-y-6 animate-in fade-in duration-300"
