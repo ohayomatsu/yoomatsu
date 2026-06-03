@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -57,9 +56,7 @@ export function ScrollReveal({
       )}
       style={{ 
         transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-        transitionDelay: `${delay}ms`,
-        willChange: "transform, opacity, filter",
-        transform: "translateZ(0)" // Força aceleração de hardware
+        transitionDelay: `${delay}ms`
       }}
     >
       {children}

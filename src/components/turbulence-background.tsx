@@ -14,27 +14,12 @@ export function TurbulenceBackground() {
     function resize() {
       if (canvas) {
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight * 2.2; // Suporta a altura de 220% definida no CSS
+        canvas.height = window.innerHeight * 2.2;
       }
     }
     
     resize();
     window.addEventListener('resize', resize);
-
-    // Gerador de Ruído Cromático (Grão)
-    const grainCanvas = document.createElement('canvas');
-    const grainCtx = grainCanvas.getContext('2d');
-    if (grainCtx) {
-      grainCanvas.width = 256;
-      grainCanvas.height = 256;
-      const grainData = grainCtx.createImageData(256, 256);
-      for (let i = 0; i < grainData.data.length; i += 4) {
-        const v = Math.round((Math.random() - 0.5) * 20 + 128);
-        grainData.data[i] = grainData.data[i+1] = grainData.data[i+2] = v;
-        grainData.data[i+3] = 10;
-      }
-      grainCtx.putImageData(grainData, 0, 0);
-    }
 
     // Função de ruído procedural baseada em fBM (Fractal Brownian Motion)
     function noise(x: number, y: number, t: number) {
@@ -47,8 +32,6 @@ export function TurbulenceBackground() {
     // Algoritmo de colorização intensificado (Azul vibrante e cinzas mais claros)
     function getColor(n: number) {
       const t = (n + 1) / 2;
-      // Curva mais suave para o brilho base (grayScale) e cor (accentStrength)
-      // Isso torna os "blobs" maiores e mais presentes
       const grayScale = Math.pow(t, 2.5) * 60; 
       const accentStrength = Math.pow(t, 6); 
       
@@ -63,26 +46,21 @@ export function TurbulenceBackground() {
     let time = 0;
     let animationFrameId: number;
 
-    // Função de Parallax baseada em Scroll
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const docHeight = document.documentElement.scrollHeight;
       const winHeight = window.innerHeight;
       
-      // Calcula o percentual de scroll (0 a 1)
       const scrollPercent = scrollY / (docHeight - winHeight || 1);
-      
-      // Move no máximo 20% dentro do container (compensando a altura de 220%)
       const move = scrollPercent * 20;
       
       if (canvas) {
-        // Direção invertida: movendo para cima (-) conforme o scroll
         canvas.style.transform = `translateY(-${move}%)`;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Chamada inicial para posicionar corretamente
+    handleScroll();
 
     function draw() {
       if (!canvas || !ctx) return;
@@ -127,18 +105,6 @@ export function TurbulenceBackground() {
         offCtx.putImageData(imgData, 0, 0);
         ctx.imageSmoothingEnabled = true;
         ctx.drawImage(offCanvas, 0, 0, W, H);
-
-        ctx.globalAlpha = 0.05;
-        ctx.globalCompositeOperation = 'screen';
-        const gW = grainCanvas.width;
-        const gH = grainCanvas.height;
-        for (let tx = 0; tx < W; tx += gW) {
-          for (let ty = 0; ty < H; ty += gH) {
-            ctx.drawImage(grainCanvas, tx, ty);
-          }
-        }
-        ctx.globalAlpha = 1;
-        ctx.globalCompositeOperation = 'source-over';
       }
 
       time += 0.008;

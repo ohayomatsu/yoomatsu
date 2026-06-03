@@ -38,7 +38,6 @@ export default function RootLayout({
             height: 220%;
             z-index: -1;
             pointer-events: none;
-            will-change: transform;
           }
           body { 
             background: transparent !important; 
