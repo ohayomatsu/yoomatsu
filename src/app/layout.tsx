@@ -49,6 +49,16 @@ export default function RootLayout({
             position: relative;
             z-index: 1;
           }
+          @media (max-width: 768px) {
+            .bg-container {
+              height: 100vh;
+              min-height: -webkit-fill-available;
+            }
+            .bg-gradient {
+              height: 180%;
+              min-height: -webkit-fill-available;
+            }
+          }
         `}</style>
       </head>
       <body className="font-body antialiased text-[#F0F0F0] noise-bg">
