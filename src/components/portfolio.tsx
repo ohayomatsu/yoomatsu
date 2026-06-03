@@ -204,7 +204,7 @@ export function Portfolio() {
           </button>
           
           <div 
-            className="relative overflow-hidden w-[min(860px,90vw)] aspect-video h-auto animate-in zoom-in-95 duration-300"
+            className="relative overflow-hidden w-[min(860px,90vw)] aspect-video h-auto animate-in zoom-in-95 duration-300 bg-transparent border-none outline-none"
             onClick={(e) => e.stopPropagation()}
           >
             <iframe
@@ -212,7 +212,7 @@ export function Portfolio() {
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              className="w-full h-full border-none block rounded-2xl shadow-2xl"
+              className="w-full h-full border-none block bg-transparent outline-none"
               loading="lazy"
             />
           </div>
