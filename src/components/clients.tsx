@@ -7,7 +7,7 @@ const CLIENTS = [
   { 
     name: "CAIO ANDRES", 
     imageUrl: "/caioandres.jpeg", 
-    href: "https://www.youtube.com/@CaioAndres" 
+    href: "https://www.youtube.com/@caio_andress" 
   },
   { 
     name: "REYSHEE", 
