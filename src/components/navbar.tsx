@@ -22,6 +22,8 @@ export function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
+    
+    // Garantindo o uso de passive: true para melhor performance de scroll
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     const observer = new IntersectionObserver(
@@ -93,7 +95,7 @@ export function Navbar() {
       )}
       style={{ 
         willChange: 'transform', 
-        transform: 'translateX(-50%) translateZ(0)' 
+        transform: 'translateX(-50%) translateZ(0)' // Forçando aceleração por GPU
       }}
     >
       <div className="flex items-center relative min-h-[40px] w-full overflow-hidden md:overflow-visible">
