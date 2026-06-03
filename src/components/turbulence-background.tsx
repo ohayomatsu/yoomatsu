@@ -143,7 +143,7 @@ export function TurbulenceBackground() {
         transition: 'opacity 1s ease',
         pointerEvents: 'none',
         willChange: 'transform',
-        animation: 'none' // Removemos a animação automática para usar o fade in manual via isReady
+        isolation: 'isolate'
       }}
     />
   );

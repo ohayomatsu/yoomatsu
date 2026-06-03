@@ -9,8 +9,24 @@ export function About() {
       <div className="flex flex-col md:flex-row items-center gap-10">
         <div className="shrink-0">
           <div className="relative w-[220px] h-[220px]">
+            {/* Círculo externo pulsante */}
             <div className="absolute inset-0 rounded-full border-2 border-white/20 animate-pulse" />
-            <div className="absolute inset-3 rounded-full backdrop-blur-[20px] bg-white/[0.04] border border-white/30 overflow-hidden">
+            
+            {/* Container do Avatar com efeito Liquid Glass */}
+            <div 
+              className="absolute inset-3 rounded-full overflow-hidden"
+              style={{
+                border: '1.5px solid rgba(255, 255, 255, 0.2)',
+                boxShadow: `
+                  0 0 0 6px rgba(255, 255, 255, 0.04),
+                  0 0 0 7px rgba(255, 255, 255, 0.06),
+                  0 0 30px 8px rgba(100, 180, 255, 0.08),
+                  inset 0 1.5px 0 rgba(255, 255, 255, 0.3)
+                `,
+                backdropFilter: 'blur(2px)',
+                WebkitBackdropFilter: 'blur(2px)',
+              }}
+            >
               <Image
                 src="/norantry.png"
                 alt="Matsu Portrait"
@@ -18,6 +34,14 @@ export function About() {
                 className="object-cover"
                 loading="lazy"
                 decoding="async"
+              />
+              
+              {/* Pseudo-elemento de brilho/reflexo (Liquid Glass overlay) */}
+              <div 
+                className="absolute inset-0 rounded-full pointer-events-none"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 50%)'
+                }}
               />
             </div>
           </div>
