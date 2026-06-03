@@ -47,7 +47,21 @@ export function Navbar() {
         if (!targetElement) return;
 
         const start = window.scrollY;
-        const end = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+        
+        // Calcula o limite máximo de scroll permitido
+        const maxScroll = Math.max(
+          document.body.scrollHeight, 
+          document.documentElement.scrollHeight,
+          document.body.offsetHeight,
+          document.documentElement.offsetHeight,
+          document.body.clientHeight,
+          document.documentElement.clientHeight
+        ) - window.innerHeight;
+        
+        // Calcula a posição alvo e garante que não ultrapasse o fim da página
+        const targetPos = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+        const end = Math.min(targetPos, maxScroll);
+        
         const duration = 600;
         let startTime: number | null = null;
 
@@ -116,7 +130,10 @@ export function Navbar() {
                 ? "opacity-0 -translate-x-2 blur-sm pointer-events-none" 
                 : "opacity-100 translate-x-0 blur-0"
             )}
-            style={{ transition: 'opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease' }}
+            style={{ 
+              transition: 'opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease',
+              transform: isHeroTitleVisible ? 'translateX(-8px) translateZ(0)' : 'translateX(0) translateZ(0)'
+            }}
           >
             <img 
               src="/logo.svg" 
