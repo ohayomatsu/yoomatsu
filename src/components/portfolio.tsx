@@ -103,47 +103,57 @@ export function Portfolio() {
       </div>
 
       <div className="w-full flex flex-col items-center justify-center space-y-12">
-        <div 
-          className="w-full overflow-x-auto overflow-y-hidden no-scrollbar px-6" 
-          style={{ WebkitOverflowScrolling: 'touch' }}
-        >
+        {/* Filter Wrapper Extra - Isolates overflow */}
+        <div className="w-full overflow-hidden px-4 md:px-0">
+          {/* Scroll Container */}
           <div 
-            ref={containerRef}
-            className="relative flex items-center p-1 bg-white/[0.04] border border-white/10 rounded-full w-fit mx-auto gap-0 flex-nowrap"
+            className="overflow-x-auto overflow-y-visible no-scrollbar py-2 px-1" 
+            style={{ 
+              WebkitOverflowScrolling: 'touch',
+              msOverflowStyle: 'none',
+              scrollbarWidth: 'none'
+            }}
           >
             <div 
-              className="absolute pointer-events-none z-0"
-              style={{
-                left: `${pillStyle.left}px`,
-                top: '50%',
-                width: `${pillStyle.width}px`,
-                height: `${pillStyle.height}px`,
-                opacity: pillStyle.opacity,
-                transition: 'left 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                background: 'rgba(255, 255, 255, 0.2)',
-                borderRadius: '9999px',
-                willChange: 'left, width, opacity',
-                transform: 'translateY(-50%) translateZ(0)'
-              }}
-            />
-
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat.id}
-                ref={(el) => {
-                  buttonsRef.current[cat.id] = el;
+              ref={containerRef}
+              className="relative flex items-center p-1 bg-white/[0.04] border border-white/10 rounded-full w-fit mx-auto gap-0 flex-nowrap"
+              style={{ isolation: 'isolate' }}
+            >
+              {/* Active Indicator (Pill) */}
+              <div 
+                className="absolute pointer-events-none z-0"
+                style={{
+                  left: `${pillStyle.left}px`,
+                  top: '50%',
+                  width: `${pillStyle.width}px`,
+                  height: `${pillStyle.height}px`,
+                  opacity: pillStyle.opacity,
+                  transition: 'left 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                  background: 'rgba(255, 255, 255, 0.2)',
+                  borderRadius: '9999px',
+                  willChange: 'left, width, opacity',
+                  transform: 'translateY(-50%) translateZ(0)'
                 }}
-                onClick={() => setActiveCategory(cat.id)}
-                className={cn(
-                  "relative z-10 px-4 md:px-6 py-2.5 md:py-2 rounded-full text-[0.7rem] md:text-xs font-bold uppercase tracking-widest transition-opacity duration-300 bg-transparent border-none text-center shrink-0 whitespace-nowrap",
-                  activeCategory === cat.id
-                    ? "text-white opacity-100"
-                    : "text-white/40 opacity-50 hover:opacity-80"
-                )}
-              >
-                {cat.label}
-              </button>
-            ))}
+              />
+
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat.id}
+                  ref={(el) => {
+                    buttonsRef.current[cat.id] = el;
+                  }}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={cn(
+                    "relative z-10 px-5 md:px-6 py-2.5 md:py-2 rounded-full text-[0.7rem] md:text-xs font-bold uppercase tracking-widest transition-opacity duration-300 bg-transparent border-none text-center shrink-0 whitespace-nowrap",
+                    activeCategory === cat.id
+                      ? "text-white opacity-100"
+                      : "text-white/40 opacity-50 hover:opacity-80"
+                  )}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -161,7 +171,7 @@ export function Portfolio() {
                     src={thumbnailUrl}
                     alt={project.title}
                     fill
-                    className="object-cover transition duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] grayscale group-hover:grayscale-0 group-hover:scale-110"
+                    className="object-cover transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] grayscale group-hover:grayscale-0 group-hover:scale-110"
                     unoptimized
                     loading="lazy"
                     decoding="async"
