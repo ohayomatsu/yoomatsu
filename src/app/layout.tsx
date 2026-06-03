@@ -4,8 +4,8 @@ import { TurbulenceBackground } from '@/components/turbulence-background';
 import { PageLoader } from '@/components/page-loader';
 
 export const metadata: Metadata = {
-  title: 'Matsu | Video Editor & Content Creator',
-  description: 'Portfolio of Matsu, professional video editor and content creator specialized in high-impact social media content.',
+  title: 'yoomatsu',
+  description: 'criador de conteúdo e editor de vídeo',
 };
 
 export default function RootLayout({
