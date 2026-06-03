@@ -55,7 +55,7 @@ const CATEGORIES = [
 export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
-  const [pillStyle, setPillStyle] = useState({ left: 0, top: 0, width: 0, height: 0, opacity: 0 });
+  const [pillStyle, setPillStyle] = useState({ left: 0, width: 0, height: 0, opacity: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<{ [key: string]: HTMLButtonElement | null }>({});
 
@@ -69,7 +69,6 @@ export function Portfolio() {
       if (activeBtn && containerRef.current) {
         setPillStyle({
           left: activeBtn.offsetLeft,
-          top: activeBtn.offsetTop,
           width: activeBtn.offsetWidth,
           height: activeBtn.offsetHeight,
           opacity: 1
@@ -106,21 +105,21 @@ export function Portfolio() {
       <div className="w-full flex flex-col items-center justify-center space-y-12">
         <div 
           ref={containerRef}
-          className="relative grid grid-cols-2 md:flex items-center justify-center p-2 md:p-1 bg-white/[0.04] border border-white/10 rounded-2xl md:rounded-full w-fit mx-auto gap-1 md:gap-0 overflow-hidden"
+          className="relative flex items-center justify-center p-1 bg-white/[0.04] border border-white/10 rounded-full w-fit mx-auto gap-0 overflow-hidden"
         >
           <div 
             className="absolute pointer-events-none z-0"
             style={{
               left: `${pillStyle.left}px`,
-              top: `${pillStyle.top}px`,
+              top: '50%',
               width: `${pillStyle.width}px`,
               height: `${pillStyle.height}px`,
               opacity: pillStyle.opacity,
-              transition: 'left 0.4s cubic-bezier(0.4, 0, 0.2, 1), top 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1), height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              transition: 'left 0.4s cubic-bezier(0.4, 0, 0.2, 1), width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
               background: 'rgba(255, 255, 255, 0.2)',
               borderRadius: '9999px',
-              willChange: 'left, top, width, height, opacity',
-              transform: 'translateZ(0)'
+              willChange: 'left, width, opacity',
+              transform: 'translateY(-50%) translateZ(0)'
             }}
           />
 
@@ -132,7 +131,7 @@ export function Portfolio() {
               }}
               onClick={() => setActiveCategory(cat.id)}
               className={cn(
-                "relative z-10 px-4 md:px-6 py-2.5 md:py-2 rounded-full text-[0.7rem] md:text-xs font-bold uppercase tracking-widest transition-opacity duration-300 bg-transparent border-none text-center",
+                "relative z-10 px-4 md:px-6 py-2.5 md:py-2 rounded-full text-[0.7rem] md:text-xs font-bold uppercase tracking-widest transition-opacity duration-300 bg-transparent border-none text-center shrink-0",
                 activeCategory === cat.id
                   ? "text-white opacity-100"
                   : "text-white/40 opacity-50 hover:opacity-80"
