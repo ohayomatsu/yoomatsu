@@ -13,8 +13,9 @@ export function TurbulenceBackground() {
 
     function resize() {
       if (canvas) {
+        const isMobile = window.innerWidth <= 768;
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight * 3.0;
+        canvas.height = window.innerHeight * (isMobile ? 2.5 : 3.0);
       }
     }
     
@@ -30,12 +31,13 @@ export function TurbulenceBackground() {
 
     function getColor(n: number) {
       const t = (n + 1) / 2;
-      const grayScale = Math.pow(t, 2.5) * 60; 
-      const accentStrength = Math.pow(t, 6); 
+      // Interpolação entre #0f1012 (15, 16, 18) e #1f465e (31, 70, 94)
+      // Usamos uma potência para dar mais contraste aos "blobs"
+      const factor = Math.pow(t, 2.5);
       
-      const r = Math.round(grayScale + accentStrength * 40);
-      const g = Math.round(grayScale + accentStrength * 120);
-      const b = Math.round(grayScale + accentStrength * 200);
+      const r = Math.round(15 + factor * 16);
+      const g = Math.round(16 + factor * 54);
+      const b = Math.round(18 + factor * 76);
       
       return [r, g, b];
     }
