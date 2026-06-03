@@ -4,9 +4,20 @@
 import { cn } from "@/lib/utils";
 
 const CLIENTS = [
-  { name: "CAIO ANDRES", imageUrl: "/caioandres.jpeg" },
-  { name: "?" },
-  { name: "YOOMATSU (EU)", imageUrl: "/eu.png" },
+  { 
+    name: "CAIO ANDRES", 
+    imageUrl: "/caioandres.jpeg", 
+    href: "https://www.youtube.com/@CaioAndres" 
+  },
+  { 
+    name: "REYSHEE", 
+    href: "https://www.youtube.com/@Reyshee" 
+  },
+  { 
+    name: "YOOMATSU (EU)", 
+    imageUrl: "/eu.png", 
+    href: "https://www.youtube.com/@yoomatsu" 
+  },
 ];
 
 function getInitials(name: string) {
@@ -29,8 +40,14 @@ export function Clients() {
 
       <div className="flex justify-center items-center gap-12 md:gap-24 px-6 flex-wrap">
         {CLIENTS.map((client, idx) => (
-          <div key={idx} className="flex flex-col items-center space-y-4 shrink-0">
-            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full border border-white/10 bg-white/5 backdrop-blur-[20px] flex items-center justify-center transition-all duration-500 hover:border-white/50 hover:shadow-[0_0_15px_4px_rgba(59,89,130,0.5)] cursor-default group/item overflow-hidden">
+          <a 
+            key={idx} 
+            href={client.href} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex flex-col items-center space-y-4 shrink-0 transition-transform duration-300 hover:scale-105 active:scale-95 group"
+          >
+            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full border border-white/10 bg-white/5 backdrop-blur-[20px] flex items-center justify-center transition-all duration-500 group-hover:border-white/50 group-hover:shadow-[0_0_15px_4px_rgba(59,89,130,0.5)] overflow-hidden">
               {client.imageUrl ? (
                 <img 
                   src={client.imageUrl} 
@@ -38,15 +55,15 @@ export function Clients() {
                   className="w-full h-full object-cover rounded-full"
                 />
               ) : (
-                <span className="text-xl md:text-2xl font-bold tracking-tighter text-white/40 group-hover/item:text-white group-hover/item:glow-text transition-all duration-500">
+                <span className="text-xl md:text-2xl font-bold tracking-tighter text-white/40 group-hover:text-white group-hover:glow-text transition-all duration-500">
                   {getInitials(client.name)}
                 </span>
               )}
             </div>
-            <span className="text-xs md:text-sm font-medium text-foreground/40 tracking-wider uppercase">
+            <span className="text-xs md:text-sm font-medium text-foreground/40 tracking-wider uppercase group-hover:text-foreground/80 transition-colors">
               {client.name}
             </span>
-          </div>
+          </a>
         ))}
       </div>
     </section>
