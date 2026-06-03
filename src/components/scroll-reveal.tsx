@@ -14,21 +14,29 @@ export function ScrollReveal({
   children, 
   className, 
   delay = 0,
-  threshold = 0.1 
+  threshold = 0.15 
 }: ScrollRevealProps) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Delay leve de 100ms conforme solicitado
+            setTimeout(() => {
+              setIsVisible(true);
+            }, 100);
+            
+            // Garante que a animação só ocorra uma vez
+            observer.unobserve(entry.target);
+          }
+        });
       },
       {
         threshold: threshold,
-        rootMargin: "0px 0px -50px 0px"
+        rootMargin: "0px 0px -50px 0px" // Elemento precisa estar 50px dentro da viewport
       }
     );
 
