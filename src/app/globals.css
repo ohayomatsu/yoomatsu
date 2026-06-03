@@ -33,7 +33,7 @@
   }
   body {
     @apply bg-black text-[#F0F0F0] antialiased selection:bg-white/20;
-    background-color: #0f1012;
+    background-color: #0c0d0d;
     overflow-x: hidden;
   }
 }

@@ -31,13 +31,12 @@ export function TurbulenceBackground() {
 
     function getColor(n: number) {
       const t = (n + 1) / 2;
-      // Interpolação entre #0f1012 (15, 16, 18) e #1f465e (31, 70, 94)
-      // Usamos uma potência para dar mais contraste aos "blobs"
+      // Interpolação entre #0c0d0d (12, 13, 13) e #283d4a (40, 61, 74)
       const factor = Math.pow(t, 2.5);
       
-      const r = Math.round(15 + factor * 16);
-      const g = Math.round(16 + factor * 54);
-      const b = Math.round(18 + factor * 76);
+      const r = Math.round(12 + factor * 28);
+      const g = Math.round(13 + factor * 48);
+      const b = Math.round(13 + factor * 61);
       
       return [r, g, b];
     }
