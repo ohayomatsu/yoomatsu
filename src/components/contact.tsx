@@ -10,19 +10,19 @@ export function Contact() {
     const heading = headingRef.current;
     if (!heading) return;
 
-    const handleGlow = () => {
-      heading.classList.add("glow-active");
+    const handleZoom = () => {
+      heading.classList.add("zoom-active");
     };
 
     const handleAnimationEnd = () => {
-      heading.classList.remove("glow-active");
+      heading.classList.remove("zoom-active");
     };
 
-    window.addEventListener("trigger-contact-glow", handleGlow);
+    window.addEventListener("trigger-contact-glow", handleZoom);
     heading.addEventListener("animationend", handleAnimationEnd);
 
     return () => {
-      window.removeEventListener("trigger-contact-glow", handleGlow);
+      window.removeEventListener("trigger-contact-glow", handleZoom);
       heading.removeEventListener("animationend", handleAnimationEnd);
     };
   }, []);
@@ -32,7 +32,7 @@ export function Contact() {
       <div className="flex flex-col items-center text-center gap-3">
         <h2 
           ref={headingRef}
-          className="text-[1.8rem] font-headline font-bold tracking-tight glow-text leading-tight text-white"
+          className="text-[1.8rem] font-headline font-bold tracking-tight glow-text leading-tight text-white origin-center"
         >
           Ficou interessado? <br /> só chamar!
         </h2>
