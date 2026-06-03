@@ -107,7 +107,8 @@ export function TurbulenceBackground() {
         ctx.drawImage(offCanvas, 0, 0, W, H);
       }
 
-      time += 0.008;
+      // Velocidade da animação aumentada para metade do tempo original (dobro da velocidade)
+      time += 0.016;
       animationFrameId = requestAnimationFrame(draw);
     }
 
