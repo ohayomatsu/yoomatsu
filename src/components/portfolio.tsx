@@ -1,8 +1,9 @@
+
 "use client";
 
 import { useState, useRef, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Play, X } from "lucide-react";
+import { Play } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -54,7 +55,7 @@ const CATEGORIES = [
 
 export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
+  const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
   const [pillStyle, setPillStyle] = useState({ left: 0, top: 0, width: 0, height: 0, opacity: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<{ [key: string]: HTMLButtonElement | null }>({});
@@ -83,17 +84,6 @@ export function Portfolio() {
     return () => window.removeEventListener('resize', updatePill);
   }, [activeCategory]);
 
-  useEffect(() => {
-    if (selectedVideoId) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [selectedVideoId]);
-
   return (
     <section id="portfolio" className="py-24 px-6 max-w-7xl mx-auto space-y-16 scroll-mt-20">
       <div className="space-y-4 text-center">
@@ -105,7 +95,7 @@ export function Portfolio() {
 
       <div className="w-full flex flex-col items-center justify-center space-y-12">
         <div className="w-full max-w-[600px] mx-auto">
-          {/* Mobile: Grid 2x2 | Desktop: Row with Pill */}
+          {/* Mobile: Grid 2x2 */}
           <div 
             className="md:hidden flex flex-wrap gap-2 w-full p-2"
           >
@@ -169,30 +159,52 @@ export function Portfolio() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
           {filteredProjects.map((project) => {
+            const isPlaying = playingVideoId === project.videoId;
             const thumbnailUrl = `https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg`;
+            
             return (
               <div 
                 key={project.id} 
-                onClick={() => setSelectedVideoId(project.videoId)}
+                onClick={() => !isPlaying && setPlayingVideoId(project.videoId)}
                 className="group relative liquid-card overflow-hidden aspect-video cursor-pointer"
               >
                 <div className="relative w-full h-full">
-                  <Image
-                    src={thumbnailUrl}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] grayscale group-hover:grayscale-0 group-hover:scale-110"
-                    unoptimized
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  {isPlaying ? (
+                    <iframe
+                      src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1`}
+                      title={project.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      style={{ width: '100%', height: '100%', border: 'none', borderRadius: 'inherit' }}
+                      className="block"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <>
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={thumbnailUrl}
+                          alt={project.title}
+                          fill
+                          className="object-cover transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] grayscale group-hover:grayscale-0 group-hover:scale-110"
+                          unoptimized
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center space-y-4 backdrop-blur-sm">
+                        <div className="p-4 rounded-full bg-white/20 border border-white/40 scale-0 group-hover:scale-100 transition-transform duration-500">
+                          <Play fill="white" size={32} />
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center space-y-4 backdrop-blur-sm">
-                  <div className="p-4 rounded-full bg-white/20 border border-white/40 scale-0 group-hover:scale-100 transition-transform duration-500">
-                    <Play fill="white" size={32} />
-                  </div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                
+                <div className={cn(
+                  "absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent transition-all duration-500",
+                  isPlaying ? "pointer-events-none opacity-0 group-hover:opacity-100" : "opacity-100"
+                )}>
                   <Badge variant="outline" className="mb-2 bg-white/5 text-white/80 border-white/20 backdrop-blur-md">
                     {project.category}
                   </Badge>
@@ -205,39 +217,6 @@ export function Portfolio() {
           })}
         </div>
       </div>
-
-      {selectedVideoId && (
-        <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-sm animate-in fade-in duration-300 p-5"
-          onClick={() => setSelectedVideoId(null)}
-        >
-          <button 
-            className="absolute top-6 right-6 p-3 text-white/60 hover:text-white transition-colors z-[110]"
-            onClick={(e) => {
-              e.stopPropagation();
-              setSelectedVideoId(null);
-            }}
-          >
-            <X size={32} />
-          </button>
-          
-          <div 
-            className="relative animate-in duration-300 bg-transparent border-none outline-none"
-            style={{ width: 'min(860px, 90vw)', aspectRatio: '16/9' }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <iframe
-              src={`https://www.youtube.com/embed/${selectedVideoId}?autoplay=1`}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
-              className="bg-transparent outline-none"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      )}
     </section>
   );
 }
