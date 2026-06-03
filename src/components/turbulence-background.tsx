@@ -1,11 +1,15 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export function TurbulenceBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
+    const handleReady = () => setIsReady(true);
+    window.addEventListener('page-loader-finished', handleReady);
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: false });
@@ -31,14 +35,10 @@ export function TurbulenceBackground() {
 
     function getColor(n: number) {
       const t = (n + 1) / 2;
-      // Interpolação entre #080909 (8, 9, 9) e #103059 (16, 48, 89)
-      // Usamos um expoente de 3.5 para que a cor escura domine mais a tela
       const factor = Math.pow(t, 3.5);
-      
       const r = Math.round(8 + factor * 8);
       const g = Math.round(9 + factor * 39);
       const b = Math.round(9 + factor * 80);
-      
       return [r, g, b];
     }
 
@@ -51,11 +51,8 @@ export function TurbulenceBackground() {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const isMobile = window.innerWidth <= 768;
-          
           if (isMobile) {
-            if (canvas) {
-              canvas.style.transform = 'none';
-            }
+            if (canvas) canvas.style.transform = 'none';
             ticking = false;
             return;
           }
@@ -70,7 +67,6 @@ export function TurbulenceBackground() {
           );
           const winHeight = window.innerHeight;
           const scrollY = window.scrollY || window.pageYOffset;
-          
           const scrollPercent = Math.max(0, Math.min(1, scrollY / (docHeight - winHeight || 1)));
           const move = scrollPercent * 20; 
           
@@ -88,14 +84,11 @@ export function TurbulenceBackground() {
 
     function draw() {
       if (!canvas || !ctx) return;
-
       const W = canvas.width;
       const H = canvas.height;
       if (W === 0 || H === 0) return;
-
       const bW = Math.ceil(W / SCALE);
       const bH = Math.ceil(H / SCALE);
-
       const imgData = ctx.createImageData(bW, bH);
       const data = imgData.data;
 
@@ -103,15 +96,11 @@ export function TurbulenceBackground() {
         const ny = (py / bH) * 2.8;
         for (let px = 0; px < bW; px++) {
           const nx = (px / bW) * 4.2;
-          
           const qx = noise(nx, ny, time * 0.2);
           const qy = noise(nx + 1.2, ny + 1.2, time * 0.2);
-          
           const rx = noise(nx + 2.5 * qx, ny + 2.5 * qy, time * 0.15);
           const ry = noise(nx + 2.5 * qx + 4.0, ny + 2.5 * qy + 1.8, time * 0.15);
-          
           const val = noise(nx + rx, ny + ry, time * 0.3);
-          
           const [r, g, b] = getColor(val);
           const idx = (py * bW + px) * 4;
           data[idx] = r; 
@@ -140,6 +129,7 @@ export function TurbulenceBackground() {
     return () => {
       window.removeEventListener('resize', resize);
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('page-loader-finished', handleReady);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -149,10 +139,11 @@ export function TurbulenceBackground() {
       ref={canvasRef}
       className="bg-gradient"
       style={{ 
-        opacity: 0,
-        animation: 'fadeInBg 1.5s ease-out forwards',
+        opacity: isReady ? 1 : 0,
+        transition: 'opacity 1s ease',
         pointerEvents: 'none',
-        willChange: 'transform'
+        willChange: 'transform',
+        animation: 'none' // Removemos a animação automática para usar o fade in manual via isReady
       }}
     />
   );

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 /**
- * @fileOverview Um componente de loader global que cobre a tela até que a página esteja carregada.
+ * @fileOverview Um componente de loader global que sincroniza o carregamento com as animações do site.
  */
 
 export function PageLoader() {
@@ -11,33 +11,29 @@ export function PageLoader() {
   const [shouldRender, setShouldRender] = useState(true);
 
   useEffect(() => {
-    // Bloqueia o scroll do corpo imediatamente ao montar o componente no cliente
+    // Bloqueia o scroll do corpo imediatamente
     document.body.style.overflow = 'hidden';
 
     const handleLoad = () => {
-      // Aguarda um pequeno delay para garantir que a transição seja percebida
+      // Pequeno delay inicial conforme solicitado
       setTimeout(() => {
         setIsVisible(false);
         document.body.style.overflow = '';
         
-        // Dispara um evento global para notificar outros componentes (como o Hero)
-        // que o loader terminou de desaparecer (0.6s de transição)
+        // Após o fade out do loader (0.6s), dispara os eventos de animação
         setTimeout(() => {
           window.dispatchEvent(new CustomEvent('page-loader-finished'));
         }, 600);
         
-        // Remove o componente do DOM completamente após a transição de opacidade (0.6s)
-        setTimeout(() => setShouldRender(false), 600);
+        // Remove do DOM após a transição
+        setTimeout(() => setShouldRender(false), 800);
       }, 300);
     };
 
-    // Se o documento já estiver carregado (ex: refresh rápido), executa imediatamente
     if (document.readyState === 'complete') {
       handleLoad();
     } else {
       window.addEventListener('load', handleLoad);
-      
-      // Fallback de segurança: se o carregamento demorar mais de 3 segundos, libera o site
       const fallback = setTimeout(handleLoad, 3000);
 
       return () => {

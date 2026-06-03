@@ -8,14 +8,15 @@ export function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const handleLoaded = () => setIsLoaded(true);
+    const handleLoaded = () => {
+      // Pequeno delay adicional de 400ms após o loader sumir para iniciar a coreografia
+      setTimeout(() => setIsLoaded(true), 400);
+    };
     
-    // Escuta o evento customizado do PageLoader
     window.addEventListener('page-loader-finished', handleLoaded);
     
-    // Fallback caso o loader já tenha terminado antes do Hero montar
     if (document.readyState === 'complete' && !document.getElementById('page-loader')) {
-      setIsLoaded(true);
+      handleLoaded();
     }
 
     return () => window.removeEventListener('page-loader-finished', handleLoaded);
