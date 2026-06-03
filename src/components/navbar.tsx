@@ -18,12 +18,17 @@ export function Navbar() {
   const [isHeroTitleVisible, setIsHeroTitleVisible] = useState(true);
 
   useEffect(() => {
+    // Função para atualizar o estado da navbar baseado no scroll
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 50);
     };
+    
+    // Executa imediatamente para garantir o estado correto no refresh
+    handleScroll();
     
     window.addEventListener("scroll", handleScroll, { passive: true });
 
+    // Observador para a logo do Hero
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsHeroTitleVisible(entry.isIntersecting);
@@ -34,6 +39,7 @@ export function Navbar() {
     const heroTitle = document.getElementById("hero-title");
     if (heroTitle) observer.observe(heroTitle);
 
+    // Smooth scroll otimizado com requestAnimationFrame
     const handleHashLinks = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a');
@@ -42,7 +48,7 @@ export function Navbar() {
       const href = anchor.getAttribute('href');
       if (href && href.startsWith('#')) {
         e.preventDefault();
-        const targetElement = document.querySelector(href);
+        const targetElement = document.querySelector(href === "#hero" ? "#hero" : href);
         if (!targetElement) return;
 
         const start = window.scrollY;
@@ -92,16 +98,16 @@ export function Navbar() {
     <>
       <nav
         className={cn(
-          "fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl rounded-full border",
+          "fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl rounded-full border transition-all duration-500 ease-in-out",
           isScrolled 
-            ? "liquid-glass py-2 px-6" 
+            ? "backdrop-blur-[20px] bg-black/40 border-white/10 py-2 px-6 shadow-2xl" 
             : "border-transparent bg-transparent py-4 px-6"
         )}
         style={{ 
           willChange: 'transform, opacity', 
           transform: 'translateX(-50%) translateZ(0)',
           backfaceVisibility: 'hidden',
-          transition: 'background 0.3s ease, border 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease, padding 0.5s ease'
+          WebkitBackdropFilter: isScrolled ? 'blur(20px)' : 'none'
         }}
       >
         <div className="flex items-center relative min-h-[40px] w-full md:overflow-visible">
@@ -114,6 +120,7 @@ export function Navbar() {
                 ? "opacity-0 -translate-x-2 blur-sm pointer-events-none" 
                 : "opacity-100 translate-x-0 blur-0"
             )}
+            style={{ transition: 'opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease' }}
           >
             <img 
               src="/logo.svg" 
@@ -165,12 +172,17 @@ export function Navbar() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div 
-          className="md:hidden fixed inset-0 z-[9999] flex flex-col items-center justify-center p-8 space-y-6 animate-in fade-in duration-300 mobile-menu-container mobile-menu-blur"
+          className="md:hidden fixed inset-0 z-[9999] flex flex-col items-center justify-center p-8 space-y-6 animate-in fade-in duration-300"
           style={{
             backdropFilter: 'blur(12px)',
             WebkitBackdropFilter: 'blur(12px)',
             background: 'rgba(0, 0, 0, 0.4)',
             transform: 'translateZ(0)',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
           }}
         >
           <button
