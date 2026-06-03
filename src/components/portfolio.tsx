@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -100,7 +99,7 @@ export function Portfolio() {
       <div className="w-full flex flex-col items-center justify-center space-y-12">
         <div 
           ref={containerRef}
-          className="relative grid grid-cols-2 md:flex md:flex-wrap justify-center p-2 md:p-1 bg-white/[0.04] border border-white/10 rounded-2xl md:rounded-full w-full max-w-md md:max-w-none gap-1 md:gap-0"
+          className="relative grid grid-cols-2 md:flex md:flex-wrap justify-center p-2 md:p-1 bg-white/[0.04] border border-white/10 rounded-2xl md:rounded-full w-full max-w-md md:max-w-none mx-auto gap-1 md:gap-0"
         >
           {/* Liquid Slider Pill */}
           <div 
