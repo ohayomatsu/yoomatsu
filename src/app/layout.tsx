@@ -57,8 +57,9 @@ export default function RootLayout({
               height: 100dvh;
             }
             .bg-gradient {
-              height: 220%;
-              top: -60%;
+              height: 300%;
+              top: -100%;
+              transform: none !important;
             }
           }
         `}</style>

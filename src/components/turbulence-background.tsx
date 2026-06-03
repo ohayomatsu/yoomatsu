@@ -14,8 +14,8 @@ export function TurbulenceBackground() {
     function resize() {
       if (canvas) {
         canvas.width = window.innerWidth;
-        // Sincroniza a altura do canvas com o CSS (2.2x para preencher o bg-gradient)
-        canvas.height = window.innerHeight * 2.2;
+        // Ajusta a altura interna para suportar a escala do CSS
+        canvas.height = window.innerHeight * 3.0;
       }
     }
     
@@ -46,6 +46,15 @@ export function TurbulenceBackground() {
     let animationFrameId: number;
 
     const handleScroll = () => {
+      const isMobile = window.innerWidth <= 768;
+      
+      if (isMobile) {
+        if (canvas) {
+          canvas.style.transform = 'none';
+        }
+        return;
+      }
+
       const docHeight = Math.max(
         document.body.scrollHeight, 
         document.documentElement.scrollHeight,
@@ -113,7 +122,7 @@ export function TurbulenceBackground() {
         ctx.drawImage(offCanvas, 0, 0, W, H);
       }
 
-      time += 0.032; // Velocidade aumentada conforme solicitado anteriormente
+      time += 0.032; 
       animationFrameId = requestAnimationFrame(draw);
     }
 
