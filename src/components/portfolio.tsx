@@ -156,7 +156,7 @@ export function Portfolio() {
                     src={thumbnailUrl}
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110 saturate-[0.8]"
+                    className="object-cover transition duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] grayscale group-hover:grayscale-0 group-hover:scale-110"
                     unoptimized
                     loading="lazy"
                     decoding="async"
