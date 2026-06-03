@@ -98,7 +98,7 @@ export function Portfolio() {
       <div className="space-y-4 text-center">
         <h2 className="text-4xl md:text-5xl font-headline font-bold tracking-tight">Portfólio</h2>
         <p className="text-foreground/60 max-w-2xl mx-auto">
-          Uma seleção de trabalhos que traduzem visão em realidade.
+          Alguns dos meus trabalhos mais recentes.
         </p>
       </div>
 

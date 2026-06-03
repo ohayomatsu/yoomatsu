@@ -52,7 +52,7 @@ export function Clients() {
                 <img 
                   src={client.imageUrl} 
                   alt={client.name}
-                  className="w-full h-full object-cover rounded-full"
+                  className="w-full h-full object-cover rounded-full grayscale transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:grayscale-0"
                   loading="lazy"
                   decoding="async"
                 />
