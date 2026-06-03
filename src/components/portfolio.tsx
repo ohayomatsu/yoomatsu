@@ -56,7 +56,7 @@ const CATEGORIES = [
 export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
-  const [pillStyle, setPillStyle] = useState({ left: 0, width: 0, opacity: 0 });
+  const [pillStyle, setPillStyle] = useState({ left: 0, top: 0, width: 0, height: 0, opacity: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<{ [key: string]: HTMLButtonElement | null }>({});
 
@@ -69,13 +69,14 @@ export function Portfolio() {
     if (activeBtn && containerRef.current) {
       setPillStyle({
         left: activeBtn.offsetLeft,
+        top: activeBtn.offsetTop,
         width: activeBtn.offsetWidth,
+        height: activeBtn.offsetHeight,
         opacity: 1
       });
     }
   }, [activeCategory]);
 
-  // Lock body scroll when modal is open
   useEffect(() => {
     if (selectedVideoId) {
       document.body.style.overflow = "hidden";
@@ -99,16 +100,18 @@ export function Portfolio() {
       <div className="w-full flex flex-col items-center justify-center space-y-12">
         <div 
           ref={containerRef}
-          className="relative flex flex-wrap justify-center p-1 bg-white/[0.04] border border-white/10 rounded-full"
+          className="relative grid grid-cols-2 md:flex md:flex-wrap justify-center p-2 md:p-1 bg-white/[0.04] border border-white/10 rounded-2xl md:rounded-full w-full max-w-md md:max-w-none gap-1 md:gap-0"
         >
           {/* Liquid Slider Pill */}
           <div 
-            className="absolute top-1 bottom-1 pointer-events-none z-0"
+            className="absolute pointer-events-none z-0"
             style={{
               left: `${pillStyle.left}px`,
+              top: `${pillStyle.top}px`,
               width: `${pillStyle.width}px`,
+              height: `${pillStyle.height}px`,
               opacity: pillStyle.opacity,
-              transition: 'left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease',
+              transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
               background: 'rgba(255, 255, 255, 0.2)',
               borderRadius: '9999px',
             }}
@@ -122,7 +125,7 @@ export function Portfolio() {
               }}
               onClick={() => setActiveCategory(cat.id)}
               className={cn(
-                "relative z-10 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-opacity duration-300 bg-transparent border-none",
+                "relative z-10 px-4 md:px-6 py-2.5 md:py-2 rounded-full text-[0.7rem] md:text-xs font-bold uppercase tracking-widest transition-opacity duration-300 bg-transparent border-none text-center",
                 activeCategory === cat.id
                   ? "text-white opacity-100"
                   : "text-white/40 opacity-50 hover:opacity-80"
@@ -170,7 +173,6 @@ export function Portfolio() {
         </div>
       </div>
 
-      {/* Video Modal Player */}
       {selectedVideoId && (
         <div 
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-sm animate-in fade-in duration-300"
