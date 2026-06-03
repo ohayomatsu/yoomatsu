@@ -11,6 +11,7 @@ const CLIENTS = [
   },
   { 
     name: "REYSHEE", 
+    imageUrl: "/rey.jpg",
     href: "https://www.youtube.com/@Reyshee" 
   },
   { 
