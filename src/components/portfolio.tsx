@@ -104,10 +104,10 @@ export function Portfolio() {
 
       <div className="w-full flex flex-col items-center justify-center space-y-12">
         {/* Filter Wrapper Extra - Isolates overflow */}
-        <div className="w-full overflow-hidden px-4 md:px-0">
+        <div className="w-full overflow-visible">
           {/* Scroll Container */}
           <div 
-            className="overflow-x-auto overflow-y-visible no-scrollbar py-2 px-1" 
+            className="overflow-x-auto overflow-y-visible no-scrollbar py-2 px-4 md:px-1 scroll-px-4" 
             style={{ 
               WebkitOverflowScrolling: 'touch',
               msOverflowStyle: 'none',
