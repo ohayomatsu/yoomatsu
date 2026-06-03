@@ -1,6 +1,7 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { TurbulenceBackground } from '@/components/turbulence-background';
+import { PageLoader } from '@/components/page-loader';
 
 export const metadata: Metadata = {
   title: 'Matsu | Video Editor & Content Creator',
@@ -72,6 +73,7 @@ export default function RootLayout({
         `}</style>
       </head>
       <body className="font-body antialiased text-[#F0F0F0] noise-bg">
+        <PageLoader />
         <div className="bg-container">
           <TurbulenceBackground />
         </div>
