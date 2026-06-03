@@ -100,11 +100,13 @@ export function Navbar() {
         transition: 'background 0.3s ease, border 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease, padding 0.5s ease'
       }}
     >
-      <div className="flex items-center relative min-h-[40px] w-full overflow-hidden md:overflow-visible">
+      <div className="flex items-center relative min-h-[40px] w-full md:overflow-visible">
         <Link 
           href="#hero" 
           className={cn(
-            "transition-all duration-500 ease-in-out absolute left-0 z-10 flex items-center",
+            "navbar-logo transition-all duration-500 ease-in-out absolute z-10 flex items-center",
+            // Corrigindo posição no mobile para não cortar e alinhando no desktop
+            "left-2 md:left-0",
             isHeroTitleVisible 
               ? "opacity-0 -translate-x-2 pointer-events-none" 
               : "opacity-100 translate-x-0"
