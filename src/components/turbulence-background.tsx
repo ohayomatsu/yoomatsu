@@ -13,8 +13,10 @@ export function TurbulenceBackground() {
 
     function resize() {
       if (canvas) {
+        const isMobile = window.innerWidth <= 768;
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight * 2.2;
+        // Sincroniza a altura do canvas com o CSS (2.2x no desktop, 2.5x no mobile)
+        canvas.height = window.innerHeight * (isMobile ? 2.5 : 2.2);
       }
     }
     
@@ -47,19 +49,28 @@ export function TurbulenceBackground() {
     let animationFrameId: number;
 
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight;
+      // Cálculo robusto da altura do documento para garantir funcionamento em mobile e desktop
+      const docHeight = Math.max(
+        document.body.scrollHeight, 
+        document.documentElement.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.offsetHeight,
+        document.body.clientHeight,
+        document.documentElement.clientHeight
+      );
       const winHeight = window.innerHeight;
+      const scrollY = window.scrollY || window.pageYOffset;
       
-      const scrollPercent = scrollY / (docHeight - winHeight || 1);
-      const move = scrollPercent * 20;
+      const scrollPercent = Math.max(0, Math.min(1, scrollY / (docHeight - winHeight || 1)));
+      const move = scrollPercent * 20; // Move até 20% da própria altura para o efeito parallax
       
       if (canvas) {
-        canvas.style.transform = `translateY(-${move}%)`;
+        canvas.style.transform = `translateY(-${move}%) translateZ(0)`;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    // Executa uma vez no mount para posicionar corretamente
     handleScroll();
 
     function draw() {
@@ -107,7 +118,6 @@ export function TurbulenceBackground() {
         ctx.drawImage(offCanvas, 0, 0, W, H);
       }
 
-      // Velocidade da animação aumentada para metade do tempo original (dobro da velocidade)
       time += 0.016;
       animationFrameId = requestAnimationFrame(draw);
     }
@@ -128,7 +138,8 @@ export function TurbulenceBackground() {
       style={{ 
         opacity: 0,
         animation: 'fadeInBg 1.5s ease-out forwards',
-        pointerEvents: 'none'
+        pointerEvents: 'none',
+        willChange: 'transform'
       }}
     />
   );
