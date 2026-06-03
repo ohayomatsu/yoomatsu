@@ -61,7 +61,7 @@ export function About() {
           
           <div className="text-[0.95rem] text-foreground/60 leading-relaxed">
             <p>
-              Opa, eu sou o Matsu, trabalho com edição de vídeo e motion design. Sou especializado em <strong className="text-white"><u>After Effects</u></strong> e <strong className="text-white"><u>Premiere Pro</u></strong> há mais de 8 anos, começando na época de ouro das Intros.
+              Opa, eu sou o Matsu, trabalho com <strong className="text-white font-bold">edição de vídeo</strong> e <strong className="text-white font-bold">motion design</strong>. Sou especializado em <strong className="text-white"><u>After Effects</u></strong> e <strong className="text-white"><u>Premiere Pro</u></strong> há mais de <strong className="text-white font-bold">8 anos</strong>, começando na época de ouro das Intros.
             </p>
           </div>
 
