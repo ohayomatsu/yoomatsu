@@ -24,10 +24,10 @@ export function ScrollReveal({
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            // Delay leve de 100ms conforme solicitado
+            // Delay leve de 70ms para maior fluidez
             setTimeout(() => {
               setIsVisible(true);
-            }, 100);
+            }, 70);
             
             // Garante que a animação só ocorra uma vez
             observer.unobserve(entry.target);
@@ -36,7 +36,7 @@ export function ScrollReveal({
       },
       {
         threshold: threshold,
-        rootMargin: "0px 0px -50px 0px" // Elemento precisa estar 50px dentro da viewport
+        rootMargin: "0px 0px -30px 0px" // Elemento precisa estar 30px dentro da viewport
       }
     );
 
