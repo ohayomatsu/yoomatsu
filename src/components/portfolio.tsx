@@ -65,16 +65,24 @@ export function Portfolio() {
     : PROJECTS.filter(p => p.category === activeCategory);
 
   useEffect(() => {
-    const activeBtn = buttonsRef.current[activeCategory];
-    if (activeBtn && containerRef.current) {
-      setPillStyle({
-        left: activeBtn.offsetLeft,
-        top: activeBtn.offsetTop,
-        width: activeBtn.offsetWidth,
-        height: activeBtn.offsetHeight,
-        opacity: 1
-      });
-    }
+    const updatePill = () => {
+      const activeBtn = buttonsRef.current[activeCategory];
+      if (activeBtn && containerRef.current) {
+        setPillStyle({
+          left: activeBtn.offsetLeft,
+          top: activeBtn.offsetTop,
+          width: activeBtn.offsetWidth,
+          height: activeBtn.offsetHeight,
+          opacity: 1
+        });
+      }
+    };
+
+    updatePill();
+    
+    // Recalcula posição ao redimensionar a janela
+    window.addEventListener('resize', updatePill);
+    return () => window.removeEventListener('resize', updatePill);
   }, [activeCategory]);
 
   useEffect(() => {
@@ -100,7 +108,7 @@ export function Portfolio() {
       <div className="w-full flex flex-col items-center justify-center space-y-12">
         <div 
           ref={containerRef}
-          className="relative grid grid-cols-2 md:flex items-center justify-center p-2 md:p-1 bg-white/[0.04] border border-white/10 rounded-2xl md:rounded-full w-full max-w-md md:max-w-none mx-auto gap-1 md:gap-0 overflow-hidden"
+          className="relative grid grid-cols-2 md:flex items-center justify-center p-2 md:p-1 bg-white/[0.04] border border-white/10 rounded-2xl md:rounded-full w-fit mx-auto gap-1 md:gap-0 overflow-hidden"
         >
           {/* Liquid Slider Pill */}
           <div 
