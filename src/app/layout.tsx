@@ -1,4 +1,4 @@
-import type {Metadata} from 'next';
+import type {Metadata} from 'metadata';
 import './globals.css';
 import { PageLoader } from '@/components/page-loader';
 
@@ -17,14 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="dark" style={{ background: '#000' }}>
+    <html lang="pt-BR" className="dark" style={{ background: '#0a0a0a' }}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
         <style>{`
           body { 
-            background: #000 !important;
+            background: #0a0a0a !important;
             position: relative;
             min-height: 100vh;
             overflow-x: hidden;
@@ -41,7 +41,7 @@ export default function RootLayout({
       <body className="font-body antialiased text-[#F0F0F0]">
         <PageLoader />
         
-        <div className="min-h-screen w-full bg-black relative overflow-hidden">
+        <div className="min-h-screen w-full bg-[#0a0a0a] relative overflow-hidden">
           {/* Top Spotlight Background */}
           <div
             className="absolute inset-0 z-0 pointer-events-none"

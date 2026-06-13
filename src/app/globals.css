@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%;
+    --background: 0 0% 4%;
     --foreground: 0 0% 98%;
     --card: 220 6% 5%;
     --card-foreground: 0 0% 98%;
@@ -34,8 +34,8 @@
     -moz-osx-font-smoothing: grayscale;
   }
   body {
-    @apply bg-black text-[#F0F0F0] antialiased selection:bg-white/20;
-    background-color: #000;
+    @apply bg-[#0a0a0a] text-[#F0F0F0] antialiased selection:bg-white/20;
+    background-color: #0a0a0a;
     overflow-x: hidden;
   }
 }
