@@ -1,150 +1,133 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
+/**
+ * Versão CSS-only do fundo animado.
+ * Substitui o canvas com noise procedural por gradientes radiais
+ * com blur, animados via CSS, mantendo a mesma paleta de cores
+ * (do azul escuro #080909 ao azul mais claro ~#102f59) e o
+ * movimento sutil tanto em idle quanto no scroll.
+ *
+ * Custo de CPU: praticamente zero (roda no compositor/GPU),
+ * contra ~9s de main-thread do canvas original.
+ */
 export function TurbulenceBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const handleReady = () => setIsReady(true);
     window.addEventListener('page-loader-finished', handleReady);
-    
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d', { alpha: false });
-    if (!ctx) return;
 
-    function resize() {
-      if (canvas) {
-        const isMobile = window.innerWidth <= 768;
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight * (isMobile ? 3.0 : 3.0);
-      }
-    }
-    
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-
-    function noise(x: number, y: number, t: number) {
-      const n1 = Math.sin(x * 1.1 + t * 0.15) * Math.cos(y * 0.8 - t * 0.1);
-      const n2 = Math.sin(x * 0.5 - y * 0.6 + t * 0.08) * 0.5;
-      const n3 = Math.cos(x * 1.8 + y * 1.2 - t * 0.2) * 0.25;
-      return (n1 + n2 + n3) / 1.75;
+    // Fallback: se o evento já passou ou não disparar, mostra mesmo assim
+    if (document.readyState === 'complete' && !document.getElementById('page-loader')) {
+      setIsReady(true);
     }
 
-    function getColor(n: number) {
-      const t = (n + 1) / 2;
-      const factor = Math.pow(t, 3.5);
-      const r = Math.round(8 + factor * 8);
-      const g = Math.round(9 + factor * 39);
-      const b = Math.round(9 + factor * 80);
-      return [r, g, b];
-    }
-
-    const SCALE = 12;
-    let time = 0;
-    let animationFrameId: number;
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const isMobile = window.innerWidth <= 768;
-          if (isMobile) {
-            if (canvas) canvas.style.transform = 'none';
-            ticking = false;
-            return;
-          }
-
-          const docHeight = Math.max(
-            document.body.scrollHeight, 
-            document.documentElement.scrollHeight,
-            document.body.offsetHeight,
-            document.documentElement.offsetHeight,
-            document.body.clientHeight,
-            document.documentElement.clientHeight
-          );
-          const winHeight = window.innerHeight;
-          const scrollY = window.scrollY || window.pageYOffset;
-          const scrollPercent = Math.max(0, Math.min(1, scrollY / (docHeight - winHeight || 1)));
-          const move = scrollPercent * 20; 
-          
-          if (canvas) {
-            canvas.style.transform = `translateY(-${move}%) translateZ(0)`;
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    function draw() {
-      if (!canvas || !ctx) return;
-      const W = canvas.width;
-      const H = canvas.height;
-      if (W === 0 || H === 0) return;
-      const bW = Math.ceil(W / SCALE);
-      const bH = Math.ceil(H / SCALE);
-      const imgData = ctx.createImageData(bW, bH);
-      const data = imgData.data;
-
-      for (let py = 0; py < bH; py++) {
-        const ny = (py / bH) * 2.8;
-        for (let px = 0; px < bW; px++) {
-          const nx = (px / bW) * 4.2;
-          const qx = noise(nx, ny, time * 0.2);
-          const qy = noise(nx + 1.2, ny + 1.2, time * 0.2);
-          const rx = noise(nx + 2.5 * qx, ny + 2.5 * qy, time * 0.15);
-          const ry = noise(nx + 2.5 * qx + 4.0, ny + 2.5 * qy + 1.8, time * 0.15);
-          const val = noise(nx + rx, ny + ry, time * 0.3);
-          const [r, g, b] = getColor(val);
-          const idx = (py * bW + px) * 4;
-          data[idx] = r; 
-          data[idx + 1] = g; 
-          data[idx + 2] = b; 
-          data[idx + 3] = 255;
-        }
-      }
-
-      const offCanvas = document.createElement('canvas');
-      offCanvas.width = bW;
-      offCanvas.height = bH;
-      const offCtx = offCanvas.getContext('2d');
-      if (offCtx) {
-        offCtx.putImageData(imgData, 0, 0);
-        ctx.imageSmoothingEnabled = true;
-        ctx.drawImage(offCanvas, 0, 0, W, H);
-      }
-
-      time += 0.032; 
-      animationFrameId = requestAnimationFrame(draw);
-    }
-
-    draw();
-
-    return () => {
-      window.removeEventListener('resize', resize);
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('page-loader-finished', handleReady);
-      cancelAnimationFrame(animationFrameId);
-    };
+    return () => window.removeEventListener('page-loader-finished', handleReady);
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="bg-gradient"
-      style={{ 
+    <div
+      className="bg-gradient turbulence-css"
+      style={{
         opacity: isReady ? 1 : 0,
         transition: 'opacity 1s ease',
-        pointerEvents: 'none',
-        willChange: 'transform',
-        isolation: 'isolate'
       }}
-    />
+    >
+      <div className="turbulence-blob turbulence-blob-1" />
+      <div className="turbulence-blob turbulence-blob-2" />
+      <div className="turbulence-blob turbulence-blob-3" />
+
+      <style>{`
+        .turbulence-css {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          background: #080909;
+          overflow: hidden;
+        }
+
+        .turbulence-blob {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(60px);
+          will-change: transform;
+          mix-blend-mode: screen;
+        }
+
+        .turbulence-blob-1 {
+          width: 70%;
+          height: 50%;
+          top: -10%;
+          left: 5%;
+          background: radial-gradient(circle, rgba(16,48,89,0.65) 0%, rgba(16,48,89,0) 70%);
+          animation: drift-1 32s ease-in-out infinite alternate;
+        }
+
+        .turbulence-blob-2 {
+          width: 60%;
+          height: 55%;
+          top: 30%;
+          right: 0%;
+          background: radial-gradient(circle, rgba(12,34,68,0.6) 0%, rgba(12,34,68,0) 70%);
+          animation: drift-2 38s ease-in-out infinite alternate;
+        }
+
+        .turbulence-blob-3 {
+          width: 65%;
+          height: 50%;
+          bottom: -10%;
+          left: 20%;
+          background: radial-gradient(circle, rgba(9,22,48,0.55) 0%, rgba(9,22,48,0) 70%);
+          animation: drift-3 44s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift-1 {
+          0%   { transform: translate(0%, 0%) scale(1); }
+          50%  { transform: translate(-6%, 4%) scale(1.08); }
+          100% { transform: translate(4%, -3%) scale(1); }
+        }
+
+        @keyframes drift-2 {
+          0%   { transform: translate(0%, 0%) scale(1); }
+          50%  { transform: translate(5%, -6%) scale(1.1); }
+          100% { transform: translate(-4%, 3%) scale(1); }
+        }
+
+        @keyframes drift-3 {
+          0%   { transform: translate(0%, 0%) scale(1); }
+          50%  { transform: translate(-4%, -5%) scale(1.06); }
+          100% { transform: translate(5%, 4%) scale(1); }
+        }
+
+        /* Movimento sutil ao rolar a página, igual ao canvas original.
+           Suportado em Chrome/Edge recentes; navegadores sem suporte
+           simplesmente ignoram e ficam com o drift idle apenas. */
+        @supports (animation-timeline: scroll()) {
+          .turbulence-css {
+            animation: scroll-parallax linear;
+            animation-timeline: scroll(root);
+          }
+
+          @keyframes scroll-parallax {
+            from { transform: translateY(0%); }
+            to   { transform: translateY(-20%); }
+          }
+        }
+
+        @media (max-width: 768px) {
+          .turbulence-blob {
+            filter: blur(40px);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .turbulence-blob {
+            animation: none;
+          }
+        }
+      `}</style>
+    </div>
   );
 }

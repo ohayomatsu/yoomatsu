@@ -160,7 +160,7 @@ export function Portfolio() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
           {filteredProjects.map((project) => {
             const isPlaying = playingVideoId === project.videoId;
-            const thumbnailUrl = `https://img.youtube.com/vi/${project.videoId}/maxresdefault.jpg`;
+            const thumbnailUrl = `https://img.youtube.com/vi/${project.videoId}/hqdefault.jpg`;
             
             return (
               <div 
