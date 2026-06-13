@@ -51,35 +51,35 @@ export function TurbulenceBackground() {
         .turbulence-blob {
           position: absolute;
           border-radius: 50%;
-          filter: blur(60px);
+          filter: blur(120px);
           will-change: transform;
           mix-blend-mode: screen;
         }
 
         .turbulence-blob-1 {
-          width: 70%;
-          height: 50%;
-          top: -10%;
-          left: 5%;
-          background: radial-gradient(circle, rgba(16,48,89,0.65) 0%, rgba(16,48,89,0) 70%);
+          width: 90%;
+          height: 70%;
+          top: -20%;
+          left: -10%;
+          background: radial-gradient(circle, rgba(16,48,89,0.55) 0%, rgba(16,48,89,0.25) 35%, rgba(16,48,89,0.08) 60%, rgba(16,48,89,0) 100%);
           animation: drift-1 32s ease-in-out infinite alternate;
         }
 
         .turbulence-blob-2 {
-          width: 60%;
-          height: 55%;
-          top: 30%;
-          right: 0%;
-          background: radial-gradient(circle, rgba(12,34,68,0.6) 0%, rgba(12,34,68,0) 70%);
+          width: 85%;
+          height: 75%;
+          top: 20%;
+          right: -15%;
+          background: radial-gradient(circle, rgba(12,34,68,0.5) 0%, rgba(12,34,68,0.22) 35%, rgba(12,34,68,0.07) 60%, rgba(12,34,68,0) 100%);
           animation: drift-2 38s ease-in-out infinite alternate;
         }
 
         .turbulence-blob-3 {
-          width: 65%;
-          height: 50%;
-          bottom: -10%;
-          left: 20%;
-          background: radial-gradient(circle, rgba(9,22,48,0.55) 0%, rgba(9,22,48,0) 70%);
+          width: 90%;
+          height: 70%;
+          bottom: -20%;
+          left: 5%;
+          background: radial-gradient(circle, rgba(9,22,48,0.45) 0%, rgba(9,22,48,0.2) 35%, rgba(9,22,48,0.06) 60%, rgba(9,22,48,0) 100%);
           animation: drift-3 44s ease-in-out infinite alternate;
         }
 
@@ -118,7 +118,7 @@ export function TurbulenceBackground() {
 
         @media (max-width: 768px) {
           .turbulence-blob {
-            filter: blur(40px);
+            filter: blur(80px);
           }
         }
 
