@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 220 6% 3.5%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 98%;
     --card: 220 6% 5%;
     --card-foreground: 0 0% 98%;
@@ -35,16 +35,12 @@
   }
   body {
     @apply bg-black text-[#F0F0F0] antialiased selection:bg-white/20;
-    background-color: #080909;
+    background-color: #000;
     overflow-x: hidden;
   }
 }
 
 @layer components {
-  .noise-bg {
-    position: relative;
-  }
-  
   .liquid-glass {
     @apply backdrop-blur-[16px] saturate-[180%] bg-white/[0.04] border border-white/20;
     box-shadow: 
@@ -97,13 +93,6 @@
   .fade-in-element.visible {
     opacity: 1;
     transform: translateY(0) translateZ(0);
-  }
-
-  .bg-gradient, nav, .mobile-menu-container, .navbar {
-    transform: translateZ(0);
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
   }
 
   #portfolio, #clients, #services, #about {

@@ -51,7 +51,7 @@ export function PageLoader() {
       style={{
         position: 'fixed',
         inset: 0,
-        background: '#0c0d0d',
+        background: '#000',
         zIndex: 99999,
         display: 'flex',
         alignItems: 'center',

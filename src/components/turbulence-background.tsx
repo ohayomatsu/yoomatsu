@@ -4,13 +4,9 @@ import React, { useEffect, useState } from 'react';
 
 /**
  * Versão CSS-only do fundo animado.
- * Substitui o canvas com noise procedural por gradientes radiais
- * com blur, animados via CSS, mantendo a mesma paleta de cores
- * (do azul escuro #080909 ao azul mais claro ~#102f59) e o
- * movimento sutil tanto em idle quanto no scroll.
- *
- * Custo de CPU: praticamente zero (roda no compositor/GPU),
- * contra ~9s de main-thread do canvas original.
+ * Vinheta azul radial nas bordas/cantos, fixa na viewport (1 tela),
+ * sempre visível na mesma posição. Centro preto. Drift sutil via
+ * transform (compositor), sem custo de CPU relevante.
  */
 export function TurbulenceBackground() {
   const [isReady, setIsReady] = useState(false);
@@ -19,7 +15,6 @@ export function TurbulenceBackground() {
     const handleReady = () => setIsReady(true);
     window.addEventListener('page-loader-finished', handleReady);
 
-    // Fallback: se o evento já passou ou não disparar, mostra mesmo assim
     if (document.readyState === 'complete' && !document.getElementById('page-loader')) {
       setIsReady(true);
     }
@@ -35,95 +30,36 @@ export function TurbulenceBackground() {
         transition: 'opacity 1s ease',
       }}
     >
-      <div className="turbulence-blob turbulence-blob-1" />
-      <div className="turbulence-blob turbulence-blob-2" />
-      <div className="turbulence-blob turbulence-blob-3" />
+      <div className="glow" />
 
       <style>{`
         .turbulence-css {
-          position: relative;
+          position: fixed;
+          inset: 0;
           width: 100%;
           height: 100%;
           background: #080909;
           overflow: hidden;
         }
 
-        .turbulence-blob {
+        .glow {
           position: absolute;
-          border-radius: 50%;
-          filter: blur(120px);
+          inset: -10%;
+          width: 120%;
+          height: 120%;
           will-change: transform;
-          mix-blend-mode: screen;
+          background: radial-gradient(circle at 50% 50%, #080909 0%, #0a1424 45%, #16294d 100%);
+          animation: drift 40s ease-in-out infinite alternate;
         }
 
-        .turbulence-blob-1 {
-          width: 90%;
-          height: 70%;
-          top: -20%;
-          left: -10%;
-          background: radial-gradient(circle, rgba(16,48,89,0.55) 0%, rgba(16,48,89,0.25) 35%, rgba(16,48,89,0.08) 60%, rgba(16,48,89,0) 100%);
-          animation: drift-1 32s ease-in-out infinite alternate;
-        }
-
-        .turbulence-blob-2 {
-          width: 85%;
-          height: 75%;
-          top: 20%;
-          right: -15%;
-          background: radial-gradient(circle, rgba(12,34,68,0.5) 0%, rgba(12,34,68,0.22) 35%, rgba(12,34,68,0.07) 60%, rgba(12,34,68,0) 100%);
-          animation: drift-2 38s ease-in-out infinite alternate;
-        }
-
-        .turbulence-blob-3 {
-          width: 90%;
-          height: 70%;
-          bottom: -20%;
-          left: 5%;
-          background: radial-gradient(circle, rgba(9,22,48,0.45) 0%, rgba(9,22,48,0.2) 35%, rgba(9,22,48,0.06) 60%, rgba(9,22,48,0) 100%);
-          animation: drift-3 44s ease-in-out infinite alternate;
-        }
-
-        @keyframes drift-1 {
+        @keyframes drift {
           0%   { transform: translate(0%, 0%) scale(1); }
-          50%  { transform: translate(-6%, 4%) scale(1.08); }
-          100% { transform: translate(4%, -3%) scale(1); }
-        }
-
-        @keyframes drift-2 {
-          0%   { transform: translate(0%, 0%) scale(1); }
-          50%  { transform: translate(5%, -6%) scale(1.1); }
-          100% { transform: translate(-4%, 3%) scale(1); }
-        }
-
-        @keyframes drift-3 {
-          0%   { transform: translate(0%, 0%) scale(1); }
-          50%  { transform: translate(-4%, -5%) scale(1.06); }
-          100% { transform: translate(5%, 4%) scale(1); }
-        }
-
-        /* Movimento sutil ao rolar a página, igual ao canvas original.
-           Suportado em Chrome/Edge recentes; navegadores sem suporte
-           simplesmente ignoram e ficam com o drift idle apenas. */
-        @supports (animation-timeline: scroll()) {
-          .turbulence-css {
-            animation: scroll-parallax linear;
-            animation-timeline: scroll(root);
-          }
-
-          @keyframes scroll-parallax {
-            from { transform: translateY(0%); }
-            to   { transform: translateY(-20%); }
-          }
-        }
-
-        @media (max-width: 768px) {
-          .turbulence-blob {
-            filter: blur(80px);
-          }
+          50%  { transform: translate(-1.5%, 1%) scale(1.03); }
+          100% { transform: translate(1.5%, -1%) scale(1); }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .turbulence-blob {
+          .glow {
             animation: none;
           }
         }

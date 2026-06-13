@@ -1,6 +1,5 @@
 import type {Metadata} from 'next';
 import './globals.css';
-import { TurbulenceBackground } from '@/components/turbulence-background';
 import { PageLoader } from '@/components/page-loader';
 
 export const metadata: Metadata = {
@@ -18,61 +17,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="dark" style={{ background: '#080909' }}>
+    <html lang="pt-BR" className="dark" style={{ background: '#000' }}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
         <style>{`
-          html {
-            position: relative;
-          }
-          .bg-container {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            width: 100dvw;
-            height: auto;
-            min-height: 100%;
-            z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
-            background: #080909;
-            transform: translateZ(0);
-            isolation: isolate;
-          }
-          .bg-gradient { 
-            position: absolute; 
-            top: -60%;
-            left: 0; 
-            width: 100%; 
-            height: 220%;
-            min-width: 100vw;
-            z-index: -1;
-            pointer-events: none;
-            transform: translateZ(0);
-            will-change: transform;
-            isolation: isolate;
-          }
           body { 
-            background: transparent !important; 
+            background: #000 !important;
             position: relative;
             min-height: 100vh;
             overflow-x: hidden;
-          }
-          main {
-            position: relative;
-            z-index: 1;
+            margin: 0;
           }
           @media (max-width: 768px) {
-            .bg-container {
-              height: 100%;
-            }
-            .bg-gradient {
-              height: 300%;
-              top: -100%;
-              transform: none !important;
-            }
             .mobile-menu-blur {
               backdrop-filter: blur(12px) !important;
               -webkit-backdrop-filter: blur(12px) !important;
@@ -80,12 +38,29 @@ export default function RootLayout({
           }
         `}</style>
       </head>
-      <body className="font-body antialiased text-[#F0F0F0] noise-bg">
+      <body className="font-body antialiased text-[#F0F0F0]">
         <PageLoader />
-        <div className="bg-container">
-          <TurbulenceBackground />
+        
+        <div className="min-h-screen w-full bg-black relative overflow-hidden">
+          {/* Top Spotlight Background */}
+          <div
+            className="absolute inset-0 z-0 pointer-events-none"
+            style={{
+              background: `
+                radial-gradient(
+                  circle at top,
+                  rgba(255, 255, 255, 0.08) 0%,
+                  rgba(255, 255, 255, 0.08) 20%,
+                  rgba(0, 0, 0, 0.0) 60%
+                )
+              `,
+            }}
+          />
+          
+          <div className="relative z-10">
+            {children}
+          </div>
         </div>
-        {children}
       </body>
     </html>
   );
