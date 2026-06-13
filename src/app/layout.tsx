@@ -29,12 +29,11 @@ export default function RootLayout({
           }
           .bg-container {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             width: 100dvw;
-            height: 100%;
-            min-height: 100vh;
+            height: auto;
+            min-height: 100%;
             z-index: -1;
             overflow: hidden;
             pointer-events: none;
