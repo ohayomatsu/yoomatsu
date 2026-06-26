@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react";
 
 /**
- * @fileOverview Componente de cursor personalizado que segue o mouse e reage a cliques.
+ * @fileOverview Componente de cursor personalizado que segue o mouse, reage a cliques
+ * e se esconde ao entrar nos cards do portfólio.
  */
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement | null>(null);
@@ -11,6 +12,10 @@ export function CustomCursor() {
   useEffect(() => {
     // Evita execução se não estiver no navegador
     if (typeof window === "undefined") return;
+
+    // Variáveis de estado interno para gerenciar a escala sem conflitos
+    let isHidden = false;
+    let isPressed = false;
 
     // Criar o elemento do cursor
     const cursor = document.createElement("div");
@@ -27,7 +32,7 @@ export function CustomCursor() {
     cursor.style.filter = "drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.35))";
     cursor.style.display = "none"; // Oculto inicialmente até o primeiro movimento
 
-    // SVG do cursor (usando white para visibilidade no fundo escuro)
+    // SVG do cursor
     cursor.innerHTML = `
       <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
         <path fill="white" d="m64.9 405.7c-13.2-5.6-21.4-15.4-24-28.8-1.7-9.3-15.7-308-14.7-314.6 3.7-23.8 28.2-40.8 51.7-35.9 4 0.8 9.6 2.8 12.4 4.3 5.1 2.8 230.6 188.1 241.8 198.8 3.4 3.1 6.8 7.7 8.5 11.2 2.6 5.3 2.9 6.8 2.9 16.3 0 9.6-0.3 11-2.9 16.5-3.8 7.6-10.5 14.3-18.1 18.1-6 2.9-6 2.9-58 3.5-45.3 0.5-53 0.8-59.5 2.3-14.7 3.6-29.1 11.8-39 22.2-3.1 3.3-17.3 21.4-31.7 40.4-14.3 19-27.8 36.2-29.9 38.2-2.2 2-6.4 4.9-9.4 6.4-4.6 2.4-7 2.9-15 3.1-8.2 0.3-10.3 0-15.1-2z"/>
@@ -37,24 +42,44 @@ export function CustomCursor() {
     document.body.appendChild(cursor);
     cursorRef.current = cursor;
 
+    // Função centralizada para atualizar a escala do cursor
+    const updateScale = () => {
+      if (!cursorRef.current) return;
+      if (isHidden) {
+        cursorRef.current.style.transform = "scale(0)";
+      } else {
+        cursorRef.current.style.transform = isPressed ? "scale(0.78)" : "scale(1)";
+      }
+    };
+
     const moveCursor = (e: MouseEvent) => {
       if (cursorRef.current) {
         cursorRef.current.style.display = "block";
         cursorRef.current.style.left = `${e.clientX}px`;
         cursorRef.current.style.top = `${e.clientY}px`;
+
+        // Verifica se o mouse está sobre um card de vídeo no portfólio
+        const target = e.target as HTMLElement;
+        const isOverCard = target.closest("#portfolio .liquid-card");
+
+        if (isOverCard && !isHidden) {
+          isHidden = true;
+          updateScale();
+        } else if (!isOverCard && isHidden) {
+          isHidden = false;
+          updateScale();
+        }
       }
     };
 
     const handleMouseDown = () => {
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = "scale(0.78)";
-      }
+      isPressed = true;
+      updateScale();
     };
 
     const handleMouseUp = () => {
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = "scale(1)";
-      }
+      isPressed = false;
+      updateScale();
     };
 
     window.addEventListener("mousemove", moveCursor);
