@@ -41,14 +41,14 @@ const PROJECTS = [
     id: 5, 
     title: "PEAK", 
     channel: "YOOMATSU",
-    category: "Long Form", 
+    category: "Shorts", 
     videoId: "bxg4Qrf-UZg" 
   },
   { 
     id: 6, 
     title: "MINECRAFT TERROR", 
     channel: "YOOMATSU",
-    category: "Long Form", 
+    category: "Shorts", 
     videoId: "jVsj5zg67Pc" 
   },
   { 
@@ -61,13 +61,12 @@ const PROJECTS = [
 ];
 
 const CATEGORIES = [
-  { id: "all", label: "Todos" },
   { id: "Long Form", label: "Long Form" },
   { id: "Shorts", label: "Shorts" },
 ];
 
 export function Portfolio() {
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState("Long Form");
   const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
   const [pillStyle, setPillStyle] = useState({ left: 0, top: 0, width: 0, height: 0, opacity: 0 });
   const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
@@ -77,9 +76,7 @@ export function Portfolio() {
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<{ [key: string]: HTMLButtonElement | null }>({});
 
-  const filteredProjects = activeCategory === "all" 
-    ? PROJECTS 
-    : PROJECTS.filter(p => p.category === activeCategory);
+  const filteredProjects = PROJECTS.filter(p => p.category === activeCategory);
 
   useEffect(() => {
     setMounted(true);
@@ -214,7 +211,7 @@ export function Portfolio() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full min-h-[400px]">
           {filteredProjects.map((project) => {
             const isPlaying = playingVideoId === project.videoId;
             const thumbnailUrl = `https://img.youtube.com/vi/${project.videoId}/hqdefault.jpg`;
@@ -225,7 +222,7 @@ export function Portfolio() {
                 onClick={() => !isPlaying && setPlayingVideoId(project.videoId)}
                 onMouseEnter={() => !isPlaying && setIsHoveringCard(true)}
                 onMouseLeave={() => setIsHoveringCard(false)}
-                className="group relative liquid-card overflow-hidden aspect-video cursor-pointer"
+                className="group relative liquid-card overflow-hidden aspect-video cursor-pointer animate-in fade-in duration-500"
               >
                 <div className="relative w-full h-full">
                   {isPlaying ? (
