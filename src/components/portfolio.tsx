@@ -11,46 +11,45 @@ const PROJECTS = [
   { 
     id: 1, 
     title: "SUPER BATTLE GOLF (YOOMATSU)", 
-    category: "Edição Complexa", 
+    category: "Long Form", 
     videoId: "YLDHPSmUhVg" 
   },
   { 
     id: 2, 
     title: "MD10 CS (YOOMATSU)", 
-    category: "Edição Complexa", 
+    category: "Long Form", 
     videoId: "S5kAg4xBnNo" 
   },
   { 
     id: 3, 
     title: "15K INTRO (YOOMATSU)", 
-    category: "Edição Complexa", 
+    category: "Shorts", 
     videoId: "z8Ys15mzk2s" 
   },
   { 
     id: 4, 
     title: "MINECRAFT SURVIVAL (YOOMATSU)", 
-    category: "Edição Básica", 
+    category: "Long Form", 
     videoId: "Ctt-e2dugY8" 
   },
   { 
     id: 5, 
     title: "PEAK (YOOMATSU)", 
-    category: "Edição Básica", 
+    category: "Shorts", 
     videoId: "bxg4Qrf-UZg" 
   },
   { 
     id: 6, 
     title: "MINECRAFT TERROR (YOOMATSU)", 
-    category: "Edição Básica", 
+    category: "Long Form", 
     videoId: "jVsj5zg67Pc" 
   },
 ];
 
 const CATEGORIES = [
   { id: "all", label: "Todos" },
-  { id: "Edição Básica", label: "Edição Básica" },
-  { id: "Edição Complexa", label: "Edição Complexa" },
-  { id: "Sonorização", label: "Sonorização" },
+  { id: "Long Form", label: "Long Form" },
+  { id: "Shorts", label: "Shorts" },
 ];
 
 export function Portfolio() {
@@ -95,7 +94,7 @@ export function Portfolio() {
 
       <div className="w-full flex flex-col items-center justify-center space-y-12">
         <div className="w-full max-w-[600px] mx-auto">
-          {/* Mobile: Grid 2x2 */}
+          {/* Mobile: Grid-style layout for filters */}
           <div 
             className="md:hidden flex flex-wrap gap-2 w-full p-2"
           >
@@ -104,7 +103,7 @@ export function Portfolio() {
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
                 className={cn(
-                  "flex-[0_0_calc(50%-4px)] py-3 rounded-full text-[0.7rem] font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center",
+                  "flex-[1_0_auto] py-3 rounded-full text-[0.7rem] font-bold uppercase tracking-widest transition-all duration-300 flex items-center justify-center min-w-[80px]",
                   activeCategory === cat.id
                     ? "bg-white/20 text-white"
                     : "bg-white/[0.04] text-white/40"
@@ -220,3 +219,4 @@ export function Portfolio() {
     </section>
   );
 }
+
