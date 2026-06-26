@@ -4,21 +4,27 @@ import { Check } from "lucide-react";
 
 const SERVICES = [
   {
-    title: "Long Form",
-    description: "Texto placeholder descrevendo o serviço de edição para vídeos longos.",
+    eyebrow: "VÍDEO LONGO",
+    title: "Diretor's Cut",
+    description: "Edição completa para vídeos de longa duração, focada em retenção e qualidade cinematográfica.",
+    price: "Sob consulta",
     features: [
-      "Item placeholder 1",
-      "Item placeholder 2",
-      "Item placeholder 3"
+      "Cortes e ritmo dinâmico",
+      "Legendas e elementos gráficos",
+      "Tratamento de cor",
+      "Até 2 rodadas de revisão"
     ],
   },
   {
-    title: "Shorts",
-    description: "Texto placeholder descrevendo o serviço de edição para vídeos curtos/shorts.",
+    eyebrow: "VERTICAL / SHORTS",
+    title: "Corte Rápido",
+    description: "Edição ágil para Reels, TikTok e Shorts, otimizada para viralização e impacto imediato.",
+    price: "Sob consulta",
     features: [
-      "Item placeholder 1",
-      "Item placeholder 2",
-      "Item placeholder 3"
+      "Edição de 1 vídeo curto (até 60s)",
+      "Legendas estilizadas + SFX",
+      "1 rodada de revisão",
+      "Entrega em até 48h"
     ],
     highlight: true,
   },
@@ -35,7 +41,7 @@ export function Services() {
         <div className="text-center space-y-4">
           <h2 className="text-5xl md:text-6xl font-headline font-bold tracking-tight glow-text">Serviços</h2>
           <p className="text-foreground/40 max-w-2xl mx-auto text-lg">
-            Soluções premium de pós-produção com estética cinematográfica.
+            Duas opções já pensadas.
           </p>
         </div>
 
@@ -47,9 +53,17 @@ export function Services() {
                 service.highlight ? "border-white/40 bg-white/[0.08]" : ""
               }`}
             >
-              <div className="space-y-3">
-                <h3 className="text-3xl font-bold font-headline glow-text">{service.title}</h3>
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <span className="text-[10px] font-bold tracking-[0.2em] text-foreground/40 uppercase">
+                    {service.eyebrow}
+                  </span>
+                  <h3 className="text-3xl font-bold font-headline glow-text">{service.title}</h3>
+                </div>
                 <p className="text-foreground/50 text-sm leading-relaxed">{service.description}</p>
+                <div className="pt-2">
+                  <span className="text-lg font-medium text-white/90">{service.price}</span>
+                </div>
               </div>
 
               <div className="h-px bg-white/10 w-full" />
@@ -70,7 +84,7 @@ export function Services() {
                 onClick={triggerGlow}
                 className="liquid-button w-full text-xs font-bold uppercase tracking-widest bg-white/5 text-center flex items-center justify-center"
               >
-                SAIBA MAIS
+                QUERO ESSE
               </a>
             </div>
           ))}
