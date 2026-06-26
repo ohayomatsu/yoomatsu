@@ -6,23 +6,24 @@ const SERVICES = [
   {
     eyebrow: "LONG FORM",
     title: "Diretor's Cut",
-    description: "Edição completa para vídeos de longa duração, focada em retenção e qualidade cinematográfica.",
+    description: "O serviço ideal para vídeos long form, visando entregar qualidade e agilidade!",
     features: [
       "Cortes e ritmo dinâmico",
-      "Legendas e elementos gráficos",
-      "Tratamento de cor",
+      "Efeitos no ponto certo",
+      "Motion design pra deixar tudo mais vivo",
+      "Tratamento de áudio + SFX",
       "Até 2 rodadas de revisão"
     ],
   },
   {
-    eyebrow: "SHORTS",
-    title: "Corte Rápido",
-    description: "Edição ágil para Reels, TikTok e Shorts, otimizada para viralização e impacto imediato.",
+    eyebrow: "VERTICAL / SHORTS",
+    title: "Tramontina",
+    description: "Se você tá precisando de um shorts, esse é o serviço certo para isso!",
     features: [
-      "Edição de 1 vídeo curto (até 60s)",
-      "Legendas estilizadas + SFX",
-      "1 rodada de revisão",
-      "Entrega em até 48h"
+      "Edição de vídeo curto (até 60s)",
+      "Legendas estilizadas + VFX",
+      "Tratamento de áudio + SFX",
+      "1 rodada de revisão"
     ],
     highlight: true,
   },
@@ -39,7 +40,7 @@ export function Services() {
         <div className="text-center space-y-4">
           <h2 className="text-5xl md:text-6xl font-headline font-bold tracking-tight glow-text">Serviços</h2>
           <p className="text-foreground/40 max-w-2xl mx-auto text-lg">
-            Duas opções já pensadas.
+            Duas opções já pensadas para cada tipo de conteúdo.
           </p>
         </div>
 
