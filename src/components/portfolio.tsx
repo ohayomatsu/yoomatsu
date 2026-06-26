@@ -118,8 +118,8 @@ export function Portfolio() {
       <div 
         className="fixed pointer-events-none z-[9999] hidden md:flex items-center justify-center rounded-full bg-white/90"
         style={{
-          width: '60px',
-          height: '60px',
+          width: '40px',
+          height: '40px',
           left: mousePos.x,
           top: mousePos.y,
           transform: `translate(-50%, -50%) scale(${isHoveringCard ? 1 : 0})`,
@@ -130,7 +130,7 @@ export function Portfolio() {
           border: 'none',
         }}
       >
-        <span className="text-[10px] font-bold tracking-widest text-black">VER</span>
+        <span className="text-[9px] font-bold tracking-widest text-black">VER</span>
       </div>,
       document.body
     );
