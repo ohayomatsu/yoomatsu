@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -24,8 +23,8 @@ const PROJECTS = [
   },
   { 
     id: 3, 
-    title: "15K INTRO", 
-    channel: "YOOMATSU",
+    title: "PROPAGANDA HOSTINGER", 
+    channel: "Caio Andres",
     category: "Long Form", 
     videoId: "z8Ys15mzk2s" 
   },
@@ -49,6 +48,13 @@ const PROJECTS = [
     channel: "YOOMATSU",
     category: "Long Form", 
     videoId: "jVsj5zg67Pc" 
+  },
+  { 
+    id: 7, 
+    title: "UM MC NO CS", 
+    channel: "YOOMATSU",
+    category: "Long Form", 
+    videoId: "zJ-Ha1AqF5s" 
   },
 ];
 
