@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Play } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { createPortal } from "react-dom";
 
 const PROJECTS = [
   { 
@@ -69,8 +70,9 @@ export function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
   const [pillStyle, setPillStyle] = useState({ left: 0, top: 0, width: 0, height: 0, opacity: 0 });
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
   const [isHoveringCard, setIsHoveringCard] = useState(false);
+  const [mounted, setMounted] = useState(false);
   
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<{ [key: string]: HTMLButtonElement | null }>({});
@@ -78,6 +80,16 @@ export function Portfolio() {
   const filteredProjects = activeCategory === "all" 
     ? PROJECTS 
     : PROJECTS.filter(p => p.category === activeCategory);
+
+  useEffect(() => {
+    setMounted(true);
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   useEffect(() => {
     const updatePill = () => {
@@ -99,14 +111,30 @@ export function Portfolio() {
     return () => window.removeEventListener('resize', updatePill);
   }, [activeCategory]);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
+  const renderCursor = () => {
+    if (!mounted || typeof document === 'undefined') return null;
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+    return createPortal(
+      <div 
+        className="fixed pointer-events-none z-[9999] hidden md:flex items-center justify-center rounded-full bg-white/90"
+        style={{
+          width: '60px',
+          height: '60px',
+          left: mousePos.x,
+          top: mousePos.y,
+          transform: `translate(-50%, -50%) scale(${isHoveringCard ? 1 : 0})`,
+          opacity: isHoveringCard ? 1 : 0,
+          transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease',
+          margin: 0,
+          padding: 0,
+          border: 'none',
+        }}
+      >
+        <span className="text-[10px] font-bold tracking-widest text-black">VER</span>
+      </div>,
+      document.body
+    );
+  };
 
   return (
     <section 
@@ -116,20 +144,7 @@ export function Portfolio() {
         isHoveringCard && "md:cursor-none"
       )}
     >
-      {/* Custom Cursor */}
-      <div 
-        className="fixed pointer-events-none z-[9999] hidden md:flex items-center justify-center rounded-full bg-white/90 transition-transform duration-300 ease-out"
-        style={{
-          width: '60px',
-          height: '60px',
-          left: mousePos.x,
-          top: mousePos.y,
-          transform: `translate(-50%, -50%) scale(${isHoveringCard ? 1 : 0})`,
-          opacity: isHoveringCard ? 1 : 0,
-        }}
-      >
-        <span className="text-[10px] font-bold tracking-widest text-black">VER</span>
-      </div>
+      {renderCursor()}
 
       <div className="space-y-4 text-center">
         <h2 className="text-4xl md:text-5xl font-headline font-bold tracking-tight">Portfólio</h2>
@@ -140,7 +155,6 @@ export function Portfolio() {
 
       <div className="w-full flex flex-col items-center justify-center space-y-12">
         <div className="w-full max-w-[600px] mx-auto">
-          {/* Mobile: Grid-style layout for filters */}
           <div className="md:hidden flex flex-wrap gap-2 w-full p-2">
             {CATEGORIES.map((cat) => (
               <button
