@@ -4,38 +4,23 @@ import { Check } from "lucide-react";
 
 const SERVICES = [
   {
-    title: "Edição Básica",
-    description: "Como sempre me diziam, o famoso básico mas bem feito.",
+    title: "Long Form",
+    description: "Texto placeholder descrevendo o serviço de edição para vídeos longos.",
     features: [
-      "Cortes e ritmo dinâmico",
-      "Transições limpas",
-      "Ajustes básicos de cor",
-      "Efeitos dinâmicos"
+      "Item placeholder 1",
+      "Item placeholder 2",
+      "Item placeholder 3"
     ],
   },
   {
-    title: "Edição Complexa",
-    description: "Dê um tchan a mais na edição do seu vídeo com o Motion Graphics.",
+    title: "Shorts",
+    description: "Texto placeholder descrevendo o serviço de edição para vídeos curtos/shorts.",
     features: [
-      "Tudo do plano básico",
-      "Motion Graphics avançado",
-      "VFX e composição",
-      "Mixagem de áudio profissional",
-      "Design de som imersivo",
-      "Tratamento de cor (Color Grading)"
+      "Item placeholder 1",
+      "Item placeholder 2",
+      "Item placeholder 3"
     ],
     highlight: true,
-  },
-  {
-    title: "Sonorização",
-    description: "O áudio é 50% do seu vídeo. Dê vida aos seus vídeos vazios.",
-    features: [
-      "Curadoria de trilha sonora",
-      "Sound Design (Foley e FX)",
-      "Mixagem e masterização",
-      "Remoção de ruídos",
-      "Equalização vocal"
-    ],
   },
 ];
 
@@ -54,12 +39,12 @@ export function Services() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
           {SERVICES.map((service, i) => (
             <div
               key={i}
               className={`liquid-card p-10 flex flex-col space-y-8 h-full ${
-                service.highlight ? "border-white/40 bg-white/[0.08] md:scale-105" : ""
+                service.highlight ? "border-white/40 bg-white/[0.08]" : ""
               }`}
             >
               <div className="space-y-3">
@@ -85,7 +70,7 @@ export function Services() {
                 onClick={triggerGlow}
                 className="liquid-button w-full text-xs font-bold uppercase tracking-widest bg-white/5 text-center flex items-center justify-center"
               >
-                Saiba Mais
+                SAIBA MAIS
               </a>
             </div>
           ))}
