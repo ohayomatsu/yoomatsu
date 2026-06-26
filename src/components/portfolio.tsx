@@ -10,37 +10,43 @@ import { cn } from "@/lib/utils";
 const PROJECTS = [
   { 
     id: 1, 
-    title: "SUPER BATTLE GOLF (YOOMATSU)", 
+    title: "SUPER BATTLE GOLF", 
+    channel: "YOOMATSU",
     category: "Long Form", 
     videoId: "YLDHPSmUhVg" 
   },
   { 
     id: 2, 
-    title: "MD10 CS (YOOMATSU)", 
+    title: "MD10 CS", 
+    channel: "YOOMATSU",
     category: "Long Form", 
     videoId: "S5kAg4xBnNo" 
   },
   { 
     id: 3, 
-    title: "15K INTRO (YOOMATSU)", 
-    category: "Shorts", 
+    title: "15K INTRO", 
+    channel: "YOOMATSU",
+    category: "Long Form", 
     videoId: "z8Ys15mzk2s" 
   },
   { 
     id: 4, 
-    title: "MINECRAFT SURVIVAL (YOOMATSU)", 
+    title: "MINECRAFT SURVIVAL", 
+    channel: "YOOMATSU",
     category: "Long Form", 
     videoId: "Ctt-e2dugY8" 
   },
   { 
     id: 5, 
-    title: "PEAK (YOOMATSU)", 
-    category: "Shorts", 
+    title: "PEAK", 
+    channel: "YOOMATSU",
+    category: "Long Form", 
     videoId: "bxg4Qrf-UZg" 
   },
   { 
     id: 6, 
-    title: "MINECRAFT TERROR (YOOMATSU)", 
+    title: "MINECRAFT TERROR", 
+    channel: "YOOMATSU",
     category: "Long Form", 
     videoId: "jVsj5zg67Pc" 
   },
@@ -207,9 +213,14 @@ export function Portfolio() {
                   <Badge variant="outline" className="mb-2 bg-white/5 text-white/80 border-white/20 backdrop-blur-md">
                     {project.category}
                   </Badge>
-                  <h3 className="text-xl font-medium text-white group-hover:glow-text transition-all">
-                    {project.title}
-                  </h3>
+                  <div className="space-y-0.5">
+                    <h3 className="text-xl font-medium text-white group-hover:glow-text transition-all leading-tight">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs font-bold tracking-[0.15em] text-foreground/40 uppercase">
+                      {project.channel}
+                    </p>
+                  </div>
                 </div>
               </div>
             );
@@ -219,4 +230,3 @@ export function Portfolio() {
     </section>
   );
 }
-
