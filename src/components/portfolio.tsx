@@ -188,7 +188,6 @@ export function Portfolio() {
                       allowFullScreen
                       style={{ width: '100%', height: '100%', border: 'none', borderRadius: 'inherit' }}
                       className="block"
-                      loading="lazy"
                     />
                   ) : (
                     <>
@@ -197,8 +196,8 @@ export function Portfolio() {
                           src={thumbnailUrl}
                           alt={project.title}
                           fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           className="object-cover transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] grayscale group-hover:grayscale-0 group-hover:scale-110"
-                          unoptimized
                           loading="lazy"
                           decoding="async"
                         />
