@@ -4,7 +4,7 @@ import { Check } from "lucide-react";
 
 const SERVICES = [
   {
-    eyebrow: "VÍDEO LONGO",
+    eyebrow: "LONG FORM",
     title: "Diretor's Cut",
     description: "Edição completa para vídeos de longa duração, focada em retenção e qualidade cinematográfica.",
     features: [
@@ -15,7 +15,7 @@ const SERVICES = [
     ],
   },
   {
-    eyebrow: "VERTICAL / SHORTS",
+    eyebrow: "SHORTS",
     title: "Corte Rápido",
     description: "Edição ágil para Reels, TikTok e Shorts, otimizada para viralização e impacto imediato.",
     features: [

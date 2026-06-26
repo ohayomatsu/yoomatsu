@@ -1,4 +1,4 @@
-import type {Metadata} from 'metadata';
+import type {Metadata} from 'next';
 import './globals.css';
 import { PageLoader } from '@/components/page-loader';
 
