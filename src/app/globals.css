@@ -32,6 +32,7 @@
     @apply border-border;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    cursor: none !important;
   }
   body {
     @apply bg-[#0a0a0a] text-[#F0F0F0] antialiased selection:bg-white/20;
