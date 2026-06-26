@@ -8,18 +8,9 @@ export function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const handleLoaded = () => {
-      // Pequeno delay adicional de 400ms após o loader sumir para iniciar a coreografia
-      setTimeout(() => setIsLoaded(true), 400);
-    };
-    
-    window.addEventListener('page-loader-finished', handleLoaded);
-    
-    if (document.readyState === 'complete' && !document.getElementById('page-loader')) {
-      handleLoaded();
-    }
-
-    return () => window.removeEventListener('page-loader-finished', handleLoaded);
+    // Inicia as animações logo após o carregamento do componente
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
   }, []);
 
   return (

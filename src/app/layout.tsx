@@ -1,6 +1,5 @@
 import type {Metadata} from 'next';
 import './globals.css';
-import { PageLoader } from '@/components/page-loader';
 
 export const metadata: Metadata = {
   title: 'yoomatsu',
@@ -39,8 +38,6 @@ export default function RootLayout({
         `}</style>
       </head>
       <body className="font-body antialiased text-[#F0F0F0]">
-        <PageLoader />
-        
         <div className="min-h-screen w-full bg-[#0a0a0a] relative overflow-hidden">
           {/* Top Spotlight Background */}
           <div

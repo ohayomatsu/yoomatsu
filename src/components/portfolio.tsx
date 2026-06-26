@@ -41,14 +41,14 @@ const PROJECTS = [
     id: 5, 
     title: "PEAK", 
     channel: "YOOMATSU",
-    category: "Shorts", 
+    category: "Long Form", 
     videoId: "bxg4Qrf-UZg" 
   },
   { 
     id: 6, 
     title: "MINECRAFT TERROR", 
     channel: "YOOMATSU",
-    category: "Shorts", 
+    category: "Long Form", 
     videoId: "jVsj5zg67Pc" 
   },
   { 

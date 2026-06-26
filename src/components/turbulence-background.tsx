@@ -12,14 +12,8 @@ export function TurbulenceBackground() {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const handleReady = () => setIsReady(true);
-    window.addEventListener('page-loader-finished', handleReady);
-
-    if (document.readyState === 'complete' && !document.getElementById('page-loader')) {
-      setIsReady(true);
-    }
-
-    return () => window.removeEventListener('page-loader-finished', handleReady);
+    // Background fica visível imediatamente
+    setIsReady(true);
   }, []);
 
   return (
@@ -40,6 +34,7 @@ export function TurbulenceBackground() {
           height: 100%;
           background: #080909;
           overflow: hidden;
+          z-index: -1;
         }
 
         .glow {
