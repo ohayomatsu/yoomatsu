@@ -7,7 +7,6 @@ const SERVICES = [
     eyebrow: "VÍDEO LONGO",
     title: "Diretor's Cut",
     description: "Edição completa para vídeos de longa duração, focada em retenção e qualidade cinematográfica.",
-    price: "Sob consulta",
     features: [
       "Cortes e ritmo dinâmico",
       "Legendas e elementos gráficos",
@@ -19,7 +18,6 @@ const SERVICES = [
     eyebrow: "VERTICAL / SHORTS",
     title: "Corte Rápido",
     description: "Edição ágil para Reels, TikTok e Shorts, otimizada para viralização e impacto imediato.",
-    price: "Sob consulta",
     features: [
       "Edição de 1 vídeo curto (até 60s)",
       "Legendas estilizadas + SFX",
@@ -61,9 +59,6 @@ export function Services() {
                   <h3 className="text-3xl font-bold font-headline glow-text">{service.title}</h3>
                 </div>
                 <p className="text-foreground/50 text-sm leading-relaxed">{service.description}</p>
-                <div className="pt-2">
-                  <span className="text-lg font-medium text-white/90">{service.price}</span>
-                </div>
               </div>
 
               <div className="h-px bg-white/10 w-full" />
@@ -84,7 +79,7 @@ export function Services() {
                 onClick={triggerGlow}
                 className="liquid-button w-full text-xs font-bold uppercase tracking-widest bg-white/5 text-center flex items-center justify-center"
               >
-                QUERO ESSE
+                SAIBA MAIS
               </a>
             </div>
           ))}
