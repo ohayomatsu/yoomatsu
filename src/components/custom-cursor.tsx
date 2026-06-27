@@ -50,8 +50,10 @@ export function CustomCursor() {
     // Função centralizada para atualizar a escala do cursor
     const updateScale = () => {
       if (!cursorRef.current) return;
-      if (isHidden || isOutsideWindow) {
+      if (isHidden) {
         cursorRef.current.style.transform = "scale(0)";
+      } else if (isOutsideWindow) {
+        cursorRef.current.style.transform = "scale(0.01)";
       } else {
         cursorRef.current.style.transform = isPressed ? "scale(0.78)" : "scale(1)";
       }
@@ -99,15 +101,15 @@ export function CustomCursor() {
     window.addEventListener("mousemove", moveCursor);
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
-    document.addEventListener("mouseleave", handleMouseLeaveWindow);
-    document.addEventListener("mouseenter", handleMouseEnterWindow);
+    document.documentElement.addEventListener("mouseleave", handleMouseLeaveWindow);
+    document.documentElement.addEventListener("mouseenter", handleMouseEnterWindow);
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
-      document.removeEventListener("mouseleave", handleMouseLeaveWindow);
-      document.removeEventListener("mouseenter", handleMouseEnterWindow);
+      document.documentElement.removeEventListener("mouseleave", handleMouseLeaveWindow);
+      document.documentElement.removeEventListener("mouseenter", handleMouseEnterWindow);
       if (document.body.contains(cursor)) {
         document.body.removeChild(cursor);
       }
