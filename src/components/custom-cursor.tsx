@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 /**
  * @fileOverview Componente de cursor personalizado que segue o mouse, reage a cliques
- * e se esconde ao entrar nos cards do portfólio.
+ * e se esconde ao entrar nos cards do portfólio. Desativado em dispositivos touch.
  */
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement | null>(null);
@@ -12,6 +12,9 @@ export function CustomCursor() {
   useEffect(() => {
     // Evita execução se não estiver no navegador
     if (typeof window === "undefined") return;
+
+    // Desativa completamente o cursor em dispositivos touch
+    if (window.matchMedia('(pointer: coarse)').matches) return;
 
     // Variáveis de estado interno para gerenciar a escala sem conflitos
     let isHidden = false;
@@ -30,7 +33,7 @@ export function CustomCursor() {
     cursor.style.transformOrigin = "12% 16%";
     cursor.style.transition = "transform 0.08s ease";
     cursor.style.filter = "drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.35))";
-    cursor.style.display = "none"; // Oculto inicialmente até o primeiro movimento
+    cursor.style.display = "none";
 
     // SVG do cursor
     cursor.innerHTML = `
@@ -58,7 +61,6 @@ export function CustomCursor() {
         cursorRef.current.style.left = `${e.clientX}px`;
         cursorRef.current.style.top = `${e.clientY}px`;
 
-        // Verifica se o mouse está sobre um card de vídeo no portfólio
         const target = e.target as HTMLElement;
         const isOverCard = target.closest("#portfolio .liquid-card");
 
