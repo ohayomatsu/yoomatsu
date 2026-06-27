@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 
 /**
  * @fileOverview Componente de cursor personalizado que segue o mouse, reage a cliques
- * e se esconde ao entrar nos cards do portfólio. Desativado em dispositivos touch.
+ * e se esconde ao entrar nos cards do portfólio ou sair da janela do navegador.
+ * Desativado em dispositivos touch.
  */
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement | null>(null);
@@ -19,6 +20,7 @@ export function CustomCursor() {
     // Variáveis de estado interno para gerenciar a escala sem conflitos
     let isHidden = false;
     let isPressed = false;
+    let isOutsideWindow = false;
 
     // Criar o elemento do cursor
     const cursor = document.createElement("div");
@@ -48,7 +50,7 @@ export function CustomCursor() {
     // Função centralizada para atualizar a escala do cursor
     const updateScale = () => {
       if (!cursorRef.current) return;
-      if (isHidden) {
+      if (isHidden || isOutsideWindow) {
         cursorRef.current.style.transform = "scale(0)";
       } else {
         cursorRef.current.style.transform = isPressed ? "scale(0.78)" : "scale(1)";
@@ -84,14 +86,28 @@ export function CustomCursor() {
       updateScale();
     };
 
+    const handleMouseLeaveWindow = () => {
+      isOutsideWindow = true;
+      updateScale();
+    };
+
+    const handleMouseEnterWindow = () => {
+      isOutsideWindow = false;
+      updateScale();
+    };
+
     window.addEventListener("mousemove", moveCursor);
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mouseleave", handleMouseLeaveWindow);
+    document.addEventListener("mouseenter", handleMouseEnterWindow);
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("mouseleave", handleMouseLeaveWindow);
+      document.removeEventListener("mouseenter", handleMouseEnterWindow);
       if (document.body.contains(cursor)) {
         document.body.removeChild(cursor);
       }
