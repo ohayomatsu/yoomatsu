@@ -420,6 +420,22 @@
   .package-list li{ font-size:0.85rem; display:flex; gap:10px; align-items:baseline; }
   .package-list li::before{ content:'—'; color:var(--ai-soft); flex-shrink:0; }
 
+  .cta-btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 30px; border:1px solid var(--line); background:transparent;
+    color:var(--washi); text-decoration:none; cursor:pointer;
+    font-family:'JetBrains Mono', monospace; font-size:0.78rem;
+    letter-spacing:0.1em; text-transform:uppercase;
+    transition:border-color 0.3s ease, background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  .cta-btn:hover{
+    border-color:var(--ai-soft); color:var(--ai-soft);
+    background:rgba(127,155,209,0.08); transform:translateY(-3px);
+  }
+  .cta-btn .cta-arrow{ transition:transform 0.3s ease; }
+  .cta-btn:hover .cta-arrow{ transform:translateX(4px); }
+  .cta-btn.full{ width:100%; justify-content:center; margin-top:auto; }
+
   /* ---------- ABOUT ---------- */
   .about-wrap{ display:grid; grid-template-columns:1.1fr 1fr; gap:60px; align-items:start; max-width:1100px; margin:0 auto; }
   @media (max-width:860px){ .about-wrap{ grid-template-columns:1fr; } }
@@ -642,6 +658,7 @@
           <li>[ motion design pra deixar tudo mais vivo ]</li>
           <li>[ 2 revisões inclusas ]</li>
         </ul>
+        <a href="#contact" class="cta-btn full">estou interessado <span class="cta-arrow">→</span></a>
       </div>
     </div>
     <div class="package-card">
@@ -660,6 +677,7 @@
           <li>[ tratamento de áudio + sfx ]</li>
           <li>[ 1 revisão inclusa ]</li>
         </ul>
+        <a href="#contact" class="cta-btn full">estou interessado <span class="cta-arrow">→</span></a>
       </div>
     </div>
   </div>
