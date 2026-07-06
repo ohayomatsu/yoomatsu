@@ -52,7 +52,9 @@
     writing-mode:vertical-rl; text-orientation:mixed;
     font-size:0.72rem; letter-spacing:0.35em; color:var(--washi-dim);
     z-index:90; opacity:0.55; pointer-events:none;
+    transition:opacity 0.5s ease;
   }
+  .tategaki.hidden{ opacity:0; }
   @media (max-width:780px){ .tategaki{ display:none; } }
 
   /* ---------- HUD ---------- */
@@ -868,6 +870,16 @@ filterBtns.forEach(btn=>{
     entries.forEach(entry=>{ hudLogo.classList.toggle('visible', !entry.isIntersecting); });
   }, { threshold:0 });
   heroObserver.observe(heroSection);
+
+  /* ---------- Texto lateral (tategaki) some ao chegar na seção de contato ---------- */
+  const contactSection=document.getElementById('contact');
+  const tategakiEl=document.querySelector('.tategaki');
+  if(contactSection && tategakiEl){
+    const tategakiObserver=new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{ tategakiEl.classList.toggle('hidden', entry.isIntersecting); });
+    }, { threshold:0.15 });
+    tategakiObserver.observe(contactSection);
+  }
 
   /* ---------- Selos (hanko): tilt 3D que reage ao cursor ---------- */
   function attachHankoTilt(el){
