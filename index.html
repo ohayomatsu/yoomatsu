@@ -157,9 +157,10 @@
   .hero-logo{
     width:min(520px, 52vw); height:auto;
     animation: logoBlurIn 0.7s cubic-bezier(.4,0,.2,1) both;
+    
   }
   @keyframes logoBlurIn{
-    from{ filter: blur(2px); opacity:0; transform: translateY(10px)}
+    from{ filter: blur(0px); opacity:1; transform: translateY(0px)}
     to{ filter: blur(0); opacity:1; transform: translateY(0);}
   }
   .hero-logo img{ width:100%; height:auto; display:block; }
@@ -906,10 +907,12 @@ filterBtns.forEach(btn=>{
         }
         img.src = frames[current].src;
       }
-      requestAnimationFrame(step);
+        requestAnimationFrame(step);
     }
 
-    requestAnimationFrame(step);
+    setTimeout(() => {
+      requestAnimationFrame(step);
+    }, 105);
   })();
 </script>
 </body>
