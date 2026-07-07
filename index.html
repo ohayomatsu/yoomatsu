@@ -156,13 +156,13 @@
 
   .hero-logo{
     width:min(520px, 52vw); height:auto;
-    animation: logoBlurIn 1.2s cubic-bezier(.4,0,.2,1) both;
+    animation: logoBlurIn 0.7s cubic-bezier(.4,0,.2,1) both;
   }
   @keyframes logoBlurIn{
-    from{ filter: blur(5px); opacity:0; transform: translateY(20px)}
+    from{ filter: blur(2px); opacity:0; transform: translateY(10px)}
     to{ filter: blur(0); opacity:1; transform: translateY(0);}
   }
-  .hero-logo svg{ width:100%; height:auto; display:block; }
+  .hero-logo img{ width:100%; height:auto; display:block; }
 
   .hanko{
     width:76px; height:76px; border-radius:50%; flex-shrink:0;
@@ -515,17 +515,7 @@
   <div class="eyebrow"><span class="kanji">映像編集者</span> — Video Editor</div>
   <div class="name-wrap">
     <div class="hero-logo">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 398.31">
-  <style>
-    .logo-mark { fill: var(--washi); }
-  </style>
-  <path class="logo-mark" d="M374.24,38.16c-2.25-2.17-5.32-3.16-8.41-2.69l-246.07,37.14c-3.04.46-5.66,2.26-7.18,4.93-1.52,2.68-1.73,5.84-.57,8.69h0l21.39,52.48c1.8,4.42,6.51,6.96,11.19,6.01l125.02-25.06,4.21,60.12-128.8.33c-2.76,0-5.42,1.17-7.29,3.2s-2.83,4.77-2.63,7.52l4.09,54.51c.2,2.71,1.52,5.25,3.62,6.97,2.1,1.72,4.85,2.52,7.54,2.19l122.94-15.12-8.73,57.93-128.6,10.35c-4.23.34-7.79,3.33-8.85,7.44l-13.64,52.74c-.85,3.27,0,6.72,2.29,9.22,2.28,2.5,5.63,3.67,8.97,3.12l137.39-22.3-4.28,15.89c-.5,1.86-.55,3.84.03,5.67,1.4,4.4,5.35,7.07,9.55,7.07.31,0,.62-.01.94-.04l56.25-5.31c4.35-.41,7.89-3.56,8.81-7.83l13.02-60.41c.07-.32.12-.63.15-.94l30.62-265.49c.36-3.11-.73-6.14-2.98-8.32h.01Z"/>
-  <path class="logo-mark" d="M608.85,164.75c-.23-5.41-4.83-9.66-10.24-9.43l-201.8,8c-4.98.2-9.04,4.1-9.43,9.07l-4.68,58.84c-.24,3,.88,5.9,3.07,7.96,1.85,1.74,4.24,2.68,6.73,2.68.46,0,.93-.03,1.4-.1l208.07-29.49c5.04-.72,8.68-5.09,8.46-10.18l-1.59-37.35h0Z"/>
-  <path class="logo-mark" d="M859.01,66.38c-1.38-2.27-3.66-3.91-6.26-4.49l-222.29-49.84c-3.04-.68-6.26.13-8.61,2.18s-3.6,5.12-3.34,8.23l5.34,64.62c.38,4.61,3.84,8.28,8.42,8.93h0l122.51,17.42-65.33,55.63-30.99-17.18c-2.57-1.42-5.61-1.63-8.34-.56-2.73,1.07-4.83,3.28-5.76,6.06l-16.46,49.51c-1.58,4.75.65,9.92,5.19,12.02l75.5,35.06,73.21,91.02c1.87,2.32,4.7,3.67,7.67,3.67.19,0,.39,0,.58-.02,3.17-.19,6.07-1.91,7.76-4.6l31.18-49.87c2.38-3.81,1.88-8.74-1.21-11.99l-72.21-75.95c-.69-.73-1.49-1.34-2.36-1.83l-.39-.22,93.84-85.41c1.4-1.28,2.4-2.92,2.89-4.76l10.6-39.99c.68-2.57.28-5.35-1.1-7.62l-.04-.02Z"/>
-  <path class="logo-mark" d="M900.72,199.15c.96,4.84,5.19,8.26,10.04,8.26.29,0,.58-.01.87-.04l44.27-3.72c2.26-.19,4.46-1.02,6.15-2.53,2.55-2.28,3.78-5.49,3.43-8.79l-11.75-110.44c-.51-4.78-4.2-8.49-8.97-9.02l-56.71-6.36h-1.05c-1.51,0-3.02.25-4.38.88-4.45,2.05-6.66,6.82-5.77,11.3l23.86,120.45h.01Z"/>
-  <path class="logo-mark" d="M996.08,168.37c.37,3.72,2.74,6.94,6.18,8.41,1.29.55,2.66.82,4.02.82,2.26,0,4.49-.74,6.33-2.18l37.25-29.21c2.19-1.72,3.62-4.3,3.91-7.07l9.41-89.04c.38-3.63-1.13-7.1-4.06-9.29-2.92-2.19-6.68-2.66-10.06-1.26l-56.16,23.24c-4.26,1.76-6.81,6.03-6.35,10.61l9.53,94.97h0Z"/>
-  <path class="logo-mark" d="M1167.1,108.56c-2.14-3.16-5.94-4.71-9.68-3.95l-61.62,12.52c-4.21.85-7.91,3.24-10.41,6.73l-97.15,134.9c-.07.1-.16.17-.28.21l-105.94,37.03c-3.03,1.06-5.51,3.22-6.98,6.08l-24.85,48.48c-1.7,3.32-1.29,7.33,1.06,10.23,1.82,2.25,4.53,3.51,7.34,3.51.81,0,1.63-.11,2.44-.32l173.19-46.36c2.43-.65,4.53-2.17,5.91-4.28l127.06-194.32c2.09-3.19,2.05-7.3-.09-10.46h0Z"/>
-</svg>
+<img id="hero-logo-anim" src="assets/logo-frames/logo_00000.png" width="1375" height="427" alt="Logo" draggable="false">
 </div>
   </div>
   </div>
@@ -876,6 +866,51 @@ filterBtns.forEach(btn=>{
     document.querySelectorAll('.hanko').forEach(attachHankoTilt);
   }
   initHankoTilt();
+
+  /* ---------- Logo do hero: sequência de PNGs a 25fps, toca uma vez e para no último frame ---------- */
+  (function initHeroLogoSequence(){
+    const img = document.getElementById('hero-logo-anim');
+    if(!img) return;
+
+    const FRAME_COUNT = 58;      // logo_00000.png ... logo_00057.png
+    const FPS = 25;
+    const FRAME_MS = 1000 / FPS;
+    const BASE_PATH = 'assets/logo-frames/logo_';
+
+    function framePath(i){
+      return BASE_PATH + String(i).padStart(5,'0') + '.png';
+    }
+
+    // pré-carrega todos os frames pra troca ficar instantânea/sem engasgar
+    const frames = [];
+    for(let i=0; i<FRAME_COUNT; i++){
+      const im = new Image();
+      im.src = framePath(i);
+      frames.push(im);
+    }
+
+    let current = 0;
+    let lastTick = null;
+
+    function step(timestamp){
+      if(lastTick === null) lastTick = timestamp;
+      const elapsed = timestamp - lastTick;
+
+      if(elapsed >= FRAME_MS){
+        lastTick = timestamp - (elapsed % FRAME_MS);
+        current++;
+
+        if(current >= FRAME_COUNT){
+          img.src = frames[FRAME_COUNT - 1].src; // fica parado no último frame
+          return; // sem loop
+        }
+        img.src = frames[current].src;
+      }
+      requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  })();
 </script>
 </body>
 </html>
