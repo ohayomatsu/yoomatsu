@@ -883,15 +883,39 @@ filterBtns.forEach(btn=>{
     }
 
     // pré-carrega todos os frames pra troca ficar instantânea/sem engasgar
+    // e marca quais falharam ao carregar (arquivo ausente, nome errado, etc.)
     const frames = [];
+    const frameOk = [];
     for(let i=0; i<FRAME_COUNT; i++){
       const im = new Image();
+      frameOk[i] = true;
+      im.onerror = () => { frameOk[i] = false; };
       im.src = framePath(i);
       frames.push(im);
     }
 
+    // rede de segurança: se por qualquer motivo o <img> visível tentar
+    // carregar um frame quebrado, ele nunca fica com o ícone de imagem
+    // quebrada + texto alternativo — volta pro último frame que funcionou
+    let lastGoodSrc = img.src;
+    img.addEventListener('load', () => { lastGoodSrc = img.src; });
+    img.addEventListener('error', () => { img.src = lastGoodSrc; });
+
+    function lastValidFrame(upTo){
+      for(let i = upTo; i >= 0; i--){
+        if(frameOk[i] !== false) return i;
+      }
+      return 0;
+    }
+
     let current = 0;
     let lastTick = null;
+
+    function setFrame(i){
+      // pula frames que já sabemos que falharam, em vez de tentar exibi-los
+      if(frameOk[i] === false) return;
+      img.src = frames[i].src;
+    }
 
     function step(timestamp){
       if(lastTick === null) lastTick = timestamp;
@@ -902,17 +926,18 @@ filterBtns.forEach(btn=>{
         current++;
 
         if(current >= FRAME_COUNT){
-          img.src = frames[FRAME_COUNT - 1].src; // fica parado no último frame
+          const last = lastValidFrame(FRAME_COUNT - 1);
+          setFrame(last); // fica parado no último frame válido
           return; // sem loop
         }
-        img.src = frames[current].src;
+        setFrame(current);
       }
         requestAnimationFrame(step);
     }
 
     setTimeout(() => {
       requestAnimationFrame(step);
-    }, 105);
+    }, 155);
   })();
 </script>
 </body>
